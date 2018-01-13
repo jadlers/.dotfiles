@@ -1,0 +1,85 @@
+{
+  // spell-checker: disable
+  // Place your settings in this file to overwrite the default settings
+  "window.zoomLevel": 0,
+  "workbench.sideBar.location": "right",
+  "workbench.editor.tabCloseButton": "left",
+  "workbench.startupEditor": "none",
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "editor.lineNumbers": "relative", // Use "relative" for VIM
+  "editor.fontFamily": "'Fira Code', 'source code pro'",
+  "editor.fontLigatures": true, // Fira code uses ligatures
+  "editor.fontSize": 12,
+  "editor.cursorStyle": "underline",
+  "editor.cursorBlinking": "phase",
+  "editor.renderIndentGuides": true,
+  "editor.fontWeight": "400",
+  "editor.formatOnPaste": true,
+  "editor.wordWrapColumn": 80,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    80
+  ],
+  "editor.minimap.enabled": false,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.cursorStyle": "underline",
+  "terminal.integrated.cursorBlinking": true,
+  "zenMode.hideTabs": false,
+  "rewrap.wrappingColumn": 80,
+  "markdown.preview.scrollEditorWithPreview": false,
+  "bookmarks.treeview.visible": false,
+  "projectManager.treeview.visible": false,
+  "projectManager.showProjectNameInStatusBar": false,
+  "prettier.eslintIntegration": true,
+  "cSpell.showStatus": false,
+  "cSpell.language": "en-GB, sv",
+  "cSpell.userWords": [
+    "Adlers",
+    "Admin",
+    "Arial",
+    "ctrl",
+    "ecmascript",
+    "movie",
+    "movies",
+    "placeholders",
+    "startup"
+  ],
+  "cSpell.ignoreRegExpList": [
+    "\\\\\\w*(\\[.*?\\])?(\\{.*?\\})?",
+    "\\$.+?\\$"
+  ],
+  "cSpell.enabledLanguageIds": [
+    "c",
+    "cpp",
+    "csharp",
+    "go",
+    "handlebars",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "latex",
+    "markdown",
+    "php",
+    "plaintext",
+    "python",
+    "restructuredtext",
+    "text",
+    "typescript",
+    "typescriptreact",
+    "yml"
+  ],
+  "cSpell.ignorePaths": [
+    "node_modules",
+    "**/node_modules",
+    "**/node_modules/**",
+    ".git",
+    "*.dll",
+    "**/*.dll"
+  ]
+}
+ 
