@@ -12,3 +12,7 @@
 
 " Tabs are 2 spaces, if a tab is inserted it's 2 chars long
 :set shiftwidth=2 softtabstop=2 expandtab
+
+" Make the indentation smarter (more experimental than autoindent)
+:set smartindent
+
