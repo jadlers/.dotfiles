@@ -16,3 +16,5 @@
 " Make the indentation smarter (more experimental than autoindent)
 :set smartindent
 
+" Enables autoformatting on buffer write
+autocmd FileType c,cpp,h ClangFormatAutoEnable
