@@ -46,6 +46,7 @@
     "ecmascript",
     "movie",
     "movies",
+    "multiline",
     "placeholders",
     "startup"
   ],
@@ -80,5 +81,7 @@
     ".git",
     "*.dll",
     "**/*.dll"
-  ]
+  ],
+  "C_Cpp.clang_format_sortIncludes": true,
+  "C_Cpp.clang_format_fallbackStyle": "Google",
 }
