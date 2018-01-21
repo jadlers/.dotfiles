@@ -1,3 +1,6 @@
+" Start Pathogen plugin manager
+execute pathogen#infect() 
+
 " Looks for the fileextension to determine syntax
 :syntax on
 
