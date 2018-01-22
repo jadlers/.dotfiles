@@ -37,6 +37,11 @@
   "projectManager.treeview.visible": false,
   "projectManager.showProjectNameInStatusBar": false,
   "prettier.eslintIntegration": true,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.disableLanguages": [
+    "markdown"
+  ],
   "cSpell.showStatus": false,
   "cSpell.language": "en-GB, sv",
   "cSpell.userWords": [
