@@ -7,12 +7,11 @@ set nocompatible " vim won't try to be vi
 set splitbelow
 set splitright
 
-" Looks for the fileextension to determine syntax
-:syntax on
+:syntax on " Looks for the fileextension to determine syntax
 
 " Make the linenumbers relative when in normal mode
 " and normal for other editors than current
-:set number relativenumber
+set number relativenumber
 :augroup numbertoggle
 :  autocmd!
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
@@ -20,10 +19,9 @@ set splitright
 :augroup END
 
 " Tabs are 2 spaces, if a tab is inserted it's 2 chars long
-:set shiftwidth=2 softtabstop=2 expandtab
+set shiftwidth=2 softtabstop=2 expandtab
 
-" Make the indentation smarter (more experimental than autoindent)
-:set smartindent
+set smartindent " Make the indentation smarter (autoindent alternative)
 
 " Enables autoformatting on buffer write
 autocmd FileType c,cpp,h ClangFormatAutoEnable
