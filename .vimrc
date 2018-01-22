@@ -1,6 +1,8 @@
 " Start Pathogen plugin manager
 execute pathogen#infect() 
 
+set nocompatible " vim won't try to be vi
+
 " Looks for the fileextension to determine syntax
 :syntax on
 
