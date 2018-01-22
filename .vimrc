@@ -3,6 +3,10 @@ execute pathogen#infect()
 
 set nocompatible " vim won't try to be vi
 
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
 " Looks for the fileextension to determine syntax
 :syntax on
 
