@@ -23,5 +23,8 @@ set shiftwidth=2 softtabstop=2 expandtab
 
 set smartindent " Make the indentation smarter (autoindent alternative)
 
-" Enables autoformatting on buffer write
+" Sets formatting style and enables auto formatting on save for c/c++ files
+let g:clang_format#code_style = "google"
+let g:clang_format#style_options = {
+  \ "AllowShortFunctionsOnASingleLine": "Empty" }
 autocmd FileType c,cpp,h ClangFormatAutoEnable
