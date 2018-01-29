@@ -2,6 +2,8 @@
 execute pathogen#infect() 
 
 set nocompatible " vim won't try to be vi
+set smartindent " Make the indentation smarter (autoindent alternative)
+set ruler " Display info on location inside open file
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -20,8 +22,6 @@ set number relativenumber
 
 " Tabs are 2 spaces, if a tab is inserted it's 2 chars long
 set shiftwidth=2 softtabstop=2 expandtab
-
-set smartindent " Make the indentation smarter (autoindent alternative)
 
 " Sets formatting style and enables auto formatting on save for c/c++ files
 let g:clang_format#code_style = "google"
