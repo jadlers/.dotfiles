@@ -9,6 +9,10 @@ set ruler " Display info on location inside open file
 set splitbelow
 set splitright
 
+filetype plugin on  " vim's own plugin for Filebrowsing
+set wildmenu        " Show matching files on tab complete
+" set path+=**      " search down subfolders for tab complete
+
 :syntax on " Looks for the fileextension to determine syntax
 
 " Make the linenumbers relative when in normal mode
