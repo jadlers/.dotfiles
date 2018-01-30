@@ -89,5 +89,5 @@
     "**/*.dll"
   ],
   "C_Cpp.clang_format_sortIncludes": true,
-  "C_Cpp.clang_format_fallbackStyle": "Google",
+  "C_Cpp.clang_format_style": "{BasedOnStyle: google, AllowShortFunctionsOnASingleLine: Empty}",
 }
