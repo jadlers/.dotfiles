@@ -27,8 +27,18 @@ set number relativenumber
 " Tabs are 2 spaces, if a tab is inserted it's 2 chars long
 set shiftwidth=2 softtabstop=2 expandtab
 
-" Sets formatting style and enables auto formatting on save for c/c++ files
-let g:clang_format#code_style = "google"
-let g:clang_format#style_options = {
-  \ "AllowShortFunctionsOnASingleLine": "Empty" }
-autocmd FileType c,cpp,h ClangFormatAutoEnable
+let s:system = system("echo -n \"$(uname)\"")
+if s:system == "Darwin" " Mac specific settings
+  " Change cursor shape between insert and normal mode in iTerm2.app
+  if $TERM_PROGRAM =~ "iTerm.app"
+      let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+      let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+      let &t_SR = "\<esc>]50;CursorShape=2\x7" " Underline in replace mode
+  endif
+
+  " Sets formatting style and enables auto formatting on save for c/c++ files
+  let g:clang_format#code_style = "google"
+  let g:clang_format#style_options = {
+    \ "AllowShortFunctionsOnASingleLine": "Empty" }
+  autocmd FileType c,cpp,h ClangFormatAutoEnable
+endif
