@@ -56,6 +56,7 @@ plugins=(
   brew
   gitignore
   zsh-autosuggestions
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
