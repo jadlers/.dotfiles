@@ -34,11 +34,6 @@ if s:system == "Darwin" " Mac specific settings
       let &t_SR = "\<esc>]50;CursorShape=2\x7" " Underline in replace mode
   endif
 
-  " Sets formatting style and enables auto formatting on save for c/c++ files
-  let g:clang_format#code_style = "google"
-  let g:clang_format#style_options = {
-    \ "AllowShortFunctionsOnASingleLine": "Empty" }
-  autocmd FileType c,cpp,h ClangFormatAutoEnable
 endif
 
 if &loadplugins
@@ -49,3 +44,12 @@ if &loadplugins
     call execute pathogen#infect('pack/bundle/start/{}')
   endif
 endif
+
+autocmd FileType c,cpp,h call SetCfamOptions()
+function SetCfamOptions()
+  packadd vim-clang-format
+  let g:clang_format#code_style = "google"
+  let g:clang_format#style_options = {
+    \ "AllowShortFunctionsOnASingleLine": "Empty" }
+  ClangFormatAutoEnable
+endfunction
