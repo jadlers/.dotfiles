@@ -1,5 +1,3 @@
-" Start Pathogen plugin manager
-execute pathogen#infect() 
 
 set nocompatible " vim won't try to be vi
 set smartindent " Make the indentation smarter (autoindent alternative)
@@ -41,4 +39,13 @@ if s:system == "Darwin" " Mac specific settings
   let g:clang_format#style_options = {
     \ "AllowShortFunctionsOnASingleLine": "Empty" }
   autocmd FileType c,cpp,h ClangFormatAutoEnable
+endif
+
+if &loadplugins
+  if has('packages')
+    packloadall
+  else
+    source $HOME/.vim/pack/bundle/opt/vim-pathogen/autoload/pathogen.vim
+    call execute pathogen#infect('pack/bundle/start/{}')
+  endif
 endif
