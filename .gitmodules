@@ -7,3 +7,6 @@
 [submodule ".vim/pack/bundle/opt/vim-clang-format"]
 	path = .vim/pack/bundle/opt/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format.git
+[submodule ".zsh/base16-shell"]
+	path = .zsh/base16-shell
+	url = /Users/jadlers/.zsh/base16-shell
