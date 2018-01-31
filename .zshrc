@@ -60,6 +60,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.zsh/colors
 
 # User configuration
 
