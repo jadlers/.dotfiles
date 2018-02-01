@@ -15,6 +15,9 @@
   set number          " Use normal numbers together with
   set relativenumber  " relative numbers as default
 
+  set spell           " Enable spellcheck
+  set spelllang=en    " Default to English
+
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
