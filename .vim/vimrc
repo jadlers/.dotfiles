@@ -1,4 +1,6 @@
 " General settings
+  set mouse=a         " Give vim access to mouse input
+
   set nocompatible    " vim won't try to be vi
   set smartindent     " Make the indentation smarter (autoindent alternative)
   set ruler           " Display info on location inside open file
