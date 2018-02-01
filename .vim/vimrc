@@ -2,7 +2,7 @@
   set mouse=a         " Give vim access to mouse input
 
   set nocompatible    " vim won't try to be vi
-  set smartindent     " Make the indentation smarter (autoindent alternative)
+  set smartindent     " Make the indentation smarter (auto indent alternative)
   set ruler           " Display info on location inside open file
 
   set shiftwidth=2    " Number of spaces for each indent
@@ -42,7 +42,7 @@
   if $TERM_PROGRAM =~ "iTerm.app"               " Change cursor to...
       let &t_EI = "\<Esc>]50;CursorShape=0\x7"  " Block in normal mode
       let &t_SI = "\<Esc>]50;CursorShape=1\x7"  " Vertical bar in insert mode
-      let &t_SR = "\<esc>]50;CursorShape=2\x7"  " Underline in replace mode
+      let &t_SR = "\<Esc>]50;CursorShape=2\x7"  " Underline in replace mode
   endif
 
 " C/C++ languages settings
