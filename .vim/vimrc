@@ -54,3 +54,9 @@
       \ "AllowShortFunctionsOnASingleLine": "Empty" }
     ClangFormatAutoEnable
   endfunction
+
+" Remapping keys
+  nnoremap <C-H> <C-w>h;
+  nnoremap <C-J> <C-w>j;
+  nnoremap <C-K> <C-w>k;
+  nnoremap <C-L> <C-w>l;
