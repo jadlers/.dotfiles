@@ -38,6 +38,28 @@
   :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
   :augroup END
 
+" UltiSnips
+  let g:UltiSnipsSnippetsDir = $HOME . '/.vim/ultisnips'
+  let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/ultisnips']
+  let g:UltiSnipsEditSplit = 'vertical'
+  let g:UltiSnipsJumpForwardTrigger = "<Tab>"
+
+  let g:ulti_expand_or_jump_res = 0
+  function ExpandSnippetOrCarriageReturn()
+      let snippet = UltiSnips#ExpandSnippetOrJump()
+      if g:ulti_expand_or_jump_res > 0
+          return snippet
+      else
+          return "\<CR>"
+      endif
+  endfunction
+  inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+" YouCompleteMe
+  let g:ycm_autoclose_preview_window_after_completion = 1
+  let g:ycm_key_list_select_completion = ['<Tab>', '<C-N>', '<Down>']
+  let g:ycm_key_list_previous_completion = ['<S-Tab>', '<C-P>', '<Up>']
+
 " iTerm settings
   if $TERM_PROGRAM =~ "iTerm.app"               " Change cursor to...
       let &t_EI = "\<Esc>]50;CursorShape=0\x7"  " Block in normal mode
@@ -53,6 +75,7 @@
     let g:clang_format#style_options = {
       \ "AllowShortFunctionsOnASingleLine": "Empty" }
     ClangFormatAutoEnable
+    let g:ycm_global_ycm_extra_conf = $HOME . '/.vim/.ycm_extra_conf.py'
   endfunction
 
 " Remapping keys
