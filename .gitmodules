@@ -4,9 +4,6 @@
 [submodule ".vim/pack/bundle/start/vim-surround"]
 	path = .vim/pack/bundle/start/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule ".vim/pack/bundle/opt/vim-clang-format"]
-	path = .vim/pack/bundle/opt/vim-clang-format
-	url = https://github.com/rhysd/vim-clang-format.git
 [submodule ".zsh/base16-shell"]
 	path = .zsh/base16-shell
 	url = /Users/jadlers/.zsh/base16-shell
@@ -22,3 +19,6 @@
 [submodule ".vim/pack/bundle/start/command-t"]
 	path = .vim/pack/bundle/start/command-t
 	url = https://github.com/wincent/command-t.git
+[submodule ".vim/pack/bundle/start/ale"]
+	path = .vim/pack/bundle/start/ale
+	url = https://github.com/w0rp/ale.git
