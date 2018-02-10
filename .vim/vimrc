@@ -72,8 +72,17 @@
 
 " C/C++ languages settings
   autocmd FileType c,cpp,h call SetCfamOptions()
+  autocmd FileType c,cpp,h call DynamicSyntaxFolding()
+
   function SetCfamOptions()
     let g:ycm_global_ycm_extra_conf = $HOME . '/.vim/.ycm_extra_conf.py'
+  endfunction
+
+  function DynamicSyntaxFolding()
+    setlocal foldmethod=syntax
+    normal! zR
+    autocmd InsertLeave,WinEnter * setlocal foldmethod=syntax
+    autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
   endfunction
 
 " Remapping keys
