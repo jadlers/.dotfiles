@@ -21,6 +21,9 @@
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
+  let mapleader="\<Space>"
+  let maplocalleader="\\"
+
 " Load plugins
   if &loadplugins
     if has('packages')

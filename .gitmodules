@@ -19,3 +19,6 @@
 [submodule ".vim/pack/bundle/start/YouCompleteMe"]
 	path = .vim/pack/bundle/start/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule ".vim/pack/bundle/start/command-t"]
+	path = .vim/pack/bundle/start/command-t
+	url = https://github.com/wincent/command-t.git
