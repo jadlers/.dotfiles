@@ -4,6 +4,7 @@
   set nocompatible    " vim won't try to be vi
   set smartindent     " Make the indentation smarter (auto indent alternative)
   set ruler           " Display info on location inside open file
+  set colorcolumn=81  " Display a column marking past where text should go
 
   set shiftwidth=2    " Number of spaces for each indent
   set tabstop=2       " Number of spaces a <Tab> stands for
