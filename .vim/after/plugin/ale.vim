@@ -1,10 +1,12 @@
 " Don't use linting for c++
 let g:ale_linters = {
       \'cpp': [],
+      \'python': ['pylint'],
       \}
 let g:ale_fixers = {
       \ 'javascript': ['prettier'],
       \ 'cpp': ['clang-format'],
+      \ 'python': ['yapf'],
       \}
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
