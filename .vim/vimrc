@@ -91,3 +91,10 @@
   nnoremap <C-J> <C-w>j;
   nnoremap <C-K> <C-w>k;
   nnoremap <C-L> <C-w>l;
+
+  " Adds newline over/under current line
+  nnoremap <Leader>o mmo<Esc>`m
+  nnoremap <Leader>O mmO<Esc>`m
+
+  " Closes all other splits
+  nnoremap <LocalLeader>o :only<CR>
