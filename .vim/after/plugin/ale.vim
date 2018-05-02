@@ -2,6 +2,7 @@
 let g:ale_linters = {
       \'cpp': [],
       \'python': ['pylint'],
+      \'scala': ['scalac']
       \}
 let g:ale_fixers = {
       \ 'javascript': ['prettier'],
