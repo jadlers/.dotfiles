@@ -28,3 +28,6 @@
 [submodule ".vim/pack/bundle/start/vim-gitgutter"]
 	path = .vim/pack/bundle/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule ".vim/pack/bundle/start/vim-vinegar"]
+	path = .vim/pack/bundle/start/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar.git
