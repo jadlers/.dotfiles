@@ -95,6 +95,7 @@
   " Adds newline over/under current line
   nnoremap <Leader>o mmo<Esc>`m
   nnoremap <Leader>O mmO<Esc>`m
+  nnoremap <Leader>f :NERDTreeToggle<CR>
 
   " Closes all other splits
   nnoremap <LocalLeader>o :only<CR>
