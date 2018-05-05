@@ -34,3 +34,6 @@
 [submodule ".vim/pack/bundle/start/nerdtree"]
 	path = .vim/pack/bundle/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule ".vim/pack/bundle/start/vim-commentary"]
+	path = .vim/pack/bundle/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
