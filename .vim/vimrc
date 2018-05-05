@@ -22,6 +22,9 @@
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
+  " Reload files, helps when modifying files externally (e.g. git)
+  au FocusGained,BufEnter * :silent! !
+
   let mapleader="\<Space>"
   let maplocalleader="\\"
 
