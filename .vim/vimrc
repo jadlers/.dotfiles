@@ -89,6 +89,10 @@
     autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
   endfunction
 
+" 80 char wrap
+  autocmd FileType md set textwidth=80
+  autocmd FileType tex,bib set textwidth=80
+
 " Remapping keys
   nnoremap <C-H> <C-w>h;
   nnoremap <C-J> <C-w>j;
