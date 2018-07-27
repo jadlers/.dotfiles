@@ -52,13 +52,17 @@ This function should only modify configuration layer settings."
                      spell-checking-enable-auto-dictionary t)
      (syntax-checking :variables syntax-checking-enable-by-default nil)
 
-     ;; Languages
+     ;; Writing
+     bibtex
+     latex
+     markdown
+     org
+
+     ;; Programming
      c-c++
      emacs-lisp
      go
      javascript
-     markdown
-     org
      react
 
      ;; Extras
