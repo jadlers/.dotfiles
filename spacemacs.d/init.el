@@ -438,7 +438,12 @@ It should only modify the values of Spacemacs settings."
    ;; Run `spacemacs/prettify-org-buffer' when
    ;; visiting README.org files of Spacemacs.
    ;; (default nil)
-   dotspacemacs-pretty-docs t))
+   dotspacemacs-pretty-docs t
+
+   ;; Change the color of the cursor depending on the mode you're currently in.
+   ;; (default nil)
+   dotspacemacs-colorize-cursor-according-to-state t
+   ))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
