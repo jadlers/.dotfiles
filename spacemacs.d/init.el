@@ -79,7 +79,8 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      prettier-js)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -477,6 +478,14 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   '(evil-want-Y-yank-to-eol t)
+
+  ;; Prettier
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+  (setq prettier-js-args '(
+                           "--single-quote"
+                           "--trailing-comma es5"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
