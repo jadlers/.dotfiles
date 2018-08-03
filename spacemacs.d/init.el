@@ -41,7 +41,9 @@ This function should only modify configuration layer settings."
      emoji
      git
      helm
-     neotree
+     (ranger :variables
+             ranger-override-dired t
+             ranger-cleanup-on-disable t)
      osx
      (shell :variables
             shell-default-height 30
