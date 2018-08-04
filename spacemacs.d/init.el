@@ -485,7 +485,7 @@ before packages are loaded."
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
   (setq prettier-js-args '(
                            "--single-quote"
-                           "--trailing-comma es5"))
+                           "--trailing-comma=es5"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
