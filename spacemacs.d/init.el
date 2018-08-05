@@ -38,7 +38,6 @@ This function should only modify configuration layer settings."
      ;; General
      auto-completion
      better-defaults
-     emoji
      git
      helm
      (ranger :variables
