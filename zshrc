@@ -57,6 +57,7 @@ plugins=(
   gitignore
   zsh-autosuggestions
   vi-mode
+  yarn
 )
 
 source $ZSH/oh-my-zsh.sh
