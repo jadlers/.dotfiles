@@ -66,6 +66,7 @@ This function should only modify configuration layer settings."
      c-c++
      emacs-lisp
      go
+     html
      javascript
      react
 
@@ -490,10 +491,11 @@ before packages are loaded."
   (setq prettier-js-args '(
                            "--single-quote"
                            "--trailing-comma=es5"))
-  )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+  ;; Indent
+  (setq standard-indent 2)
+  (setq js-indent-level 2)
+  )
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
