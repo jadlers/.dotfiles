@@ -52,6 +52,9 @@ This function should only modify configuration layer settings."
                      spell-checking-enable-by-default nil
                      spell-checking-enable-auto-dictionary t)
      (syntax-checking :variables syntax-checking-enable-by-default nil)
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-diff-side 'left)
 
      ;; Writing
      bibtex
