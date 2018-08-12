@@ -99,3 +99,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Path alteration
+
+## WARNING Always make this the last alteration, can compromise security
+PATH="$PATH:./node_modules/.bin" 
