@@ -4,11 +4,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="avit"
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -60,8 +55,21 @@ plugins=(
   yarn
 )
 
+# Default theme
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes for themes
+export ZSH_THEME="avit"
+
+# iTerm specific
+if [ "$TERM_PROGRAM" = iTerm.app ]; then
+  source $HOME/.zsh/colors
+fi
+
+# Emacs specific settings
+if [ -n "$INSIDE_EMACS" ]; then
+  export ZSH_THEME="clean"
+fi
+
 source $ZSH/oh-my-zsh.sh
-source $HOME/.zsh/colors
 
 # User configuration
 
