@@ -1,0 +1,7 @@
+# -*- c++-mode: snippet -*-
+# name: New test function
+# key: tc
+# --
+void test_${1:name}() {
+  $0
+}

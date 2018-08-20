@@ -1,0 +1,5 @@
+# -*- c++-mode: snippet -*-
+# name: Print to stdout
+# key: cout
+# --
+std::cout << $1 << std::endl;$0
