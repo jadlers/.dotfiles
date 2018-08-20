@@ -492,12 +492,19 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   '(evil-want-Y-yank-to-eol t)
 
+  ;; Add c++ clang-format shortcut for c++-mode
+  (spacemacs/set-leader-keys-for-major-mode 'c++-mode
+    "f" 'clang-format-buffer)
+
+  ;; Expose the node_modules folder for emacs
   (add-hook 'web-mode-hook #'add-node-modules-path)
+
   ;; Prettier
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-  (setq prettier-js-args '(
+
+  (setq prettier-js-args '( ;; For when no .prettierrc exists
                            "--single-quote"
                            "--trailing-comma=es5"))
 
