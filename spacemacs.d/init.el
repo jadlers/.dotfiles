@@ -55,7 +55,7 @@ This function should only modify configuration layer settings."
                      spell-checking-enable-auto-dictionary t)
      (syntax-checking :variables syntax-checking-enable-by-default nil)
      (version-control :variables
-                      version-control-diff-tool 'diff-hl
+                      version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left)
 
      ;; Writing
@@ -371,7 +371,14 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers '(:relative t :disabled-for-modes
+                                         org-mode
+                                         markdown-mode
+                                         pdf-view-mode
+                                         ranger-mode
+                                         text-mode
+                                         magit-mode
+                                         :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
