@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -88,7 +88,8 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
                                       prettier-js
-                                      add-node-modules-path)
+                                      add-node-modules-path
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -153,17 +154,17 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
-   dotspacemacs-use-spacelpa t
+   dotspacemacs-use-spacelpa nil
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
    ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives t
+   dotspacemacs-verify-spacelpa-archives nil
 
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
 
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
@@ -293,9 +294,9 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
 
-   ;; If non-nil, the paste transient-state is enabled. While enabled, pressing
-   ;; `p' several times cycles through the elements in the `kill-ring'.
-   ;; (default nil)
+   ;; If non-nil, the paste transient-state is enabled. While enabled, after you
+   ;; paste something, pressing `C-j' and `C-k' several times cycles through the
+   ;; elements in the `kill-ring'. (default nil)
    dotspacemacs-enable-paste-transient-state nil
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
@@ -450,10 +451,6 @@ It should only modify the values of Spacemacs settings."
    ;; visiting README.org files of Spacemacs.
    ;; (default nil)
    dotspacemacs-pretty-docs t
-
-   ;; Change the color of the cursor depending on the mode you're currently in.
-   ;; (default nil)
-   dotspacemacs-colorize-cursor-according-to-state t
    ))
 
 (defun dotspacemacs/user-env ()
@@ -513,78 +510,24 @@ before packages are loaded."
   (setq js-indent-level 2)
   )
 
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(package-selected-packages '(git-gutter-fringe+ git-gutter-fringe
-                                 fringe-helper git-gutter+ git-gutter diff-hl
-                                 browse-at-remote yasnippet-snippets xterm-color
-                                 xkcd ws-butler winum which-key web-mode
-                                 web-beautify volatile-highlights
-                                 vi-tilde-fringe uuidgen use-package unfill
-                                 typit toc-org tagedit symon sudoku
-                                 string-inflection stickyfunc-enhance srefactor
-                                 spotify spaceline-all-the-icons smeargle
-                                 slim-mode shell-pop scss-mode sass-mode
-                                 rjsx-mode reveal-in-osx-finder restart-emacs
-                                 ranger rainbow-delimiters pug-mode prettier-js
-                                 popwin persp-mode pcre2el password-generator
-                                 paradox pacmacs overseer osx-trash
-                                 osx-dictionary orgit org-ref org-projectile
-                                 org-present org-pomodoro org-mime org-download
-                                 org-bullets org-brain open-junk-file neotree
-                                 nameless mwim multi-term move-text mmm-mode
-                                 markdown-toc magit-svn magit-gitflow macrostep
-                                 lorem-ipsum livid-mode link-hint launchctl
-                                 json-navigator json-mode js2-refactor js-doc
-                                 indent-guide impatient-mode hungry-delete
-                                 hl-todo highlight-parentheses highlight-numbers
-                                 highlight-indentation helm-xref helm-themes
-                                 helm-swoop helm-spotify-plus helm-rtags
-                                 helm-purpose helm-projectile helm-mode-manager
-                                 helm-make helm-gitignore helm-flx
-                                 helm-descbinds helm-css-scss helm-company
-                                 helm-c-yasnippet helm-ag google-translate
-                                 google-c-style golden-ratio godoctor go-tag
-                                 go-rename go-impl go-guru go-gen-test
-                                 go-fill-struct go-eldoc gnuplot
-                                 gitignore-templates gitconfig-mode
-                                 gitattributes-mode git-timemachine
-                                 git-messenger git-link gh-md fuzzy font-lock+
-                                 flyspell-correct-helm flycheck-rtags
-                                 flycheck-pos-tip flx-ido fill-column-indicator
-                                 fancy-battery eyebrowse expand-region
-                                 evil-visualstar evil-visual-mark-mode
-                                 evil-unimpaired evil-tutor evil-surround
-                                 evil-org evil-numbers evil-nerd-commenter
-                                 evil-mc evil-matchit evil-magit evil-lisp-state
-                                 evil-lion evil-indent-plus evil-iedit-state
-                                 evil-goggles evil-exchange evil-escape
-                                 evil-cleverparens evil-args evil-anzu
-                                 eval-sexp-fu eshell-z eshell-prompt-extras
-                                 esh-help emmet-mode elisp-slime-nav
-                                 editorconfig dumb-jump dotenv-mode disaster
-                                 diminish counsel-projectile company-web
-                                 company-tern company-statistics company-rtags
-                                 company-go company-c-headers company-auctex
-                                 column-enforce-mode clean-aindent-mode
-                                 clang-format centered-cursor-mode
-                                 auto-yasnippet auto-highlight-symbol
-                                 auto-dictionary auto-compile aggressive-indent
-                                 ace-window ace-link ace-jump-helm-line
-                                 ac-ispell 2048-game)))
-
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   )
-  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(prettier-js yasnippet-snippets xterm-color xkcd ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill typit toc-org tagedit symon sudoku string-inflection spaceline-all-the-icons smeargle slim-mode shell-pop scss-mode sass-mode rjsx-mode reveal-in-osx-finder restart-emacs ranger rainbow-delimiters pug-mode popwin persp-mode pcre2el password-generator paradox pacmacs overseer osx-trash osx-dictionary orgit org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file neotree nameless mwim multi-term move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode link-hint launchctl json-navigator json-mode js2-refactor js-doc indent-guide impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy font-lock+ flyspell-correct-helm flycheck-rtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode disaster diminish diff-hl counsel-projectile company-web company-tern company-statistics company-rtags company-go company-c-headers company-auctex column-enforce-mode clean-aindent-mode clang-format centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell 2048-game)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
