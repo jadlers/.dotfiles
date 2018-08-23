@@ -506,12 +506,10 @@ before packages are loaded."
 
   ;; Expose the node_modules folder for emacs
   (add-hook 'web-mode-hook #'add-node-modules-path)
+  (add-hook 'js2-mode-hook 'spacemacs/toggle-syntax-checking-on)
 
   ;; Prettier
   (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-
   (setq prettier-js-args '( ;; For when no .prettierrc exists
                            "--single-quote"
                            "--trailing-comma=es5"))
