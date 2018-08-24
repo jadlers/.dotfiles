@@ -61,7 +61,7 @@ This function should only modify configuration layer settings."
      ;; Writing
      bibtex
      latex
-     markdown
+     (markdown :variables markdown-command "pandoc")
      org
 
      ;; Programming
