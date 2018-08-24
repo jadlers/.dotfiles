@@ -483,6 +483,18 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
    ((string-equal system-type "darwin") ; Mac OS X
     (progn
       (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))))
+
+  ;; Setting up magit's commit buffer
+  (defun jadlers/setup-git-commit ()
+    (interactive)
+    (setq git-commit-summary-max-length 50)
+    (setq-local fill-column 72)
+    (git-commit-turn-on-auto-fill)
+    (git-commit-turn-on-flyspell)
+    ;; (git-commit-check-style-conventions)
+    )
+  (add-hook 'git-commit-mode-hook 'jadlers/setup-git-commit)
+
   )
 
 (defun dotspacemacs/user-load ()
