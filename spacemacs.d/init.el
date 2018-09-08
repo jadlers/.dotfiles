@@ -71,6 +71,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      go
      html
+     java
      (javascript :variables
                  node-add-modules-path t)
      react
@@ -525,6 +526,11 @@ before packages are loaded."
   (setq prettier-js-args '( ;; For when no .prettierrc exists
                            "--single-quote"
                            "--trailing-comma=es5"))
+
+  ;; Java
+  (add-hook 'java-mode-hook (lambda ()
+                              (setq c-basic-offset 2
+                                    indent-tabs-mode nil)))
 
   ;; Indent
   (setq standard-indent 2)
