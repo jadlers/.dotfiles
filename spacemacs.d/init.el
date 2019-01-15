@@ -42,9 +42,13 @@ This function should only modify configuration layer settings."
      better-defaults
      git
      helm
+     (lsp :variables
+          lsp-ui-sideline-enable nil
+          lsp-ui-doc-enable nil)
      (ranger :variables
              ranger-override-dired t
              ranger-cleanup-on-disable t)
+     pdf
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
@@ -56,6 +60,7 @@ This function should only modify configuration layer settings."
      (version-control :variables
                       version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left)
+     yaml
 
      ;; Writing
      bibtex
@@ -68,11 +73,17 @@ This function should only modify configuration layer settings."
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode)
      emacs-lisp
-     go
+     (go :variables
+         go-tab-width 2
+         go-use-test-args "-timeout 5s"
+         go-format-before-save t)
      html
      java
      (javascript :variables
-                 node-add-modules-path t)
+                 node-add-modules-path t
+                 javascript-fmt-tool 'prettier
+                 javascript-backend 'nil)
+     python
      react
 
      ;; Extras
@@ -93,7 +104,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(tern)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -515,6 +526,9 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   '(evil-want-Y-yank-to-eol t)
+
+  ;; LSP config
+  (setq lsp-inhibit-message t)
 
   ;; Add c++ clang-format shortcut for c++-mode
   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
