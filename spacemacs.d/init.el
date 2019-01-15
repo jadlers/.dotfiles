@@ -45,7 +45,6 @@ This function should only modify configuration layer settings."
      (ranger :variables
              ranger-override-dired t
              ranger-cleanup-on-disable t)
-     osx
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
@@ -104,6 +103,10 @@ This function should only modify configuration layer settings."
    ;; installs *all* packages supported by Spacemacs and never uninstalls them.
    ;; (default is `used-only')
    dotspacemacs-install-packages 'used-only))
+
+(when (spacemacs/system-is-mac)
+  (append dotspacemacs-configuration-layers
+          '(osx)))
 
 (defun dotspacemacs/init ()
   "Initialization:
