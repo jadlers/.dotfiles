@@ -47,12 +47,21 @@ HIST_STAMPS="yyyy-mm-d"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  brew
   git
   gitignore
+  httpie
   yarn
   zsh-autosuggestions
 )
+
+# On Mac
+if [[ $(uname -s) = "Darwin" ]]; then
+  plugins+=(
+    brew
+    osx
+    iterm2
+  )
+fi
 
 # Default theme
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes for themes
