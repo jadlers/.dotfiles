@@ -16,9 +16,6 @@
   set number          " Use normal numbers together with
   set relativenumber  " relative numbers as default
 
-  set spell           " Enable spellcheck
-  set spelllang=en    " Default to English
-
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
@@ -56,10 +53,6 @@
     autocmd InsertLeave,WinEnter * setlocal foldmethod=syntax
     autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
   endfunction
-
-" 80 char wrap
-  autocmd FileType md set textwidth=80
-  autocmd FileType tex,bib set textwidth=80
 
 " Remapping keys
   nnoremap <C-H> <C-w>h;
