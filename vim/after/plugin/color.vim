@@ -32,4 +32,7 @@ function s:CheckColorScheme()
   " doautocmd ColorScheme
 endfunction
 
-call s:CheckColorScheme()
+" Only source when in iTerm
+if $TERM_PROGRAM == "iTerm.app"
+  call s:CheckColorScheme()
+endif
