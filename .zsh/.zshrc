@@ -63,6 +63,13 @@ if [[ $(uname -s) = "Darwin" ]]; then
   )
 fi
 
+# On Linux
+if [[ $(uname -s) = "Linux" ]]; then
+  plugins+=(
+    sudo
+  )
+fi;
+
 # Default theme
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes for themes
 export ZSH_THEME="avit"
