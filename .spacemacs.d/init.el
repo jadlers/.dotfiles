@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    ;; (SPC f e R to save & reload)
-   dotspacemacs-configuration-layers
+   general-layers
    '(
      ;; General
      (auto-completion :variables
@@ -91,6 +91,13 @@ This function should only modify configuration layer settings."
      xkcd
      )
 
+   ;; Conditional layers
+   conditional-layers
+         (if (string= system-type "darwin")
+           '(osx))
+
+   dotspacemacs-configuration-layers (append general-layers conditional-layers)
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -114,10 +121,6 @@ This function should only modify configuration layer settings."
    ;; installs *all* packages supported by Spacemacs and never uninstalls them.
    ;; (default is `used-only')
    dotspacemacs-install-packages 'used-only))
-
-(when (spacemacs/system-is-mac)
-  (append dotspacemacs-configuration-layers
-          '(osx)))
 
 (defun dotspacemacs/init ()
   "Initialization:
