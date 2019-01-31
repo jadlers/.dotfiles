@@ -8,7 +8,7 @@
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.hidesExplorerArrows": true,
   "editor.lineNumbers": "on", // "relative" for VIM
-  "editor.fontFamily": "'Fira Code', 'source code pro'",
+  "editor.fontFamily": "'Fira Code', 'source code pro', 'Hack', 'monospace'",
   "editor.fontLigatures": true, // Fira code uses ligatures
   "editor.fontSize": 12,
   "editor.cursorStyle": "underline",
