@@ -16,6 +16,9 @@
   set number          " Use normal numbers together with
   set relativenumber  " relative numbers as default
 
+  set nowrap          " Don't wrap by default
+  set nospell         " Spell checking turned off
+
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
