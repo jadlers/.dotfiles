@@ -51,6 +51,7 @@ plugins=(
   gitignore
   httpie
   yarn
+  zsh-completions
   zsh-autosuggestions
 )
 
