@@ -27,6 +27,7 @@
 
 import os
 import subprocess
+import re
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
@@ -123,22 +124,42 @@ extension_defaults = widget_defaults.copy()
 
 keyboardWidget = widget.KeyboardLayout(configured_keyboards=['us', 'se'])
 
+def get_local_ip_addr():
+    """ Finds ip address used on the local network. If more than one connection
+    are present only displays the first one. Should be the wired connection
+    which is listed in that case."""
+
+    ip_addr_output = str(subprocess.check_output(["ip", "addr"]), 'utf-8')
+    addresses = re.findall(r'inet (192.168.\d+.\d+)', ip_addr_output)
+    if addresses:
+        return addresses[0]
+    return "No local IP"
+
 screens = [
     Screen(
         top=bar.Bar(
             [
                 widget.GroupBox(),
-                widget.Prompt(),
                 widget.WindowName(),
-                # widget.Spacer(),
+                # WindowName will push everything below to the right
+
                 widget.Systray(),
-                widget.Net(interface='wlo1'),
+                widget.GenPollText(
+                    func=get_local_ip_addr,
+                    update_interval=10,
+                    ),
+                widget.CheckUpdates( # Requires the package aptitude
+                    distro="Ubuntu",
+                    execute=terminal + " -e sudo apt upgrade",
+                    display_format="🔄: {updates}",
+                    ),
                 widget.Battery(
                     energy_now_file='charge_now',
                     energy_full_file='charge_full',
                     power_now_file='current_now',
-                    update_delay = 30,
-                    foreground = "7070ff",
+                    charge_char='⚡',
+                    discharge_char='',
+                    format='{char} {percent:2.0%}',
                     ),
                 widget.CurrentLayout(),
                 # widget.KeyboardLayout(configured_keyboards=['us', 'se']),
