@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2010 Aldo Cortesi
 # Copyright (c) 2010, 2014 dequis
 # Copyright (c) 2012 Randall Ma
@@ -62,8 +63,11 @@ keys = [
 
     # Launch things
     Key([mod], "Return", lazy.spawn(terminal)),
+    Key([mod, ctrl], "Return", lazy.spawn("urxvtc +sb")),
     Key([mod], "r", lazy.spawn("rofi -show run")),
     Key([mod], "w", lazy.spawn("firefox")),
+    Key([mod], "c", lazy.spawn("urxvtc -fn 'xft:Hack:size=40:antialias=true' +sb -e peaclock")),
+    Key([mod], "h", lazy.spawn(terminal + " -e htop")),
 
     Key([ctrl, alt], "Left", lazy.screen.prev_group()),
     Key([ctrl, alt], "Right", lazy.screen.next_group()),
@@ -193,4 +197,4 @@ wmname = "LG3D"
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser('~')
-    subprocess.call([home + '/.fehbg'])
+    subprocess.call([home + '/.config/qtile/autostart.sh'])
