@@ -19,6 +19,9 @@
   set nowrap          " Don't wrap by default
   set nospell         " Spell checking turned off
 
+  set noesckeys       " Remove delay pressing <Shift><o> immediately after <Esc>
+                      " It also disables cursor keys while in insert mode
+
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
