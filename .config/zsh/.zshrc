@@ -79,7 +79,7 @@ export ZSH_THEME="avit"
 
 # iTerm specific
 if [ "$TERM_PROGRAM" = iTerm.app ]; then
-  source $HOME/.zsh/colors
+  source $ZDOTDIR/colors
 fi
 
 # Emacs specific settings
