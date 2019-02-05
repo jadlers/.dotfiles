@@ -58,6 +58,11 @@
       highlight Statement     ctermfg=3
   endif
 
+" Setting the background for st since it's not doing that by itself
+  if $TERM == "st-256color"
+    set background=dark
+  endif
+
 " C/C++ languages settings
   autocmd FileType c,cpp,h call DynamicSyntaxFolding()
 
