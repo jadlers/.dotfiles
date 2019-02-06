@@ -150,7 +150,7 @@ screens = [
                     ),
                 widget.CheckUpdates( # Requires the package aptitude
                     distro="Ubuntu",
-                    execute=terminal + " -e sudo apt upgrade",
+                    execute=terminal + " -e bash " + os.path.expanduser('~') + "/.config/qtile/apt_update.sh",
                     display_format="🔄: {updates}",
                     ),
                 widget.Battery(
@@ -218,4 +218,4 @@ wmname = "LG3D"
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    subprocess.call(["bash", home + '/.config/qtile/autostart.sh'])
