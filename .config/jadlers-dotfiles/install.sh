@@ -60,6 +60,10 @@ dfiles config status.showUntrackedFiles no
 dfiles submodule init
 dfiles submodule update
 
+# Remove and untrack the README since they don't want it in $HOME
+rm $HOME/README.md
+dfiles update-index --assume-unchanged $HOME/README.md
+
 # Finishing notes
 echo
 echo "Installation script finished! You'll need to log out before the \

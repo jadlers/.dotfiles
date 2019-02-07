@@ -25,3 +25,10 @@ should also work by simply typing: **NOTE THIS HAS NOT BEEN TESTED YET**
 `bash <(curl -fsSL
 https://github.com/jadlers/.dotfiles/raw/master/.config/jadlers-dotfiles/install.sh)`
 
+## Note to self
+
+### Handling this README
+
+If you use the installation script and later want to change this README use the
+command `git update-index --no-assume-unchanged $HOME/README.md` to track
+changes again.
