@@ -5,7 +5,7 @@ function s:CheckColorScheme()
     let g:base16colorspace=256
   endif
 
-  let s:config_file = expand('~/.zsh/.base16')
+  let s:config_file = expand('$ZDOTDIR/.base16')
 
   if filereadable(s:config_file)
    " Use the info in the file to set color
