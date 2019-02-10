@@ -1,6 +1,9 @@
 ## Defaults
 export EDITOR=vim
 
+## My own scripts
+export PATH=$PATH:$HOME/bin
+
 ## Go environment
 export GOPATH=$HOME/src/Go
 export GOROOT=/usr/local/opt/go/libexec
