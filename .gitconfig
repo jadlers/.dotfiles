@@ -1,0 +1,6 @@
+[user]
+	name = Jacob Adlers
+[pull]
+	rebase = true
+[core]
+	editor = vim
