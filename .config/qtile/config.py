@@ -85,6 +85,14 @@ keys = [
 
     Key([alt, ctrl], "c",
         lazy.spawn(terminal + " -e vim /home/jacob/.config/qtile/config.py")),
+
+    # Function buttons
+    Key([], "XF86HomePage", lazy.spawn("firefox")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -time 0 +10")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -time 0 -10")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse sset Master toggle")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 5%+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 5%-")),
 ]
 
 # TODO: Fix the names of the groups
