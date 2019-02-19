@@ -44,21 +44,31 @@ ctrl = "control"
 terminal = "st"
 
 keys = [
-    # Switch between windows in current stack pane
-    Key([mod], "k", lazy.layout.down()),
-    Key([mod], "j", lazy.layout.up()),
-
-    # Switch window focus to other pane(s) of stack
+    # Switch focused window in current layout
     Key([alt], "Tab", lazy.layout.next()),
     Key([alt, "shift"], "Tab", lazy.layout.previous()),
-    Key([ctrl, alt], "space", lazy.widget['keyboardlayout'].next_keyboard()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
 
-    # Toggle between different layouts as defined below
-    Key([mod], "space", lazy.next_layout()),
+    # Modify current layout
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod], "i", lazy.layout.grow()),
+    Key([mod], "m", lazy.layout.shrink()),
+    Key([mod], "n", lazy.layout.reset()),
+    Key([mod], "o", lazy.layout.maximize()),
 
+    # Close the window in focus
     Key([alt], "F4", lazy.window.kill()),
     Key([ctrl, alt], "w", lazy.window.kill()),
 
+    # Switch window layout
+    Key([mod], "space", lazy.next_layout()),
+
+    # Toggle between different keyboard layouts
+    Key([ctrl, alt], "space", lazy.widget['keyboardlayout'].next_keyboard()),
+
+    # Quit & restart qtile
     Key([mod, ctrl], "r", lazy.restart()),
     Key([mod, ctrl], "q", lazy.shutdown()),
 
