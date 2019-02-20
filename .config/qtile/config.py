@@ -71,7 +71,7 @@ keys = [
     # Quit & restart qtile
     Key([mod, ctrl], "r", lazy.restart()),
     Key([mod, ctrl], "q", lazy.shutdown()),
-    Key([mod, ctrl], "l", lazy.spawn("slock")),
+    Key([mod, ctrl], "l", lazy.spawn("slock_with_time_info")),
 
     # Launch things
     Key([mod], "Return", lazy.spawn(terminal)),

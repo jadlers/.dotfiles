@@ -1,0 +1,3 @@
+#!/bin/bash
+
+slock -m "Locked at $(LANG=en date '+%A %d, %X')"
