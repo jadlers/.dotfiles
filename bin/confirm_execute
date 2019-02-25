@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Using dmenu to confirm an action with Yes/No.
+# Takes the prompt as command to be
+# executed as well as the prompt
+
+PROMPT="$2"
+if [ "$PROMPT" == "" ]; then
+  PROMPT="Are you sure?"
+fi
+
+[ $(echo -e "No\nYes" | dmenu \
+  -fn SansSerif-16 \
+  -nf "#888" \
+  -sb "#f44b42" \
+  -i -p "$PROMPT") = "Yes" ] && $1
+
