@@ -73,6 +73,10 @@ keys = [
     Key([mod, ctrl], "l", lazy.spawn("slock_with_time_info")),
     Key([mod, ctrl], "q",
         lazy.spawn(["confirm_execute", "kill -9 -1", "Log out?"])),
+    Key([mod, ctrl], "p",
+        lazy.spawn(["confirm_execute", "shutdown now", "Shut down now?"])),
+    Key([mod, ctrl], "o",
+        lazy.spawn(["confirm_execute", "reboot", "Reboot now?"])),
 
     # Launch things
     Key([mod], "Return", lazy.spawn(terminal)),
