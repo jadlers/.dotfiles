@@ -85,3 +85,6 @@
 
   " Closes all other splits
   nnoremap <LocalLeader>o :only<CR>
+
+  " Spell toggle
+  map <F8> :setlocal spell!<CR>
