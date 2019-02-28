@@ -6,9 +6,7 @@ export PATH=$PATH:$HOME/bin
 
 ## Go environment
 export GOPATH=$HOME/src/Go
-export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
 
 ## Language
 export LANG=en_GB.UTF-8
