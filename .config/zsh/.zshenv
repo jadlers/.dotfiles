@@ -5,7 +5,7 @@ export EDITOR=vim
 export PATH=$PATH:$HOME/bin
 
 ## Go environment
-export GOPATH=$HOME/src/Go
+export GOPATH=$HOME/code/Go
 export PATH=$PATH:$GOPATH/bin
 
 ## Language
