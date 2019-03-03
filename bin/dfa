@@ -1,0 +1,11 @@
+#!/bin/bash
+# Working with my dotfiles this script makes it easy to run a git command on
+# one or more modified files in the repo. The default command is add.
+
+fzf_options='--multi --height=10 --reverse --border'
+dfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+file="$($dfiles ls-files $HOME --modified | fzf $fzf_options)"
+test "$file" || exit
+
+$dfiles ${1-add} $file
+
