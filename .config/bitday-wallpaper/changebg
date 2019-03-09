@@ -1,0 +1,47 @@
+#!/bin/sh
+# Set the wallpaper with feh base on the time of the day usin the images in the
+# bitday collection: https://www.bitday.me
+#
+# It looks for the data files in $HOME/.config/bitday-wallpaper/SIZE where SIZE
+# is passed as an env variable. Otherwise it tries to use 1920x1080.
+
+if [ -z "$SIZE" ]; then
+  SIZE="1920x1080"
+fi
+WALL_DIR="$HOME/.config/bitday-wallpaper/${SIZE}/"
+
+if [ ! -d "$WALL_DIR" ]; then
+  echo "Not a directory: ${WALL_DIR}"
+  exit 1
+fi
+
+CMD="feh --bg-fill --no-fehbg"
+HOUR=$(date +"%H")
+
+if [ "$HOUR" -lt 3 ]; then
+  $CMD "${WALL_DIR}11-Mid-Night.png"
+elif [ "$HOUR" -lt 6 ]; then 
+  $CMD "${WALL_DIR}12-Late-Night.png"
+elif [ "$HOUR" -lt 7 ]; then
+  $CMD "${WALL_DIR}01-Early-Morning.png"
+elif [ "$HOUR" -lt 8 ]; then
+  $CMD "${WALL_DIR}02-Mid-Morning.png"
+elif [ "$HOUR" -lt 10 ]; then
+  $CMD "${WALL_DIR}03-Late-Morning.png"
+elif [ "$HOUR" -lt 12 ]; then
+  $CMD "${WALL_DIR}04-Early-Afternoon.png"
+elif [ "$HOUR" -lt 13 ]; then
+  $CMD "${WALL_DIR}05-Mid-Afternoon.png"
+elif [ "$HOUR" -lt 16 ]; then
+  $CMD "${WALL_DIR}06-Late-Afternoon.png"
+elif [ "$HOUR" -lt 19 ]; then
+  $CMD "${WALL_DIR}07-Early-Evening.png"
+elif [ "$HOUR" -lt 20 ]; then
+  $CMD "${WALL_DIR}08-Mid-Evening.png"
+elif [ "$HOUR" -lt 22 ]; then
+  $CMD "${WALL_DIR}09-Late-Evening.png"
+elif [ "$HOUR" -lt 1 ]; then
+  $CMD "${WALL_DIR}10-Early-Night.png"
+else
+  $CMD "${WALL_DIR}11-Mid-Night.png"
+fi
