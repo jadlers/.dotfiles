@@ -1,0 +1,46 @@
+#!/bin/sh
+
+help() {
+  printf "A tool to download and play YouTube videos\n"
+  printf "Usage: %s [-o|-h] URL\n" "$0"
+  printf "\n"
+  printf "FLAGS:\n"
+  printf "\t-h\tShow this help description\n"
+  printf "\t-o\tOnly download the video, don't play it\n"
+  exit 2
+}
+
+while getopts 'oh' f; do
+  case $f in
+    o)
+      ONLY_SAVE="true"
+      shift;;
+    *) help;;
+  esac
+done
+
+if [ -z "$1" ]; then
+  help
+fi
+
+url="$1"
+player="mpv --really-quiet --geometry=50%:50% --keep-open"
+dir="$HOME/Videos/watch-later"
+
+videoname=$(youtube-dl --get-title "$url" | sed 's/\ /_/g')
+time=$(date +"%Y-%m-%d_%H:%M")
+filepath="$dir/$time-$videoname"
+output="$filepath.mp4"
+
+existing_file=$(find "$dir" -name "*${videoname}*") # TODO: find
+if [ -z "$existing_file" ]; then
+  echo "Downloading video..."
+  quality='bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+  youtube-dl --quiet --format "$quality" --all-subs --continue \
+    -o "$filepath" "$url"
+else
+  echo "Video already downloaded"
+  output="$existing_file"
+fi
+
+[ -z "$ONLY_SAVE" ] && $player "$output"
