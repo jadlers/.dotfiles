@@ -61,6 +61,7 @@
 " Setting the background for st since it's not doing that by itself
   if $TERM == "st-256color"
     set background=dark
+    colorscheme base16-tomorrow-night
   endif
 
 " C/C++ languages settings
