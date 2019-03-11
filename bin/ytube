@@ -32,12 +32,16 @@ time=$(date +"%Y-%m-%d_%H:%M")
 filepath="$dir/$time-$videoname"
 output="$filepath.mp4"
 
-existing_file=$(find "$dir" -name "*${videoname}*") # TODO: find
+existing_file=$(find "$dir" -name "*${videoname}.mp4")
 if [ -z "$existing_file" ]; then
   echo "Downloading video..."
   quality='bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
   youtube-dl --quiet --format "$quality" --all-subs --continue \
     -o "$filepath" "$url"
+  part_file=$(find "$dir" -name "*${videoname}*.part$")
+  if [ -f "$part_file" ]; then
+    rm "$part_file"
+  fi
 else
   echo "Video already downloaded"
   output="$existing_file"
