@@ -50,7 +50,6 @@ HIST_STAMPS="yyyy-mm-d"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  gitignore
   httpie
   yarn
   zsh-completions
