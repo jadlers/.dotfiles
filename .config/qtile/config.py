@@ -173,7 +173,7 @@ screens = [
                     update_interval=10,
                     ),
                 widget.CheckUpdates( # Requires the package aptitude
-                    distro="Ubuntu",
+                    distro="MyUbuntu",
                     execute=terminal + " -e bash " + os.path.expanduser('~') + "/.config/qtile/apt_update.sh",
                     display_format="🔄: {updates}",
                     ),
