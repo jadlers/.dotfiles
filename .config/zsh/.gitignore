@@ -1,3 +1,4 @@
 .base16*
 .zcompdump*
 zsh_history
+aliases.local.zsh
