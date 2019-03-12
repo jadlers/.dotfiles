@@ -21,4 +21,4 @@ esac
 file="$($dfiles ls-files $HOME --modified | fzf $fzf_options)"
 test "$file" || exit 0
 
-$dfiles ${1-add} $file
+$dfiles $@ $file
