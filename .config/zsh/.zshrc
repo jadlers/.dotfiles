@@ -48,5 +48,5 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # Sourcing my aliases
-[ -f ./aliases.zsh ] && source ./aliases.zsh
-[ -f ./aliases.local.zsh ] && source ./aliases.local.zsh
+[ -f "$ZDOTDIR"/aliases.zsh ] && source "$ZDOTDIR"/aliases.zsh
+[ -f "$ZDOTDIR"/aliases.local.zsh ] && source "$ZDOTDIR"/aliases.local.zsh
