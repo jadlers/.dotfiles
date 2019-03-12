@@ -34,7 +34,7 @@ date=$(date +"%Y-%m-%d")
 output="$dir/$date/$videoname.mp4"
 
 QUALITY='bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
-DL_FLAGS="--format=$QUALITY --all-subs --continue --no-playlist"
+DL_FLAGS="--format=$QUALITY --continue --no-playlist"
 
 if [ ! "$VERBOSE" = true ]; then
   player="${player} --really-quiet"
