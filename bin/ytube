@@ -2,42 +2,51 @@
 
 help() {
   printf "A tool to download and play YouTube videos\n"
-  printf "Usage: %s [-o|-h] URL\n" "$0"
+  printf "Usage: %s [-h] [-o|-v] URL\n" "$0"
   printf "\n"
   printf "FLAGS:\n"
   printf "\t-h\tShow this help description\n"
   printf "\t-o\tOnly download the video, don't play it\n"
+  printf "\t-v\tVerbose mode, download info as well as mpv info\n"
   exit 2
 }
 
-while getopts 'oh' f; do
-  case $f in
-    o)
-      ONLY_SAVE="true"
-      shift;;
+while getopts 'hov' flag; do
+  case "$flag" in
+    o) ONLY_SAVE=true;;
+    v) VERBOSE=true;;
     *) help;;
   esac
 done
+shift $((OPTIND - 1))
 
-if [ -z "$1" ]; then
+
+if [ -z "$1" ]; then # No url to play
   help
 fi
 
 url="$1"
-player="mpv --really-quiet --geometry=50%:50% --keep-open"
-dir="$HOME/Videos/watch-later"
+player="mpv --geometry=50%:50% --autofit-larger=90%x90%"
 
-videoname=$(youtube-dl --get-title "$url" | sed 's/\ /_/g')
-time=$(date +"%Y-%m-%d_%H:%M")
-filepath="$dir/$time-$videoname"
-output="$filepath.mp4"
+dir="$HOME/Videos/watch-later"
+videoname=$(youtube-dl --get-title "$url" | sed -e 's/\ /_/g' -e 's/[!:]//g')
+date=$(date +"%Y-%m-%d")
+output="$dir/$date/$videoname.mp4"
+
+QUALITY='bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+DL_FLAGS="--format=$QUALITY --all-subs --continue --no-playlist"
+
+if [ ! "$VERBOSE" = true ]; then
+  player="${player} --really-quiet"
+  DL_FLAGS="${DL_FLAGS} --quiet"
+fi
 
 existing_file=$(find "$dir" -name "*${videoname}.mp4")
 if [ -z "$existing_file" ]; then
   echo "Downloading video..."
-  quality='bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
-  youtube-dl --quiet --format "$quality" --all-subs --continue \
-    -o "$filepath" "$url"
+  youtube-dl $DL_FLAGS --output "$output" "$url"
+
+  # Clean up eventual .part files
   part_file=$(find "$dir" -name "*${videoname}*.part$")
   if [ -f "$part_file" ]; then
     rm "$part_file"
