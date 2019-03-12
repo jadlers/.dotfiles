@@ -2,10 +2,23 @@
 # Working with my dotfiles this script makes it easy to run a git command on
 # one or more modified files in the repo. The default command is add.
 
-fzf_options='--multi --height=10 --reverse --border'
+fzf_options='--multi --height=10 --reverse --border --exit-0'
 dfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+
+# Check for commands without files as arguments first
+case ${1-status} in # Given no argument status is assumed
+  "status")
+    $dfiles status
+    exit;;
+  "commit")
+    $dfiles commit
+    exit;;
+  "log")
+    $dfiles log
+    exit;;
+esac
+
 file="$($dfiles ls-files $HOME --modified | fzf $fzf_options)"
-test "$file" || exit
+test "$file" || exit 0
 
 $dfiles ${1-add} $file
-
