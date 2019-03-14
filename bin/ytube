@@ -29,7 +29,11 @@ url="$1"
 player="mpv --geometry=50%:50% --autofit-larger=90%x90%"
 
 dir="$HOME/Videos/watch-later"
-videoname=$(youtube-dl --get-title "$url" | sed -e 's/\ /_/g' -e 's/[!:]//g')
+videoname=$(youtube-dl --get-title "$url" \
+  | sed 's/\ /_/g' \
+  | sed "s/['\"]//g" \
+  | sed 's+[/\]+|+g' \
+  | sed 's/[!:]//g')
 date=$(date +"%Y-%m-%d")
 output="$dir/$date/$videoname.mp4"
 
