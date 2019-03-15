@@ -10,11 +10,12 @@ case ${1-status} in # Given no argument status is assumed
   "status")
     $dfiles status
     exit;;
-  "commit")
-    $dfiles commit
-    exit;;
-  "log")
-    $dfiles log
+  "commit"\
+    |"log"\
+    |"pull"\
+    |"push"\
+    |"show")
+    $dfiles $@
     exit;;
 esac
 
