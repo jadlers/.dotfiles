@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ~/.config/bitday-wallpaper/changebg;
-setxkbmap us;
-setxkbmap -option caps:ctrl_modifier; # Make caps lock be a ctrl modifier
-xcape -e '#66=Escape';
-synclient TapButton1=0;
-urxvtd -q -o -f &
+setxkbmap us; # Default to US keyboard
+setxkbmap -option caps:ctrl_modifier; # Make Caps Lock hold -> Ctrl modifier
+xcape -e '#66=Escape';  # Caps Lock tap -> Esc
+synclient TapButton1=0; # Disable trackpad tap
+urxvtd -q -o -f &       # Start the urxvt daemon
