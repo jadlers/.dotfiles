@@ -10,7 +10,7 @@ if [ "$PROMPT" == "" ]; then
 fi
 
 [ $(echo -e "No\nYes" | dmenu \
-  -fn SansSerif-16 \
+  -fn "mononoki Nerd Font:size=17" \
   -nf "#888" \
   -sb "#f44b42" \
   -i -p "$PROMPT") = "Yes" ] && $1
