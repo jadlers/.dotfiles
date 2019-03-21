@@ -139,7 +139,7 @@ layouts = [
 
 
 widget_defaults = dict(
-    font='sanf-serif',
+    font='mononoki Nerd Font',
     fontsize=14,
     padding=3,
 )
@@ -164,6 +164,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.GroupBox(),
+                widget.CurrentLayout(),
                 widget.WindowName(),
                 # WindowName will push everything below to the right
 
@@ -172,9 +173,9 @@ screens = [
                     func=get_local_ip_addr,
                     update_interval=10,
                     ),
-                widget.CheckUpdates( # Requires the package aptitude
+                widget.CheckUpdates(
                     distro="MyUbuntu",
-                    execute=terminal + " -e bash " + os.path.expanduser('~') + "/.config/qtile/apt_update.sh",
+                    execute=terminal + " -e bash " + os.path.expanduser('~/.config/qtile/apt_update.sh'),
                     display_format="🔄: {updates}",
                     ),
                 widget.Battery(
@@ -185,8 +186,6 @@ screens = [
                     discharge_char='',
                     format='{char} {percent:2.0%}',
                     ),
-                widget.CurrentLayout(),
-                # widget.KeyboardLayout(configured_keyboards=['us', 'se']),
                 keyboardWidget,
                 widget.Clock(format='%H:%M'),
             ],
