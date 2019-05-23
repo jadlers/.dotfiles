@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-request="wttr.in/${1-Lund}?MF" # Lund is default
+REQUEST="wttr.in/${1-Lund}?MF" # Lund is default
 
-[ $(tput cols) -lt 125 ] && request+='?n'
-curl -H "Accept-Language: ${LANG%_*}" --compressed "$request"
+[ "$(tput cols)" -lt 125 ] && REQUEST=$REQUEST"?n"
+curl -H "Accept-Language: ${LANG%_*}" --compressed "$REQUEST"
