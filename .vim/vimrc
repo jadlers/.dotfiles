@@ -25,6 +25,10 @@
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
+  set backup
+  set backupdir=$HOME/.vim/backup
+  set dir=$HOME/.vim/backup
+
   " Makes the .viminfo be placed in the .vim dir
   set viminfo='100,<50,s10,h,n$HOME/.vim/cache/viminfo
 
