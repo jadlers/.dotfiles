@@ -77,7 +77,11 @@ This function should only modify configuration layer settings."
      emacs-lisp
      (go :variables
          go-tab-width 2
+         go-backend 'lsp
          go-use-test-args "-timeout 5s"
+         godoc-at-point-function 'godoc-gogetdoc
+         go-use-golangci-lint t
+         gofmt-command "goimports"
          go-format-before-save t)
      html
      java
