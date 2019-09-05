@@ -37,8 +37,10 @@ This function should only modify configuration layer settings."
    '(
      ;; General
      (auto-completion :variables
+                      auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'complete
-                      auto-completion-enable-snippets-in-popup t)
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-complete-with-key-sequence nil)
      better-defaults
      git
      helm
@@ -93,10 +95,10 @@ This function should only modify configuration layer settings."
 
    ;; Conditional layers
    conditional-layers
-         (if (string= system-type "darwin")
-           '(osx))
+    (if (string= system-type "Darwin")
+        '(osx))
 
-   dotspacemacs-configuration-layers (append general-layers conditional-layers)
+    dotspacemacs-configuration-layers (append general-layers conditional-layers)
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -120,7 +122,7 @@ This function should only modify configuration layer settings."
    ;; installs only the used packages but won't delete unused ones. `all'
    ;; installs *all* packages supported by Spacemacs and never uninstalls them.
    ;; (default is `used-only')
-   dotspacemacs-install-packages 'used-only))
+   dotspacemacs-install-packages 'used-but-keep-unused))
 
 (defun dotspacemacs/init ()
   "Initialization:
@@ -549,6 +551,50 @@ before packages are loaded."
   (add-hook 'java-mode-hook (lambda ()
                               (setq c-basic-offset 2
                                     indent-tabs-mode nil)))
+
+  ;; Haskell
+  ;; (add-hook 'haskell-mode-hook (lambda ()
+  ;;                                (require 'lsp-haskell)
+  ;;                                (message "Done with haskel-mode hook")
+  ;;                                ))
+  (add-hook 'haskell-mode-hook (require 'lsp-haskell))
+  (add-hook 'haskell-mode-hook (setq lsp-haskell-process-path-hie "hie-wrapper"))
+  (add-hook 'haskell-mode-hook (setq lsp-document-sync-method 'full))
+  (add-hook 'haskell-mode-hook 'lsp)
+  (add-hook 'haskell-mode-hook (message "Haskell mode hook loaded"))
+
+  ;; Org
+  (add-hook 'org-mode-hook (lambda ()
+                             (spacemacs/toggle-auto-fill-mode-on)
+                             (spacemacs/toggle-spelling-checking-on)
+                             (spacemacs/toggle-highlight-current-line-globally-off)))
+
+  (setq org-directory "~/org/")
+  (setq org-default-notes-file (concat org-directory "2.notes.org"))
+  (setq org-agenda-files
+        (quote
+         ("~/org/1_todo.org"
+          "~/org/2_notes.org")
+          ))
+  (setq org-todo-keywords '((sequence "TODO" "PROGRESS" "BLOCKED" "|" "DONE" "CANCELLED")))
+  (setq hl-todo-keyword-faces
+    (quote (
+     ("TODO" . "#dc752f")
+     ("FIXME" . "#dc752f")
+     ("PROGRESS" . "#4f97d7")
+     ("OKAY" . "#4f97d7")
+     ("BLOCKED" . "#f2241f")
+     ("CANCELLED" . "#f2241f")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TMP" . "#b1951d")
+     )))
+
+  ;; Haskell
+  (add-hook 'haskell-mode-hook (lambda ()
+                                 ('turn-on-haskell-indentation)
+                                 (add-to-list 'exec-path "")))
 
   ;; Indent
   (setq standard-indent 2)
