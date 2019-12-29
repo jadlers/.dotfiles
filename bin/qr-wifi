@@ -1,6 +1,6 @@
 #!/bin/sh
 # Prompts for SSID and password for Wi-Fi. The values can also be specified as
-# environment variables
+# environment variables. Opens in default viewer for PNG images.
 
 FILE=/tmp/qr-wifi.png
 
@@ -17,4 +17,7 @@ WPA2="WIFI:S:${SSID};T:WPA2;P:${PASS};;"
 
 qrencode --type=PNG --dpi=144 --output="${FILE}" "${WPA2}"
 
-open "${FILE}"
+case "$OSTYPE" in
+  darwin*) open "$FILE";;
+  *) xdg-open "$FILE";;
+esac
