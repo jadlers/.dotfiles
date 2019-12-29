@@ -1,0 +1,20 @@
+#!/bin/sh
+# Prompts for SSID and password for Wi-Fi. The values can also be specified as
+# environment variables
+
+FILE=/tmp/qr-wifi.png
+
+if [ -z "$SSID" ]; then
+  read -p "Specify the SSID of the wi-fi network: " SSID
+fi
+
+if [ -z "$PASS" ]; then
+  read -p "Specify the password of the wi-fi network: " PASS
+fi
+
+# WPA="WIFI:T:WPA;S:${SSID};P:${PASS};;"
+WPA2="WIFI:S:${SSID};T:WPA2;P:${PASS};;"
+
+qrencode --type=PNG --dpi=144 --output="${FILE}" "${WPA2}"
+
+open "${FILE}"
