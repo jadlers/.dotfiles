@@ -74,25 +74,30 @@ This function should only modify configuration layer settings."
      (c-c++ :variables
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode)
+     (clojure :variables
+              clojure-enable-linters 'clj-kondo)
+     dap
      emacs-lisp
      (go :variables
          go-tab-width 2
          go-backend 'lsp
          go-use-test-args "-timeout 5s"
          godoc-at-point-function 'godoc-gogetdoc
-         go-use-golangci-lint t
+         ;; go-use-golangci-lint t
          gofmt-command "goimports"
          go-format-before-save t)
      html
-     java
+     (java :variables java-backend 'lsp)
      (javascript :variables
                  node-add-modules-path t
                  javascript-fmt-tool 'prettier
                  javascript-backend 'nil)
      python
      react
+     rust
 
      ;; Extras
+     graphviz
      games
      xkcd
      )
@@ -100,7 +105,8 @@ This function should only modify configuration layer settings."
    ;; Conditional layers
    conditional-layers
     (if (string= system-type "Darwin")
-        '(osx))
+        '(osx)
+        '())
 
     dotspacemacs-configuration-layers (append general-layers conditional-layers)
 
@@ -111,7 +117,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(prettier-js)
+   dotspacemacs-additional-packages '(prettier-js color-theme-modern)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -235,7 +241,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+                         spacemacs-light
+                         wombat)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -424,7 +431,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server nil
+   dotspacemacs-enable-server t
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -528,6 +535,12 @@ This function is called only while dumping Spacemacs configuration. You can
 dump."
   )
 
+(defun latex-word-count ()
+  (interactive)
+  (shell-command (concat "texcount "
+                         ; "uncomment then options go here"
+                         (buffer-file-name))))
+
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
 This function is called at the very end of Spacemacs startup, after layer
@@ -537,9 +550,64 @@ before packages are loaded."
   ;; LSP config
   (setq lsp-inhibit-message t)
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Clojure
+  ;;
+  ;;
+  ;; CIDER 0.23 Lima release options
+  ;; Configure the position of evaluation result
+  ;; By default the result displays at the end of the current line
+  ;; Set cider-result-overlay-position to `at-point' to display results right after the expression evaluated
+  ;; Useful for evaluating nexsted expressions with `, e e'
+  (setq cider-result-overlay-position 'at-point)
+  ;;
+  ;;
+  ;; Pretty print in Clojure to use the Fast Idiomatic Pretty-Printer. This is approximately 5-10x faster than clojure.core/pprint
+  ;; (setq cider-pprint-fn 'fipp)
+  ;;
+  ;;
+  ;; Indentation of function forms
+  ;; https://github.com/clojure-emacs/clojure-mode#indentation-of-function-forms
+  (setq clojure-indent-style 'align-arguments)
+  ;;
+  ;; Vertically align s-expressions
+  ;; https://github.com/clojure-emacs/clojure-mode#vertical-alignment
+  (setq clojure-align-forms-automatically t)
+  ;;
+  ;; Auto-indent code automatically
+  ;; https://emacsredux.com/blog/2016/02/07/auto-indent-your-code-with-aggressive-indent-mode/
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+
+  ;; Eval at point,
+  ;; Read more in theese threads: https://github.com/syl20bnr/spacemacs/issues/646 & https://github.com/syl20bnr/spacemacs/issues/3103
+  ;; Fix cider-eval-last-sexp in normal mode
+  ;; https://github.com/syl20bnr/spacemacs/issues/646#issuecomment-106037404
+  (defadvice cider-last-sexp (around evil activate)
+    "In normal-state or motion-state, last sexp ends at point."
+    (if (or (evil-normal-state-p) (evil-motion-state-p))
+        (save-excursion
+          (unless (or (eobp) (eolp)) (forward-char))
+          ad-do-it)
+      ad-do-it))
+  ;; fix green highlighting when eval-ing last-sexp
+  ;; original cider-eval-sexp-fu (comes with the clojure layer)
+  ;;   https://github.com/clojure-emacs/cider-eval-sexp-fu/blob/5687e7b33e17f2be40b036dac82da4a5bc6705fb/cider-eval-sexp-fu.el#L38
+  (defadvice cider-esf--bounds-of-last-sexp (around evil activate)
+    "In normal-state or motion-state, last sexp ends at point."
+    (if (or (evil-normal-state-p) (evil-motion-state-p))
+        (cons (save-excursion
+                (unless (or (eobp) (eolp)) (forward-char))
+                ad-do-it))
+      ad-do-it))
+
+
   ;; Add c++ clang-format shortcut for c++-mode
   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
     "f" 'clang-format-buffer)
+
+  ;; Add latex word cound binding
+  (spacemacs/set-leader-keys-for-major-mode 'latex-mode
+    "w" 'latex-word-count)
 
   ;; Expose the node_modules folder for emacs
   (add-hook 'web-mode-hook #'add-node-modules-path)
@@ -556,22 +624,11 @@ before packages are loaded."
                               (setq c-basic-offset 2
                                     indent-tabs-mode nil)))
 
-  ;; Haskell
-  ;; (add-hook 'haskell-mode-hook (lambda ()
-  ;;                                (require 'lsp-haskell)
-  ;;                                (message "Done with haskel-mode hook")
-  ;;                                ))
-  (add-hook 'haskell-mode-hook (require 'lsp-haskell))
-  (add-hook 'haskell-mode-hook (setq lsp-haskell-process-path-hie "hie-wrapper"))
-  (add-hook 'haskell-mode-hook (setq lsp-document-sync-method 'full))
-  (add-hook 'haskell-mode-hook 'lsp)
-  (add-hook 'haskell-mode-hook (message "Haskell mode hook loaded"))
-
   ;; Org
   (add-hook 'org-mode-hook (lambda ()
                              (spacemacs/toggle-auto-fill-mode-on)
-                             (spacemacs/toggle-spelling-checking-on)
-                             (spacemacs/toggle-highlight-current-line-globally-off)))
+                             (spacemacs/toggle-spelling-checking-on)))
+                             ;; (spacemacs/toggle-highlight-current-line-globally-off)))
 
   (setq org-directory "~/org/")
   (setq org-default-notes-file (concat org-directory "2.notes.org"))
