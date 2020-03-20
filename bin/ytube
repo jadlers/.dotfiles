@@ -38,14 +38,14 @@ videoname=$(youtube-dl --get-title "$url" \
 date=$(date +"%Y-%m-%d")
 output="$dir/$date/$videoname.mp4"
 
-QUALITY='bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+QUALITY='bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio'
 DL_FLAGS="--format=$QUALITY --continue --no-playlist"
 
 if [ "$QUIET" = true ]; then
   player="$player --really-quiet"
 fi
 
-existing_file=$(find "$dir" -name "*${videoname}.mp4")
+existing_file=$(find "$dir" -name "*${videoname}.*")
 if [ -z "$existing_file" ]; then
   if [ "$QUIET" = true ]; then
     echo "Downloading video..."
