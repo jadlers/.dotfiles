@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REQUEST="wttr.in/${1-Lund}?MF" # Lund is default
+REQUEST="wttr.in/${1-Bergshamra}?MF" # Bergshamra is default
 
 [ "$(tput cols)" -lt 125 ] && REQUEST=$REQUEST"?n"
 curl -H "Accept-Language: ${LANG%_*}" --compressed "$REQUEST"
