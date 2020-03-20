@@ -1,0 +1,6 @@
+[Unit]
+Description=Change background depending on time day
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh /home/jacob/.config/bitday-wallpaper/changebg 2560x1440

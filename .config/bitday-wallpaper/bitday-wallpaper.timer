@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer running the job every hour
+
+[Timer]
+# DayOfWeek Year-Month-Day Hour:Minute:Second
+Persistent=true
+OnCalendar=*:00
+
+[Install]
+WantedBy=graphical-session.target
