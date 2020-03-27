@@ -615,9 +615,9 @@ before packages are loaded."
 
   ;; Prettier
   (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (setq prettier-js-args '( ;; For when no .prettierrc exists
-                           "--single-quote"
-                           "--trailing-comma=es5"))
+  ;; (setq prettier-js-args '( ;; For when no .prettierrc exists
+  ;;                          "--single-quote"
+  ;;                          "--trailing-comma=es5"))
 
   ;; Java
   (add-hook 'java-mode-hook (lambda ()
