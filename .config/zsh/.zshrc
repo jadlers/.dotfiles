@@ -1,52 +1,98 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
+# Enable colors and change prompt:
+autoload -U colors && colors
+
+# History in cache directory:
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=$ZDOTDIR/zsh_history
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+# Auto complete with case insenstivity
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+# History traversal matching typed command
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'left' vi-backward-char
+bindkey -M menuselect 'down' vi-down-line-or-history
+bindkey -M menuselect 'up' vi-up-line-or-history
+bindkey -M menuselect 'right' vi-forward-char
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+# Fix backspace bug when switching modes
+bindkey "^?" backward-delete-char
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy-mm-d"
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
 
-# Which plugins would you like to load? (They're all in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  zsh-autosuggestions
-)
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
 
-# On Linux
-if [[ $(uname -s) = "Linux" ]]; then
-  plugins+=( sudo )
-fi
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Default theme
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes for themes
-export ZSH_THEME="avit"
+# Edit line in vim with ctrl-v:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^v' edit-command-line
+
+# Control bindings for programs
+# bindkey -s "^g" "git status\n"
+# bindkey -s "^h" "history\n"
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+bindkey '^R' history-incremental-pattern-search-backward
+
 
 # iTerm specific
 if [ "$TERM_PROGRAM" = iTerm.app ]; then
   source $ZDOTDIR/colors
 fi
 
-# Emacs specific settings
-if [ -n "$INSIDE_EMACS" ]; then
-  export ZSH_THEME="clean"
-fi
-
-source $ZSH/oh-my-zsh.sh
-
 # Sourcing my aliases
 [ -f "$ZDOTDIR"/aliases.zsh ] && source "$ZDOTDIR"/aliases.zsh
 [ -f "$ZDOTDIR"/aliases.local.zsh ] && source "$ZDOTDIR"/aliases.local.zsh
+
+# Config specific to single machines
+[ -f "$ZDOTDIR"/local.zsh ] && source "$ZDOTDIR"/local.zsh
+
+# Load zsh-syntax-highlighting; should be last.
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+# Load spaceship prompt
+source $ZDOTDIR/spaceship.zsh
