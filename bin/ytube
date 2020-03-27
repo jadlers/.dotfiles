@@ -29,17 +29,21 @@ fi
 url="$1"
 player="mpv --geometry=50%:50% --autofit-larger=90%x90%"
 
-dir="$HOME/Videos/watch-later"
+dir="$HOME/Videos"
 videoname=$(youtube-dl --get-title "$url" \
   | sed 's/\ /_/g' \
   | sed "s/['\"]//g" \
   | sed 's+[/\]+|+g' \
   | sed 's/[!:]//g')
 date=$(date +"%Y-%m-%d")
-output="$dir/$date/$videoname.mp4"
+output="$dir/$date/$videoname"
 
-QUALITY='bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio'
-DL_FLAGS="--format=$QUALITY --continue --no-playlist"
+DL_FLAGS="--continue --no-playlist"
+
+if [ ! "$MAX_QUALITY" = true ]; then # Max quality is default
+  QUALITY="bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"
+  DL_FLAGS="$DL_FLAGS --format=$QUALITY"
+fi
 
 if [ "$QUIET" = true ]; then
   player="$player --really-quiet"
@@ -48,10 +52,10 @@ fi
 existing_file=$(find "$dir" -name "*${videoname}.*")
 if [ -z "$existing_file" ]; then
   if [ "$QUIET" = true ]; then
-    echo "Downloading video..."
-    youtube-dl "$DL_FLAGS" --quiet --output="$output" "$url"
+    youtube-dl $DL_FLAGS --quiet --output="$output" "$url"
   else
-    youtube-dl "$DL_FLAGS" --output="$output" "$url"
+    echo "Downloading video..."
+    youtube-dl $DL_FLAGS --output="$output" "$url"
   fi;
 
   # Clean up eventual .part files

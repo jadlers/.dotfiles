@@ -8,9 +8,9 @@
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.hidesExplorerArrows": true,
   "editor.lineNumbers": "on", // "relative" for VIM
-  "editor.fontFamily": "'Fira Code', 'source code pro', 'Hack', 'monospace'",
+  "editor.fontFamily": "'mononoki Nerd Font', 'Fira Code', 'source code pro', 'Hack', 'monospace'",
   "editor.fontLigatures": true, // Fira code uses ligatures
-  "editor.fontSize": 12,
+  "editor.fontSize": 13,
   "editor.cursorStyle": "underline",
   "editor.cursorBlinking": "phase",
   "editor.renderIndentGuides": true,
@@ -97,4 +97,18 @@
     "*.sc": "scala"
   },
   "editor.renderControlCharacters": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "liveshare.featureSet": "insiders",
+  "google-java-format.executable": "/usr/local/bin/google-java-format",
+  "java.format.settings.url": "",
+  "java.format.settings.profile": "",
+  "java.format.enabled": false,
+  "diffEditor.ignoreTrimWhitespace": false,
 }

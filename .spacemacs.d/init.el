@@ -44,13 +44,14 @@ This function should only modify configuration layer settings."
      better-defaults
      git
      helm
+     ;; lsp
      (lsp :variables
           lsp-ui-sideline-enable nil
           lsp-ui-doc-enable nil)
      (ranger :variables
              ranger-override-dired t
              ranger-cleanup-on-disable t)
-     pdf
+     ;; pdf
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
@@ -58,7 +59,7 @@ This function should only modify configuration layer settings."
      (spell-checking :variables
                      spell-checking-enable-by-default nil
                      spell-checking-enable-auto-dictionary t)
-     (syntax-checking :variables syntax-checking-enable-by-default nil)
+     (syntax-checking :variables syntax-checking-enable-by-default t)
      (version-control :variables
                       version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left)
@@ -71,6 +72,7 @@ This function should only modify configuration layer settings."
      org
 
      ;; Programming
+     clojure
      (c-c++ :variables
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode)
@@ -86,15 +88,28 @@ This function should only modify configuration layer settings."
          ;; go-use-golangci-lint t
          gofmt-command "goimports"
          go-format-before-save t)
+     (haskell :variables
+              ;; haskell-enable-hindent t
+              haskell-stylish-on-save t
+              haskell-completion-backend 'ghci
+              haskell-process-type 'stack-ghci
+              )
      html
      (java :variables java-backend 'lsp)
      (javascript :variables
                  node-add-modules-path t
                  javascript-fmt-tool 'prettier
                  javascript-backend 'nil)
-     python
+     php
+     (python :variables
+             python-formatter 'black
+             python-format-on-save t
+             python-fill-column 88)
      react
      rust
+     (sql :variables
+          sql-capitalize-keywords t
+          sql-auto-indent nil)
 
      ;; Extras
      graphviz
@@ -117,7 +132,10 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(prettier-js color-theme-modern)
+    dotspacemacs-additional-packages '(prettier-js
+                                       color-theme-modern
+                                       (lsp-haskell :location (recipe :fetcher github :repo "emacs-lsp/lsp-haskell"))
+                                       )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
