@@ -69,15 +69,11 @@ precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^v' edit-command-line
 
-# Control bindings for programs
-# bindkey -s "^g" "git status\n"
-# bindkey -s "^h" "history\n"
 bindkey "^[b" backward-word
 bindkey "^[f" forward-word
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^R' history-incremental-pattern-search-backward
-
 
 # iTerm specific
 if [ "$TERM_PROGRAM" = iTerm.app ]; then
@@ -92,7 +88,8 @@ fi
 [ -f "$ZDOTDIR"/local.zsh ] && source "$ZDOTDIR"/local.zsh
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# Move to local.zsh on linux
+[ $(uname -s) = "Darwin" ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Load spaceship prompt
 source $ZDOTDIR/spaceship.zsh
