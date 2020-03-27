@@ -1,4 +1,5 @@
 alias dfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias zr='source $ZDOTDIR/.zshrc'
 
 # ls
 alias ll='ls -l'
