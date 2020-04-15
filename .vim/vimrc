@@ -21,6 +21,9 @@
   set noesckeys       " Remove delay pressing <Shift><o> immediately after <Esc>
                       " It also disables cursor keys while in insert mode
 
+  set termguicolors
+  colorscheme base16-tomorrow-night-eighties
+
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
 
