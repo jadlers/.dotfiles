@@ -1,0 +1,5 @@
+width=500
+height=600
+allow_images=true
+key_up=Control_L-k
+key_down=Control_L-j
