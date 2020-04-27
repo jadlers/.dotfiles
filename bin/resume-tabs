@@ -27,8 +27,6 @@ in_firefox() {
   if pgrep firefox > /dev/null; then
     xargs firefox -new-window -url < "$1"
   else
-    swaymsg 'exec firefox' && sleep 5
-    # xargs firefox -new-tab -url < "$1"
     xargs swaymsg 'exec MOZ_ENABLE_WAYLAND=0 firefox -new-tab -url ' < "$1"
   fi
 }
