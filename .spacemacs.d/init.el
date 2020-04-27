@@ -42,6 +42,7 @@ This function should only modify configuration layer settings."
                       auto-completion-return-key-behavior 'complete
                       auto-completion-complete-with-key-sequence nil)
      better-defaults
+     emoji
      git
      helm
      ;; lsp
@@ -107,6 +108,7 @@ This function should only modify configuration layer settings."
              python-fill-column 88)
      react
      rust
+     ruby
      (sql :variables
           sql-capitalize-keywords t
           sql-auto-indent nil)
