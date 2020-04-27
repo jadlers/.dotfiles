@@ -1,0 +1,56 @@
+#!/bin/sh
+
+help() {
+  name=$(echo "$0" | awk -F/ '{print $NF}')
+  printf "Open urls from a file in a new browser window\n"
+  printf "\n"
+  printf "USAGE:\n"
+  printf "\t $name [FLAGS] <url file>\n"
+  printf "\n"
+  printf "FLAGS:\n"
+  printf "\t-c\tOpen in chromium\n"
+  printf "\t-f\tOpen in firefox\n"
+  printf "\t-h\tShow this help page\n"
+}
+
+in_chromium() {
+  if pgrep chromium > /dev/null; then
+    swaymsg 'exec chromium';
+    sleep 1
+    xargs swaymsg "exec chromium" < "$1"
+  else
+    xargs swaymsg "exec chromium --new-window" < "$1"
+  fi
+}
+
+in_firefox() {
+  if pgrep firefox > /dev/null; then
+    xargs firefox -new-window -url < "$1"
+  else
+    swaymsg 'exec firefox' && sleep 5
+    # xargs firefox -new-tab -url < "$1"
+    xargs swaymsg 'exec MOZ_ENABLE_WAYLAND=0 firefox -new-tab -url ' < "$1"
+  fi
+}
+
+if [ -z "$1" ]; then
+  help
+  exit 2
+fi
+
+BROWSER="firefox"
+
+while getopts 'fch' flag; do
+  case "$flag" in
+    f) BROWSER="firefox";;
+    c) BROWSER="chromium";;
+    h) help; exit 0;;
+    *) help; exit 2;;
+  esac
+done
+shift $((OPTIND - 1)) # Make first non-flag arg $1
+
+case "$BROWSER" in
+  firefox)  in_firefox "$1";;
+  chromium) in_chromium "$1";;
+esac
