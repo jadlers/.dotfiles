@@ -5,7 +5,7 @@ help() {
   printf "Open urls from a file in a new browser window\n"
   printf "\n"
   printf "USAGE:\n"
-  printf "\t $name [FLAGS] <url file>\n"
+  printf "\t %s [FLAGS] <url file>\n" "$name"
   printf "\n"
   printf "FLAGS:\n"
   printf "\t-c\tOpen in chromium\n"
