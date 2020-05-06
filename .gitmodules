@@ -19,3 +19,6 @@
 [submodule "vim-vinegar"]
 	path = .vim/pack/bundle/start/vim-vinegar
 	url = git@github.com:tpope/vim-vinegar.git
+[submodule ".vim/pack/bundle/start/vim-markdown"]
+	path = .vim/pack/bundle/start/vim-markdown
+	url = git@github.com:gabrielelana/vim-markdown.git
