@@ -1,8 +1,9 @@
 [user]
-	name = Jacob Adlers
+  name = Jacob Adlers
 [pull]
-	rebase = true
+  rebase = true
 [core]
-	editor = vim
+  editor = vim
+  pager = delta
 [fetch]
-	prune = true
+  prune = true
