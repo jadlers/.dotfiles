@@ -1,0 +1,358 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+set $alt Mod1
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+# Note: it's recommended that you pass the final command to sway
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu pkill wofi || wofi --conf ~/.config/wofi/config --show drun
+set $browser firefox
+
+### Output configuration
+#
+
+#
+# Example configuration:
+#
+# output DP-3 resolution 2560x1440 position 0 0
+output 'Dell Inc. DELL U2715H GH85D72R0BFS' res 2560x1440 position 0 0
+output 'Dell Inc. DELL U2414H 9TG46449146L' res 1920x1080 transform 90 position 2560 -25
+# output DP-3 resolution 1920x1080 position 0 0
+# output HDMI-A-1 resolution 1920x1080 position 1920 25 transform 90 anticlockwise
+# output HDMI-A-1 resolution 1920x1080 position 2560 0 
+# output HDMI-A-1 transform 90 clockwise 
+
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+# Example configuration:
+set $display_off swaymsg "output * dpms off"
+set $display_on swaymsg "output * dpms on"
+set $locker lock-wrapper
+# set $locker swaylock -f -e -F --color 000000
+   # NOTE: remember to change this line if going back to swaylock
+   # timeout 120 'if pgrep -x swaylock; then $display_off; fi' \
+
+         # Removed for testing
+         # timeout 120  'pgrep --exact swaylock-blur && $display_off' \
+         # timeout 1500 '$display_off' \
+
+exec swayidle -w \
+         timeout 1500 '$locker' \
+         timeout 1800 '$display_off' \
+               resume '$display_on' \
+         before-sleep '$locker' \
+         after-resume '$display_on'
+
+    # Lock screen with key
+    # bindsym Scroll_Lock exec pause_displays
+    bindsym Scroll_Lock exec notify-send System "Locking screen"; exec $locker
+    bindsym $mod+Escape exec $HOME/bin/power.sh
+    bindsym $mod+F1 exec $HOME/bin/brightness.sh
+    # bindsym $mod+F4 exec chromium --app=http://192.168.1.10:8123
+    bindsym $mod+F4 exec kiosk-homeassistant.sh
+
+# Don't go idle when firefox is in fullscreen
+for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [class="firefox"] inhibit_idle fullscreen # Xorg version
+for_window [class="LBRY"] inhibit_idle fullscreen
+for_window [class="spotify"] inhibit_idle fullscreen
+
+#
+# Notifications
+#
+# exec mako --ignore-timeout 0 --default-timeout 8000
+exec mako
+bindsym $mod+D exec makoctl dismiss
+bindsym $mod+shift+D exec makoctl dismiss --all
+
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+input type:keyboard {
+  xkb_layout  "us,se"
+  xkb_options "grp:ctrls_toggle,caps:ctrl_modifier,grp:rctrl_rshift_toggle,grp_led:caps"
+}
+
+# Hide cursor after 8s of inactivity
+seat * hide_cursor 8000 
+
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym $mod+Space exec $menu
+
+    # Start the browser
+    # bindsym $mod+w exec $browser
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+#
+# Special keys
+#
+    bindsym --locked XF86AudioMute exec 'pamixer --toggle-mute'
+    bindsym --locked XF86AudioStop exec 'pamixer --toggle-mute'
+    bindsym --locked XF86AudioLowerVolume exec 'pamixer --decrease 5'
+    bindsym --locked XF86AudioRaiseVolume exec 'pamixer --increase 5'
+
+    # Old alsa 
+    bindsym --locked XF86AudioPlay exec 'playerctl --player spotify,mpv play-pause'
+    bindsym --locked XF86AudioNext exec 'playerctl --player spotify,mpv next'
+    bindsym --locked XF86AudioPrev exec 'playerctl --player spotify,mpv previous'
+
+    # Capture screenshots
+    set $screenshotDir $HOME/Pictures/Screenshots
+    bindsym Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') \
+        $screenshotDir/"`date +%Y-%m-%d_%H-%M-%S`.png" \
+        && exec notify-send "Screenshot" "New capture saved"
+    bindsym Shift+Print exec slurp | grim -g - $screenshotDir/"`date +%Y-%m-%d_%H-%M-%S`.png" && exec notify-send Screenshot "New region capture saved"
+
+
+
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+
+    # Switch between windows with wofi menu
+    bindsym $alt+tab exec swytch.sh # Do I want/need this?
+    # Switch to workspace
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
+    bindsym $mod+4 workspace 4
+    bindsym $mod+5 workspace 5
+    bindsym $mod+6 workspace 6
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    bindsym $mod+0 workspace 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
+    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+    bindsym $mod+Shift+0 move container to workspace 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+    # Move workspace to other monitor
+    bindsym $mod+$alt+h move workspace to output left
+    bindsym $mod+$alt+l move workspace to output right
+
+    # Assign some applications to specific workspaces
+    workspace 10 output HDMI-A-1
+    for_window [class="[Ss]potify"] move container to workspace 7
+
+    # Tag xwayland windows with [X]
+    for_window [shell="xwayland"] title_format "[X] %title"
+
+  # https://github.com/ValveSoftware/steam-for-linux/issues/1040
+  for_window [class="^Steam$" title="^Friends List$"] floating enable
+  for_window [class="^Steam$" title="Steam - News"] floating enable
+  for_window [class="^Steam$" title=".* - Chat"] floating enable
+  for_window [class="^Steam$" title="^Settings$"] floating enable
+  for_window [class="^Steam$" title=".* - event started"] floating enable
+  for_window [class="^Steam$" title=".* CD key"] floating enable
+  for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+  for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+  for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+  for_window [title="^Steam Keyboard$"] floating enable
+
+  for_window [class="^zoom$" title="^Settings"] floating enable
+  for_window [class="^zoom$" title="^Zoom - Licensed Account"] floating enable
+  for_window [class="^zoom$" title="^Edit Meeting"] floating enable
+  for_window [class="^zoom$" title="^Schedule Meeting"] floating enable
+
+  for_window [class="^Droidcam$"] floating enable
+  for_window [class="^Droidcam$"] move scratchpad
+  for_window [class="^Droidcam$"] focus
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    # bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+
+    # Add gaps when multiple windows
+    gaps inner 5
+    smart_gaps on
+
+    # Only show border if more than one window
+    smart_borders no_gaps
+
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+    for_window [class="Chromium" instance="192.168.1.10"] move scratchpad
+    for_window [class="Chromium" instance="192.168.1.10"] focus
+
+    # NOTE: The title can appear elsewhere when browsing, is there a better way?
+    for_window [app_id="firefox" title="(\w )+- Home Assistant.*"] {
+      move scratchpad
+      border none
+      focus
+    }
+
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+  swaybar_command waybar
+}
+# bar {
+#     position top
+
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     status_command while "echo $(playerctl metadata --format '{{title}} - {{artist}} | ') $(date +'%Y-%m-%d %H:%M')"; do sleep 1; done
+#     # status_command while echo $(playerctl metadata --format "{{title}}") $(date +'%Y-%m-%d %H:%M'); do sleep 1; done
+
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# }
+
+#
+# Autostart programs
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# Possible to do nicer? Systemd timer is started to change background every 1h 
+exec /usr/lib/kdeconnectd
+exec /usr/bin/kdeconnect-indicator
+exec /usr/bin/nextcloud
+exec /usr/bin/spotify
+exec sleep 1 && /home/jacob/.config/bitday-wallpaper/changebg 2560x1440
+
+# TODO: Remove when laundry is taken care of
+# exec systemd-run --user --on-calendar='*:0,15,30,45' /usr/bin/sh /home/jacob/bin/laundry.sh
+
+include /etc/sway/config.d/*
