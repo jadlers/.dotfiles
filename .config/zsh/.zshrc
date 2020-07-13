@@ -70,7 +70,6 @@ bindkey "^[b" backward-word
 bindkey "^[f" forward-word
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
-bindkey '^R' history-incremental-pattern-search-backward
 
 # iTerm specific
 if [ "$TERM_PROGRAM" = iTerm.app ]; then
@@ -87,6 +86,9 @@ fi
 # Load zsh-syntax-highlighting; should be last.
 # Move to local.zsh on linux
 [ $(uname -s) = "Darwin" ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Load fzf functions
+source /usr/share/fzf/key-bindings.zsh
 
 # Load spaceship prompt
 source $ZDOTDIR/spaceship.zsh
