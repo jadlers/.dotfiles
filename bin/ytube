@@ -8,15 +8,15 @@ help() {
   printf "\t-h\tShow this help description\n"
   printf "\t-p\tPlay the video automatically after downloading it\n"
   printf "\t-q\tQuiet mode, minimise output\n"
-  exit 2
 }
 
-while getopts 'mpq' flag; do
+while getopts 'hmpq' flag; do
   case "$flag" in
+    h) help; exit 0;;
     m) MAX_QUALITY=true;;
     p) PLAY_NOW=true;;
     q) QUIET=true;;
-    *) help;;
+    *) help; exit 2;;
   esac
 done
 shift $((OPTIND - 1))
@@ -24,6 +24,7 @@ shift $((OPTIND - 1))
 
 if [ -z "$1" ]; then # No url to play
   help
+  exit 2
 fi
 
 url="$1"
