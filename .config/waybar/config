@@ -1,0 +1,57 @@
+// vi: ft=json
+
+[{
+    // Primary monitor
+    "output": "DP-3",
+    "height": 32,
+    "layer": "top",
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-center": ["custom/spotify"],
+    "modules-right": ["tray", "pulseaudio", "custom/pacman", "clock"],
+    "clock": { "format": "{:%a, %d. %b  %H:%M}" },
+    "tray": { "spacing": 6 },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-icons": {
+            "headphones": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+		"custom/pacman": {
+        "format": "{}  ",
+        "interval": 60,                 // every minute
+        "exec": "checkupdates | wc -l", // # of updates
+        "exec-if": "exit 0",            // always run; consider advanced run conditions
+        "tooltip": false,
+        "signal": 8
+    },
+		"custom/spotify": {
+				"return-type": "json",
+				"max-length": 50,
+				"exec": "python $HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null",
+				"exec-if": "pgrep spotify"
+		}
+}, {
+    // Secondary monitor
+    "output": "HDMI-A-1",
+    "height": 32,
+    "layer": "top",
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-right": ["tray", "network", "pulseaudio", "clock"],
+    "network": {
+        "format-ethernet": "{ipaddr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "Disconnected ⚠"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-icons": {
+            "headphones": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}]
