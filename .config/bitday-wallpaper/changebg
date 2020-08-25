@@ -50,11 +50,12 @@ fi
 
 if [ -S "$SWAYSOCK" ]; then
   # Sway environment
-  swaymsg "exec swaybg -i ${IMAGE_PATH}";
+  swaymsg "exec swaybg --output DP-3 --image ${IMAGE_PATH}";
+  swaymsg "exec swaybg -o HDMI-A-1 -i $HOME/Nextcloud/Photos/shared/Nordingrå\ 2020/D482B45C-6C16-4805-B4FE-C19212B5EDBC.jpeg"
 
   # Kill previous background
   sleep 0.2
-  while [ "$(pgrep swaybg | wc -l)" -gt 1 ]; do
+  while [ "$(pgrep swaybg | wc -l)" -gt 2 ]; do
     pkill --oldest swaybg;
   done
 elif [ -n "$DISPLAY" ]; then
