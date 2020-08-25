@@ -38,7 +38,7 @@
     "height": 32,
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-right": ["tray", "network", "pulseaudio", "clock"],
+    "modules-right": ["tray", "network", "pulseaudio", "idle_inhibitor", "clock"],
     "network": {
         "format-ethernet": "{ipaddr}",
         "format-linked": "{ifname} (No IP)",
@@ -55,3 +55,4 @@
         "on-click": "pavucontrol"
     }
 }]
+

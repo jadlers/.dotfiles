@@ -16,7 +16,9 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+# set $term alacritty
+set $term kitty
+
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
@@ -32,47 +34,33 @@ set $browser firefox
 # output DP-3 resolution 2560x1440 position 0 0
 output 'Dell Inc. DELL U2715H GH85D72R0BFS' res 2560x1440 position 0 0
 output 'Dell Inc. DELL U2414H 9TG46449146L' res 1920x1080 transform 90 position 2560 -25
-# output DP-3 resolution 1920x1080 position 0 0
-# output HDMI-A-1 resolution 1920x1080 position 1920 25 transform 90 anticlockwise
-# output HDMI-A-1 resolution 1920x1080 position 2560 0 
-# output HDMI-A-1 transform 90 clockwise 
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
 #
 # Example configuration:
-set $display_off swaymsg "output * dpms off"
-set $display_on swaymsg "output * dpms on"
-set $locker lock-wrapper
-# set $locker swaylock -f -e -F --color 000000
-   # NOTE: remember to change this line if going back to swaylock
-   # timeout 120 'if pgrep -x swaylock; then $display_off; fi' \
-
-         # Removed for testing
-         # timeout 120  'pgrep --exact swaylock-blur && $display_off' \
-         # timeout 1500 '$display_off' \
+set $display_off swaymsg \"output * dpms off\"
+set $display_on swaymsg \"output * dpms on\"
 
 exec swayidle -w \
-         timeout 1500 '$locker' \
-         timeout 1800 '$display_off' \
-               resume '$display_on' \
-         before-sleep '$locker' \
-         after-resume '$display_on'
+         timeout 1500 '$display_off' \
+         resume '$display_on' \
+         timeout 1800 'lock-wrapper' \
+         before-sleep 'lock-wrapper'
 
     # Lock screen with key
-    # bindsym Scroll_Lock exec pause_displays
-    bindsym Scroll_Lock exec notify-send System "Locking screen"; exec $locker
+    bindsym Scroll_Lock exec lock-wrapper
     bindsym $mod+Escape exec $HOME/bin/power.sh
     bindsym $mod+F1 exec $HOME/bin/brightness.sh
-    # bindsym $mod+F4 exec chromium --app=http://192.168.1.10:8123
-    bindsym $mod+F4 exec kiosk-homeassistant.sh
+    bindsym $mod+F4 exec chromium --app=http://192.168.1.10:8123
 
 # Don't go idle when firefox is in fullscreen
 for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [class="firefox"] inhibit_idle fullscreen # Xorg version
 for_window [class="LBRY"] inhibit_idle fullscreen
 for_window [class="spotify"] inhibit_idle fullscreen
+for_window [class="Zoom Meeting"] inhibit_idle
 
 #
 # Notifications
@@ -95,7 +83,7 @@ input type:keyboard {
 }
 
 # Hide cursor after 8s of inactivity
-seat * hide_cursor 8000 
+seat * hide_cursor 8000
 
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -107,6 +95,7 @@ seat * hide_cursor 8000
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+w exec firefox
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -138,7 +127,7 @@ seat * hide_cursor 8000
     bindsym --locked XF86AudioLowerVolume exec 'pamixer --decrease 5'
     bindsym --locked XF86AudioRaiseVolume exec 'pamixer --increase 5'
 
-    # Old alsa 
+    # Old alsa
     bindsym --locked XF86AudioPlay exec 'playerctl --player spotify,mpv play-pause'
     bindsym --locked XF86AudioNext exec 'playerctl --player spotify,mpv next'
     bindsym --locked XF86AudioPrev exec 'playerctl --player spotify,mpv previous'
@@ -180,8 +169,6 @@ seat * hide_cursor 8000
 # Workspaces:
 #
 
-    # Switch between windows with wofi menu
-    bindsym $alt+tab exec swytch.sh # Do I want/need this?
     # Switch to workspace
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -213,7 +200,10 @@ seat * hide_cursor 8000
 
     # Assign some applications to specific workspaces
     workspace 10 output HDMI-A-1
-    for_window [class="[Ss]potify"] move container to workspace 7
+    for_window [class="[Ss]potify"] {
+      move container to workspace 7
+      border none
+    }
 
     # Tag xwayland windows with [X]
     for_window [shell="xwayland"] title_format "[X] %title"
@@ -238,6 +228,7 @@ seat * hide_cursor 8000
   for_window [class="^Droidcam$"] floating enable
   for_window [class="^Droidcam$"] move scratchpad
   for_window [class="^Droidcam$"] focus
+
 #
 # Layout stuff:
 #
@@ -248,9 +239,9 @@ seat * hide_cursor 8000
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+t layout stacking
+    bindsym $mod+y layout tabbed
+    bindsym $mod+u layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -283,16 +274,11 @@ seat * hide_cursor 8000
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 
-    for_window [class="Chromium" instance="192.168.1.10"] move scratchpad
-    for_window [class="Chromium" instance="192.168.1.10"] focus
-
-    # NOTE: The title can appear elsewhere when browsing, is there a better way?
-    for_window [app_id="firefox" title="(\w )+- Home Assistant.*"] {
+    for_window [class="Chromium" instance="192.168.1.10"] {
       move scratchpad
       border none
       focus
     }
-
 
 #
 # Resizing containers:
@@ -341,11 +327,10 @@ bar {
 #     }
 # }
 
-#
 # Autostart programs
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# Possible to do nicer? Systemd timer is started to change background every 1h 
+# Possible to do nicer? Systemd timer is started to change background every 1h
 exec /usr/lib/kdeconnectd
 exec /usr/bin/kdeconnect-indicator
 exec /usr/bin/nextcloud
