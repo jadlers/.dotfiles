@@ -19,8 +19,9 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # URL paste fix
-autoload -U url-quote-magic   
+autoload -Uz url-quote-magic bracketed-paste-magic 
 zle -N self-insert url-quote-magic
+zle -N bracketed-paste bracketed-paste-magic
 
 # History traversal matching typed command
 bindkey "^[[A" up-line-or-search
