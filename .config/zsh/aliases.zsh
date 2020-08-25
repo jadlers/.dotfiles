@@ -3,7 +3,7 @@ alias zr='source $ZDOTDIR/.zshrc'
 
 # ls
 alias ll='ls -l'
-alias la='ls -la'
+alias la='ls -lA'
 
 # Git
 alias ga='git add'
@@ -13,3 +13,4 @@ alias gco='git checkout'
 alias gd='git diff'
 alias gst='git status'
 alias gupa='git pull --rebase --autostash'
+alias cb='git branch --sort=-committerdate | fzf --header Checkout | xargs git checkout'
