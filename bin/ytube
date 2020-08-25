@@ -30,7 +30,7 @@ fi
 url="$1"
 player="mpv --geometry=50%:50% --autofit-larger=90%x90%"
 
-dir="$HOME/Videos"
+dir="$HOME/Videos/watch-later"
 videoname=$(youtube-dl --get-title "$url" \
   | sed 's/\ /_/g' \
   | sed "s/['\"]//g" \
@@ -41,8 +41,9 @@ output="$dir/$date/$videoname"
 
 DL_FLAGS="--continue --no-playlist"
 
-if [ ! "$MAX_QUALITY" = true ]; then # Max quality is default
-  QUALITY="bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"
+if [ ! "$MAX_QUALITY" = true ]; then
+  QUALITY="bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio"
+  # QUALITY="bestvideo+bestaudio"
   DL_FLAGS="$DL_FLAGS --format=$QUALITY"
 fi
 
