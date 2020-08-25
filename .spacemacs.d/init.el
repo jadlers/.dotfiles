@@ -47,8 +47,8 @@ This function should only modify configuration layer settings."
      helm
      ;; lsp
      (lsp :variables
-          lsp-ui-sideline-enable nil
-          lsp-ui-doc-enable nil)
+          lsp-ui-sideline-enable t
+          lsp-ui-doc-enable t)
      (ranger :variables
              ranger-override-dired t
              ranger-cleanup-on-disable t)
@@ -100,7 +100,7 @@ This function should only modify configuration layer settings."
      (javascript :variables
                  node-add-modules-path t
                  javascript-fmt-tool 'prettier
-                 javascript-backend 'nil)
+                 javascript-backend 'lsp)
      php
      (python :variables
              python-formatter 'black
@@ -112,6 +112,10 @@ This function should only modify configuration layer settings."
      (sql :variables
           sql-capitalize-keywords t
           sql-auto-indent nil)
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-fmt-tool 'prettier
+                 )
 
      ;; Extras
      graphviz
@@ -137,6 +141,7 @@ This function should only modify configuration layer settings."
     dotspacemacs-additional-packages '(prettier-js
                                        color-theme-modern
                                        (lsp-haskell :location (recipe :fetcher github :repo "emacs-lsp/lsp-haskell"))
+                                       magit-delta
                                        )
 
    ;; A list of packages that cannot be updated.
@@ -562,11 +567,11 @@ dump."
                          (buffer-file-name))))
 
 (defun dotspacemacs/user-config ()
-  "Configuration for user code:
-This function is called at the very end of Spacemacs startup, after layer
-configuration.
-Put your configuration code here, except for variables that should be set
-before packages are loaded."
+  "Configuration for user code: This function is called at the
+very end of Spacemacs startup, after layer configuration. Put
+your configuration code here, except for variables that should be
+set before packages are loaded."
+
   (setq global-hl-line-mode nil)
 
   ;; LSP config
