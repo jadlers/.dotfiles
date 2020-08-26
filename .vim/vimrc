@@ -22,7 +22,7 @@
                       " It also disables cursor keys while in insert mode
 
   set termguicolors
-  colorscheme base16-tomorrow-night-eighties
+  colorscheme base16-tomorrow-night
 
   filetype indent plugin on " Automatic, language-dependent indentation,
   syntax on                 " syntax coloring and other functionality.
