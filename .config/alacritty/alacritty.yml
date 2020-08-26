@@ -267,6 +267,35 @@ schemes:
       cyan: '0x8adaf1'
       white:  '0xe0e3e7'
 
+  # Colors (Tomorrow Night)
+  tomorrow_night: &tomorrow_night
+   # Default colors
+    primary:
+      background: '#1d1f21'
+      foreground: '#c5c8c6'
+
+    # Normal colors
+    normal:
+      black:   '#1d1f21'
+      red:     '#cc6666'
+      green:   '#b5bd68'
+      yellow:  '#e6c547'
+      blue:    '#81a2be'
+      magenta: '#b294bb'
+      cyan:    '#70c0ba'
+      white:   '#373b41'
+
+    # Bright colors
+    bright:
+      black:   '#666666'
+      red:     '#ff3334'
+      green:   '#9ec400'
+      yellow:  '#f0c674'
+      blue:    '#81a2be'
+      magenta: '#b77ee0'
+      cyan:    '#54ced6'
+      white:   '#282a2e'
+
   # Colors (Tomorrow Night Bright)
   tomorrow_night_bright: &tomorrow_night_bright
     # Default colors
@@ -428,7 +457,7 @@ schemes:
       cyan:    '#78DCE8'
       white:   '#FCFCFA'
     
-colors: *breeze
+colors: *tomorrow_night
 
 #  # Indexed Colors
 #  #
