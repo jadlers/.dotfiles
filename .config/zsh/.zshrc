@@ -8,6 +8,7 @@ autoload -U colors && colors
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=$ZDOTDIR/zsh_history
+setopt share_history
 
 # Basic auto/tab complete:
 autoload -U compinit
