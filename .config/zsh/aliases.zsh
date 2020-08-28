@@ -1,6 +1,12 @@
 alias dfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias zr='source $ZDOTDIR/.zshrc'
 
+# Ask if it might overwrite anything
+alias cp='cp -vi'
+alias mv='mv -vi'
+alias ln='ln -vi'
+alias rm='rm -vI'
+
 # ls
 alias ll='ls -l'
 alias la='ls -lA'
