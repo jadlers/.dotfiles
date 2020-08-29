@@ -337,6 +337,11 @@ exec /usr/bin/nextcloud
 exec /usr/bin/spotify
 exec sleep 1 && /home/jacob/.config/bitday-wallpaper/changebg 2560x1440
 
+# Test starting some sites on electron
+exec electron7 https://messenger.com
+exec electron7 https://messages.google.com/web
+exec electron7 https://twitter.com
+
 # TODO: Remove when laundry is taken care of
 # exec systemd-run --user --on-calendar='*:0,15,30,45' /usr/bin/sh /home/jacob/bin/laundry.sh
 
