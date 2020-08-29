@@ -460,7 +460,7 @@ type = custom/script
 tail = true
 format-prefix = " "
 format = <label>
-exec = ~/.config/polybar/scripts/spotify_scroll_status.sh
+exec = ~/.config/polybar/scripts/playerctl_scroll_status.sh spotify
 
 [settings]
 screenchange-reload = true
