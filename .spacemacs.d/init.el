@@ -285,7 +285,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("mononoki Nerd Font"
-                               :size 13
+                               :size 15
                                :weight regular
                                :width normal)
 
@@ -642,6 +642,7 @@ set before packages are loaded."
 
   ;; Prettier
   (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode)
   ;; (setq prettier-js-args '( ;; For when no .prettierrc exists
   ;;                          "--single-quote"
   ;;                          "--trailing-comma=es5"))
