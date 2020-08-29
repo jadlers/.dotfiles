@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+  if  [ -S "$SWAYSOCK" ]; then
+    VALUE=$(seq 10 10 100 | wofi -d --lines 10 --prompt 'Set brightness to: ')
+  elif [ -n "$DISPLAY" ]; then
+    VALUE=$(seq 10 10 100 | rofi -dmenu -l 10 -p 'Set brightness to: ')
+  fi
+
+  # Don't run any command if no value has been set
+  if [ -z "$VALUE" ]; then
+    exit 1
+  fi
+else
+  VALUE="$1"
+fi
+
+notify-send "Brightness" "Setting brightness to $VALUE"
+ddcutil --async --noverify --display 2 setvcp 10 "$VALUE";
+ddcutil --async --noverify --display 1 setvcp 10 "$VALUE"; 
