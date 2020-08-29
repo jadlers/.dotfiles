@@ -1,0 +1,5 @@
+# RIPGREP_CONFIG_PATH must point to this file for the config to be applied
+
+# Don't search in node_modules
+--glob
+!**/node_modules/*
