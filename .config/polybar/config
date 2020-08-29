@@ -46,6 +46,7 @@ font-0 = FuraCodeNerdFont:pixelsize=12
 font-1 = Symbola:scale=10;1
 font-2 = mono:pixelsize=9;1
 font-3 = unifont:fontformat=truetype:size=9:antialias=false;0
+font-4 = FontAwesome:pixelsize=11;2
 
 [bar/i3]
 inherit = bar/base
