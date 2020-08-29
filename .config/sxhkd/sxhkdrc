@@ -28,11 +28,21 @@ XF86Audio{Play,Next,Prev}
 
 # terminal emulator
 super + Return
-	alacritty
+	$TERMINAL
+
+super + shift + Return
+  alacritty
+
+# SSH to local clients
+super + s + {b,y}
+  alacritty -e ssh {bea -t tmux a,yio-remote}
 
 # program launcher
 super + @space
-	dmenu_run
+  rofi -show drun
+
+alt + @Tab
+  rofi -show window
 
 super + Escape
   power.sh
@@ -45,10 +55,15 @@ super + shift + Escape
 
   # bspc wm -r
 
+super + F1
+  brightness
 
+# Open a website in floating electron window
 super + m
   chat.sh
 
+super + grave
+  emojiselect
 
 #########################
 ##### bspwm hotkeys #####
