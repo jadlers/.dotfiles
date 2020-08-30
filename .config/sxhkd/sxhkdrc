@@ -38,6 +38,10 @@ alt + Tab
 super + Escape
   power.sh
 
+# Screenshot
+{_,shift +,ctrl +}Print
+  maim { ,-s,-i $(xdotool getactivewindow)} --hidecursor ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
+
 # make sxhkd reload its configuration files:
 super + shift + Escape
   i3-msg reload; \
