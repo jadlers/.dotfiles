@@ -15,33 +15,24 @@ XF86Audio{Lower,Raise}Volume
   pamixer --{decrease,increase} 5
 
 XF86Audio{Play,Next,Prev}
-  playerctl {play-pause,next,previous}
-
-# Super + Ctrl + Shift + q
-#   slock
-
-
-# FROM BSPWM EXAMPLES
-#
-# wm independent hotkeys
-#
+  playerctl --player=spotify {play-pause,next,previous}
 
 # terminal emulator
-super + Return
-	$TERMINAL
+super + {_,shift +} Return
+	{$TERMINAL,alacritty}
 
-super + shift + Return
-  alacritty
+super + w
+  firefox
 
 # SSH to local clients
-super + s + {b,y}
+super + {_, shift +} F3
   alacritty -e ssh {bea -t tmux a,yio-remote}
 
 # program launcher
-super + @space
+super + space
   rofi -show drun
 
-alt + @Tab
+alt + Tab
   rofi -show window
 
 super + Escape
