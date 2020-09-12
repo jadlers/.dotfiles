@@ -7,4 +7,4 @@ Persistent=true
 OnCalendar=*:00
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=timers.target
