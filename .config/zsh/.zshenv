@@ -9,8 +9,6 @@ export PATH=$PATH:$HOME/bin
 ## Linux specifics
 export PATH=$PATH:$HOME/.local/bin
 
-# Move to `.zshenv.linux` ?
-[ $(uname) = "Linux" ] && export TERMINAL=kitty
 ## Enable wayland support for firefox in sway
 [ -S "$SWAYSOCK" ] && export MOZ_ENABLE_WAYLAND=1
 
