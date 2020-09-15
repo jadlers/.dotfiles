@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rofi -dmenu \
+  -password \
+  -no-fidxed-num-lines \
+  -p "$(printf "$1" | sed s/://)"

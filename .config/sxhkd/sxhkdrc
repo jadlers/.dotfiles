@@ -32,6 +32,9 @@ super + {_, shift +} F3
 super + space
   rofi -show drun
 
+super + ctrl + shift + space
+  SUDO_ASKPASS=~/bin/askpass-rofi rofi -show drun -run-command "sudo -A {cmd}"
+
 alt + Tab
   rofi -show window
 
