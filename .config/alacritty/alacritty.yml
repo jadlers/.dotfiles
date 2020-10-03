@@ -488,11 +488,11 @@ colors: *tomorrow_night
 #   - EaseOutExpo
 #   - EaseOutCirc
 #   - Linear
-
+#
 # Specifying a `duration` of `0` will disable the visual bell.
 bell:
   animation: EaseOutQuint
-  duration: 100
+  duration: 0
   color: '0xffffff'
 
 # Background opacity
