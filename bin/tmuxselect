@@ -1,0 +1,10 @@
+#!/bin/sh
+
+SESSIONS=$(tmux list-sessions)
+
+SEL=$(echo "$SESSIONS" \
+  | rofi -dmenu -i -width 800 \
+  | cut -d':' -f1)
+
+# Only open if a value is selected
+[ -n "$SEL" ] && alacritty -e tmux attach -t"$SEL"

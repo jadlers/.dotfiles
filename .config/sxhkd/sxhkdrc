@@ -18,8 +18,8 @@ XF86Audio{Play,Next,Prev}
   playerctl --player=spotify {play-pause,next,previous}
 
 # terminal emulator
-super + {_,shift +} Return
-	{$TERMINAL,alacritty}
+super + {_,ctrl +,shift +} Return
+	{$TERMINAL -e tmux new-session -A -s Default,tmuxselect,kitty}
 
 super + w
   firefox
