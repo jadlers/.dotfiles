@@ -2,11 +2,11 @@
 export TERM=xterm-256color
 export EDITOR=vim
 export BROWSER=firefox
+[ $(uname -s) = "Linux" ] && export TERMINAL=alacritty
 
 ## My own scripts
 export PATH=$PATH:$HOME/bin
 
-## Linux specifics
 export PATH=$PATH:$HOME/.local/bin
 
 ## Enable wayland support for firefox in sway
