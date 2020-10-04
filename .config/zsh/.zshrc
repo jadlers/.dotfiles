@@ -99,7 +99,8 @@ fi
 [ $(uname -s) = "Darwin" ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Load fzf functions
-source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source /usr/local/opt/fzf/shell/key-bindings.zsh
 
 # Load spaceship prompt
 source $ZDOTDIR/spaceship.zsh
