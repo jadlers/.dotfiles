@@ -12,7 +12,9 @@ XF86Audio{Mute,Stop}
   # amixer -D pulse sset Master toggle
 
 XF86Audio{Lower,Raise}Volume
-  pamixer --{decrease,increase} 5
+  pamixer -u --{decrease,increase} 5; \
+  notify-send --expire-time=800 "Volume" "Set to $(pamixer --get-volume-human)" \
+    -h string:x-canonical-private-synchronous:Volume;
 
 XF86Audio{Play,Next,Prev}
   playerctl --player=spotify {play-pause,next,previous}
