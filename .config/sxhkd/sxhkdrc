@@ -16,8 +16,9 @@ XF86Audio{Lower,Raise}Volume
   notify-send --expire-time=800 "Volume" "Set to $(pamixer --get-volume-human)" \
     -h string:x-canonical-private-synchronous:Volume;
 
+# TODO: Make possible to select which player to target
 XF86Audio{Play,Next,Prev}
-  playerctl --player=spotify {play-pause,next,previous}
+  playerctl {play-pause,next,previous}
 
 # terminal emulator
 super + {_,ctrl +,shift +} Return
@@ -28,11 +29,11 @@ super + w
 
 # SSH to local clients
 super + {_, shift +} F3
-  alacritty -e ssh {bea -t tmux a,yio-remote}
+  alacritty --command ssh {bea -t tmux a,yio-remote}
 
 # program launcher
-super + space
-  rofi -show drun
+super + {_,ctrl +} space
+  rofi -show {drun, run}
 
 super + ctrl + shift + space
   SUDO_ASKPASS=~/bin/askpass-rofi rofi -show drun -run-command "sudo -A {cmd}"
@@ -58,12 +59,16 @@ super + shift + Escape
 super + F1
   brightness
 
+# Launch HA
+super + F4
+  chromium --new-window --app=http://bea:8123
+
 # Open a website in floating electron window
 super + m
   chat.sh
 
-super + grave
-  emojiselect
+super + {_,shift +} grave
+  emojiselect {_,insert directly}
 
 # Enable clipmenud
 super + F5
