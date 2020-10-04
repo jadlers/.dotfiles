@@ -34,6 +34,9 @@
   " Makes the .viminfo be placed in the .vim dir
   set viminfo='100,<50,s10,h,n$HOME/.vim/cache/viminfo
 
+  " Display trailing whitespace with hyphen
+  set listchars=eol:$,trail:-,tab:>-
+
   " Reload files, helps when modifying files externally (e.g. git)
   au FocusGained,BufEnter * :silent! !
 
@@ -100,3 +103,4 @@
 
   " Spell toggle
   map <F8> :setlocal spell!<CR>
+  map <F7> :setlocal list!<CR>
