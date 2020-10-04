@@ -78,6 +78,8 @@
     colorscheme base16-tomorrow-night
   endif
 
+  let g:markdown_mapping_switch_status = '<Leader>m'
+
 " C/C++ languages settings
   autocmd FileType c,cpp,h call DynamicSyntaxFolding()
 
