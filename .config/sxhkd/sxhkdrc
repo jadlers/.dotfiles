@@ -64,3 +64,19 @@ super + m
 
 super + grave
   emojiselect
+
+# Enable clipmenud
+super + F5
+  clipctl enable; \
+  notify-send "clipmenud" "Capture enabled" \
+    -h string:x-canonical-private-synchronous:clipmenud;
+
+# Disable clipmenud
+super + shift + F5
+  clipctl disable; \
+  notify-send "clipmenud" "Capture disabled" \
+    -h string:x-canonical-private-synchronous:clipmenud;
+
+# Select clipboard content from history
+super + Insert
+  CM_LAUNCHER=rofi clipmenu
