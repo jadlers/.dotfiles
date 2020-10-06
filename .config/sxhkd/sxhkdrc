@@ -70,17 +70,13 @@ super + m
 super + {_,shift +} grave
   emojiselect {_,insert directly}
 
-# Enable clipmenud
+# Temporarily disable clipmenud
 super + F5
-  clipctl enable; \
-  notify-send "clipmenud" "Capture enabled" \
-    -h string:x-canonical-private-synchronous:clipmenud;
-
-# Disable clipmenud
-super + shift + F5
+  notify-send "clipmenud" "Diabling capture for 30s"; \
   clipctl disable; \
-  notify-send "clipmenud" "Capture disabled" \
-    -h string:x-canonical-private-synchronous:clipmenud;
+  sleep 30; \
+  clipctl enable; \
+  notify-send "clipmenud" "Capture enabled again"
 
 # Select clipboard content from history
 super + Insert
