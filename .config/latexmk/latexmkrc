@@ -1,0 +1,5 @@
+$pdflatex = "pdflatex -shell-escape -interaction=nonstopmode";
+$pdf_previewer = "zathura";
+$pdf_mode = 1;
+$warning_cmd = "notify-send \"Compilation warning\" \"%D\"";
+$faliure_cmd = "notify-send --urgency=critical \"Compilation error\" \"%D\"";
