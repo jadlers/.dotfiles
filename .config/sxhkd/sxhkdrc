@@ -13,7 +13,7 @@ XF86Audio{Mute,Stop}
 
 XF86Audio{Lower,Raise}Volume
   pamixer -u --{decrease,increase} 5; \
-  notify-send --expire-time=800 "Volume" "Set to $(pamixer --get-volume-human)" \
+  notify-send -u low --expire-time=1200 "Volume" "Set to $(pamixer --get-volume-human)" \
     -h string:x-canonical-private-synchronous:Volume;
 
 # TODO: Make possible to select which player to target
@@ -75,11 +75,10 @@ super + {_,shift +} grave
 
 # Temporarily disable clipmenud
 super + F5
-  notify-send "clipmenud" "Diabling capture for 30s"; \
-  clipctl disable; \
-  sleep 30; \
-  clipctl enable; \
-  notify-send "clipmenud" "Capture enabled again"
+  notify-send -u critical "clipmenud" "Diabling capture for 30s"; \
+  clipctl disable; sleep 30; clipctl enable; \
+  notify-send -u critical "clipmenud" "Capture enabled again"
+
 
 # Select clipboard content from history
 super + Insert
