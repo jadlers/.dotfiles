@@ -126,7 +126,7 @@ label = %title:0:30:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
-blacklist-0 = num lock
+blacklist-0 = caps lock
 
 ; format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
