@@ -258,12 +258,12 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id dunst
 exec --no-startup-id sxhkd
 exec --no-startup-id /usr/lib/kdeconnectd
-exec_always --no-startup-id xautolock -time 30 -locker "i3lock --ignore-empty-password --show-failed-attempts" -killtime 30 -killer "systemctl suspend" -detectsleep
-exec --no-startup-id xcape -e 'Caps_Lock=Escape'
 exec --no-startup-id /usr/bin/unclutter
-exec --no-startup-id /usr/bin/nextcloud
-exec --no-startup-id /usr/bin/rsibreak
+exec --no-startup-id systemd-run --user --scope -p MemoryLimit=250M nextcloud # Limit memory leak
+exec --no-startup-id xautolock -time 30 -locker "i3lock --ignore-empty-password --show-failed-attempts" -killtime 30 -killer "systemctl suspend" -detectsleep
+exec --no-startup-id xcape -e 'Caps_Lock=Escape'
 
 # TODO: Better way of starting these when desktop is ready
-exec --no-startup-id sleep 3 && $HOME/.config/bitday-wallpaper/changebg
-exec --no-startup-id sleep 3 && exec --no-startup-id /usr/bin/kdeconnect-indicator
+exec sleep 3 && $HOME/.config/bitday-wallpaper/changebg
+exec sleep 3 && exec --no-startup-id /usr/bin/kdeconnect-indicator
+exec sleep 3 && exec --no-startup-id /usr/bin/rsibreak
