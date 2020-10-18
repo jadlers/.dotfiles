@@ -35,8 +35,8 @@ super + {_, shift +} F3
   alacritty --command ssh {bea -t tmux a,yio-remote}
 
 # program launcher
-super + {_,ctrl +} space
-  rofi -show {drun, run}
+super + space
+  rofi -modi "drun,run" -show drun -show-icons
 
 super + ctrl + shift + space
   SUDO_ASKPASS=~/bin/askpass-rofi rofi -show drun -run-command "sudo -A {cmd}"
