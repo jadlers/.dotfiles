@@ -20,6 +20,9 @@ XF86Audio{Lower,Raise}Volume
 XF86Audio{Play,Next,Prev}
   playerctl {play-pause,next,previous}
 
+super + XF86Audio{Play,Stop}
+  playerctl --all-players {play,pause}
+
 # terminal emulator
 super + {_,ctrl +,shift +} Return
 	{$TERMINAL -e tmux new-session -A -s Default,tmuxselect,kitty}
