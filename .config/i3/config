@@ -208,12 +208,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Rules for floating windows
-for_window [class="Electron" title="Messenger"] move scratchpad
-for_window [class="Electron" title="Messenger"] scratchpad show
-for_window [class="Electron" title="Messages for web"] move scratchpad
-for_window [class="Electron" title="Messages for web"] scratchpad show
-for_window [class="Whatsapp-for-linux"] move scratchpad
-for_window [class="Whatsapp-for-linux"] scratchpad show
+for_window [class="Electron" title="Messenger"] move scratchpad focus
+for_window [class="Electron" title="Messages for web"] move scratchpad focus
+for_window [class="Whatsapp-for-linux"] move scratchpad focus
 
 for_window [class="zoom" title="Zoom - Licensed Account"] floating enable resize set 860 600
 for_window [class="zoom" title="Settings"] floating enable
@@ -221,9 +218,6 @@ for_window [class="zoom" title="Schedule Meeting"] floating enable
 
 for_window [class="anki"] floating enable
 # for_window [class="anki" title="Preview"] floating enable
-
-# Spotify
-for_window [class="Spotify"] border pixel 1
 
 # Steam
   # https://github.com/ValveSoftware/steam-for-linux/issues/1040
