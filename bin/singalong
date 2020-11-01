@@ -1,0 +1,19 @@
+#!/bin/sh
+# Find lyrics for the currently playing song on Spotify. Uses my zzng project
+# found here: https://github.com/jadlers/zzng
+
+while getopts 'g' flag; do
+  case $flag in
+    g) USE_GENIUS=true;;
+  esac
+done
+
+ARTIST=`playerctl --player=spotify metadata artist`
+TITLE=`playerctl --player=spotify metadata title`
+
+if [ "$USE_GENIUS" == true ]; then
+  zzng genius "$ARTIST $TITLE"
+else
+  zzng apiseeds "$ARTIST" "$TITLE"
+fi
+
