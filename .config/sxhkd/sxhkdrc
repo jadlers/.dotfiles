@@ -79,6 +79,9 @@ super + F5
   clipctl disable; sleep 30; clipctl enable; \
   notify-send -u critical "clipmenud" "Capture enabled again"
 
+# Dunst notifications
+super + {d,shift + d}
+  dunstctl {close,history-pop}
 
 # Select clipboard content from history
 super + Insert
