@@ -28,7 +28,7 @@ super + {_,ctrl +,shift +} Return
 	{$TERMINAL -e tmux new-session -A -s Default,tmuxselect,kitty}
 
 super + w
-  firefox
+  firefox -P default-release
 
 # SSH to local clients
 super + {_, shift +} F3
@@ -62,9 +62,9 @@ super + shift + Escape
 super + F1
   brightness
 
-# Launch HA
+# Launch frequently visited sites
 super + F4
-  chromium --new-window --app=http://bea:8123
+  sites
 
 # Open a website in floating electron window
 super + m
@@ -81,7 +81,7 @@ super + F5
 
 # Dunst notifications
 super + {d,shift + d}
-  dunstctl {close,history-pop}
+  dunstctl {close-all,history-pop}
 
 # Select clipboard content from history
 super + Insert
