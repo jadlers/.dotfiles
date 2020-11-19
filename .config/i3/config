@@ -251,5 +251,3 @@ exec --no-startup-id xcape -e 'Caps_Lock=Escape'
 
 # TODO: Better way of starting these when desktop is ready
 exec sleep 3 && $HOME/.config/bitday-wallpaper/changebg
-exec sleep 3 && exec --no-startup-id /usr/bin/kdeconnect-indicator
-exec sleep 3 && exec --no-startup-id /usr/bin/rsibreak
