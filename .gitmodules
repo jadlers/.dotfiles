@@ -22,3 +22,6 @@
 [submodule ".vim/pack/bundle/start/vim-markdown"]
 	path = .vim/pack/bundle/start/vim-markdown
 	url = git@github.com:gabrielelana/vim-markdown.git
+[submodule ".config/tmux/tmux-fzf-url"]
+	path = .config/tmux/tmux-fzf-url
+	url = https://github.com/wfxr/tmux-fzf-url.git
