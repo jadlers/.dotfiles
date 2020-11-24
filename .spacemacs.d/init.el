@@ -37,10 +37,14 @@ This function should only modify configuration layer settings."
    '(
      ;; General
      (auto-completion :variables
+                      ; Complete with C-l
+                      auto-completion-tab-key-behavior 'nil
+                      auto-completion-return-key-behavior 'nil
+                      ; auto-completion-complete-with-key-sequence nil
+                      auto-completion-idle-delay 0.1
+                      auto-completion-minimum-prefix-length 1
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-tab-key-behavior 'complete
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-complete-with-key-sequence nil)
+                      auto-completion-private-snippets-directory t)
      better-defaults
      emoji
      git
@@ -70,7 +74,12 @@ This function should only modify configuration layer settings."
      bibtex
      latex
      (markdown :variables markdown-command "pandoc")
-     org
+     (org :variables
+          org-enable-org-journal-support t
+          org-journal-dir "~/Nextcloud/org/journal/"
+          org-journal-file-format "%Y%m%d"
+          org-journal-date-format "%A, %B %d %Y"
+          org-journal-time-format "")
 
      ;; Programming
      clojure
@@ -100,7 +109,8 @@ This function should only modify configuration layer settings."
      (javascript :variables
                  node-add-modules-path t
                  javascript-fmt-tool 'prettier
-                 javascript-backend 'lsp)
+                 javascript-backend 'lsp
+                 javascript-lsp-linter nil)
      php
      (python :variables
              python-formatter 'black
@@ -113,8 +123,10 @@ This function should only modify configuration layer settings."
           sql-capitalize-keywords t
           sql-auto-indent nil)
      (typescript :variables
+                 node-add-modules-path t
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'prettier
+                 typescript-linter 'tslint
                  )
 
      ;; Extras
@@ -207,7 +219,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
-   dotspacemacs-use-spacelpa nil
+   dotspacemacs-use-spacelpa t
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
    ;; (default nil)
@@ -577,6 +589,12 @@ set before packages are loaded."
   ;; LSP config
   (setq lsp-inhibit-message t)
 
+  ;; Snippets
+  (setq yas-snippet-dirs '("~/.spacemacs.d/snippets"))
+
+  ;; Temporary fix for Emacs 27 with YASnippet
+  (defvaralias 'helm-c-yas-space-match-any-greedy 'helm-yas-space-match-any-greedy "Temporary alias for Emacs27")
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Clojure
   ;;
@@ -636,6 +654,18 @@ set before packages are loaded."
   (spacemacs/set-leader-keys-for-major-mode 'latex-mode
     "w" 'latex-word-count)
 
+  (setq TeX-source-correlate-mode t
+        TeX-source-correlate-start-server t
+        TeX-source-correlate-method 'synctex)
+
+  (cond
+   ((string-equal system-type "darwin")
+    (progn (setq TeX-view-program-selection
+      '(("Okular" "okular --unique %o#src:%n`pwd`/./%b")
+        ("Skim" "displayline -b -g %n %o %b")))))
+   ((string-equal system-type "gnu/linux")
+    (progn (setq TeX-view-program-selection '((output-pdf "Zathura"))))))
+
   ;; Expose the node_modules folder for emacs
   (add-hook 'web-mode-hook #'add-node-modules-path)
   (add-hook 'js2-mode-hook 'spacemacs/toggle-syntax-checking-on)
@@ -658,26 +688,26 @@ set before packages are loaded."
                              (spacemacs/toggle-spelling-checking-on)))
                              ;; (spacemacs/toggle-highlight-current-line-globally-off)))
 
-  (setq org-directory "~/org/")
-  (setq org-default-notes-file (concat org-directory "2.notes.org"))
-  (setq org-agenda-files
-        (quote
-         ("~/org/1_todo.org"
-          "~/org/2_notes.org")
-          ))
-  (setq org-todo-keywords '((sequence "TODO" "PROGRESS" "BLOCKED" "|" "DONE" "CANCELLED")))
+  (setq org-directory "~/Nextcloud/org/")
+  (setq org-default-notes-file (concat org-directory "notes.org"))
+  (setq org-agenda-start-on-weekday -1) ;; Show previous 1 days and 5 days ahead
+  (setq org-agenda-file-regexp "\\`\\\([^.].*\\.org\\\|[0-9]\\\{8\\\}\\\(\\.gpg\\\)?\\\)\\'")
+  (setq org-agenda-files (list org-default-notes-file))
+                               ;; (concat org-directory "journal/")))
+                               ;; (concat org-directory "journal/")))
+
+  ;; Org-Journal
+  (setq org-journal-enable-agenda-integration t)
+
+  (setq org-todo-keywords '((sequence "TODO(t)" "PROG(p!)" "WAIT(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
+  (setq org-log-into-drawer "LOGBOOK") ;; Preferred drawer
   (setq hl-todo-keyword-faces
     (quote (
      ("TODO" . "#dc752f")
-     ("FIXME" . "#dc752f")
-     ("PROGRESS" . "#4f97d7")
-     ("OKAY" . "#4f97d7")
-     ("BLOCKED" . "#f2241f")
+     ("PROG" . "#4f97d7")
+     ("WAIT" . "#f2241f")
      ("CANCELLED" . "#f2241f")
      ("DONE" . "#86dc2f")
-     ("NOTE" . "#b1951d")
-     ("HACK" . "#b1951d")
-     ("TMP" . "#b1951d")
      )))
 
   ;; Haskell
@@ -688,4 +718,5 @@ set before packages are loaded."
   ;; Indent
   (setq standard-indent 2)
   (setq js-indent-level 2)
+  (setq typescript-indent-level 2)
   )
