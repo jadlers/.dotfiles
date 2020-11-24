@@ -14,6 +14,12 @@ TITLE=`playerctl --player=spotify metadata title`
 if [ "$USE_GENIUS" == true ]; then
   zzng genius "$ARTIST $TITLE"
 else
-  zzng apiseeds "$ARTIST" "$TITLE"
+  zzng apiseeds "$ARTIST" "$TITLE" 
+
+  if [ "$?" -gt 0 ]; then
+    echo 
+    echo "Also showing genius result since no match"
+    zzng genius "$ARTIST" "$TITLE"
+  fi
 fi
 
