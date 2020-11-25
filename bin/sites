@@ -1,0 +1,33 @@
+#!/bin/sh
+
+ENTRIES="HomeAssistant
+Calendar
+Laundry Booking
+Poll Kung DotA
+PiCamera"
+
+LINES=$(echo "$ENTRIES" | wc -l)
+
+SELECTED=$(echo "$ENTRIES" \
+  | rofi -dmenu -i -l "$LINES" -p "What to launch?" \
+  | cut -d' ' -f1 \
+  | awk '{print tolower($1)}')
+
+case "$SELECTED" in
+  homeassistant)
+    URL=http://192.168.1.10:8123;;
+  calendar)
+    URL=https://calendar.google.com;;
+  laundry)
+    exec electron7 "$HOME/code/laundry/index.js";
+    exit 0;;
+  poll)
+    URL=$(curl -s https://api.bollsvenskan.jacobadlers.com/dota-signup | jq -r ".currentPollUrl");;
+  picamera)
+    i3-msg "exec mpv --profile=low-latency --untimed av://v4l2:/dev/video0";
+    exit 0;;
+  *)
+    exit 1;;
+esac
+
+i3-msg "exec firefox --new-window -P Kiosk --class=KioskMode $URL"
