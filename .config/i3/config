@@ -209,6 +209,7 @@ for_window [class="Whatsapp-for-linux"] move scratchpad focus
 for_window [class="KioskMode"] fullscreen disable move scratchpad focus
 for_window [class="Electron" title="Aptus Portal"] floating enable resize set width 800px height 840px
 for_window [class="mpv" title="video0*"] floating enable sticky enable move up 35ppt
+for_window [class="mpvfloat"] floating enable
 
 for_window [class="zoom" title="Zoom - Licensed Account"] floating enable resize set 860 600
 for_window [class="zoom" title="Settings"] floating enable

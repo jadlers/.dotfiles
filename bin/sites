@@ -4,6 +4,7 @@ ENTRIES="HomeAssistant
 Calendar
 Laundry Booking
 Poll Kung DotA
+mpv view (link from clipboard)
 PiCamera"
 
 LINES=$(echo "$ENTRIES" | wc -l)
@@ -25,6 +26,11 @@ case "$SELECTED" in
     URL=$(curl -s https://api.bollsvenskan.jacobadlers.com/dota-signup | jq -r ".currentPollUrl");;
   picamera)
     i3-msg "exec mpv --profile=low-latency --untimed av://v4l2:/dev/video0";
+    exit 0;;
+  mpv)
+    URL=$(xclip -o)
+    notify-send "Stream with mpv" "$URL";
+    i3-msg "exec mpv -x11-name=mpvfloat $URL"
     exit 0;;
   *)
     exit 1;;
