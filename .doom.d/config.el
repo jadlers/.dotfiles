@@ -73,3 +73,18 @@
 ;; javascript & typescript
 (setq js-indent-level 2
       typescript-indent-level 2)
+
+(defun hsplit-and-focus ()
+  ;; Split window horizontally and focus the new window
+  (interactive)
+  (evil-window-split)
+  (evil-window-down 1))
+
+(defun vsplit-and-focus ()
+  ;; Split window vertically and focus the new window
+  (interactive)
+  (evil-window-vsplit)
+  (evil-window-right 1))
+
+(map! :leader :n "w S" 'hsplit-and-focus
+      :leader :n "w V" 'vsplit-and-focus)
