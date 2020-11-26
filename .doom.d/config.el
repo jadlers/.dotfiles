@@ -74,17 +74,19 @@
 (setq js-indent-level 2
       typescript-indent-level 2)
 
-(defun hsplit-and-focus ()
+(defun hsplit-and-focus (count)
   ;; Split window horizontally and focus the new window
-  (interactive)
-  (evil-window-split)
-  (evil-window-down 1))
+  (interactive "P<f>")
+  (select-window (split-window (selected-window) count 'down ))
+  (when evil-auto-balance-windows
+    (balance-windows (window-parent))))
 
-(defun vsplit-and-focus ()
+(defun vsplit-and-focus (count)
   ;; Split window vertically and focus the new window
-  (interactive)
-  (evil-window-vsplit)
-  (evil-window-right 1))
+  (interactive "P<f>")
+  (select-window (split-window (selected-window) count 'right ))
+  (when evil-auto-balance-windows
+    (balance-windows (window-parent))))
 
 (map! :leader :n "w S" 'hsplit-and-focus
       :leader :n "w V" 'vsplit-and-focus)
