@@ -4,3 +4,7 @@ map D toggle_page_mode
 map r reload
 map R rotate
 map i recolor
+map j navigate next
+map k navigate previous
+map J scroll down
+map K scroll up
