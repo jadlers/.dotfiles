@@ -25,7 +25,8 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 ;; (setq doom-font (font-spec :family "mononoki Nerd Font" :size 15))
-(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 15))
+(setq doom-font (font-spec :family (if IS-MAC "mononoki Nerd Font Mono" "SauceCodePro Nerd Font Mono")
+                           :size (if IS-MAC 13 15)))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -97,3 +98,7 @@
         (:map company-active-map
          "TAB"     #'company-complete-selection
          [tab]     #'company-complete-selection))))
+
+;; Start maximized on macOS
+(when IS-MAC
+  (toggle-frame-maximized))
