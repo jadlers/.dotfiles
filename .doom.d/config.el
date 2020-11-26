@@ -90,3 +90,10 @@
 
 (map! :leader :n "w S" 'hsplit-and-focus
       :leader :n "w V" 'vsplit-and-focus)
+
+;; Completion keybindings
+(map! (:when (featurep! :completion company)
+       (:after company
+        (:map company-active-map
+         "TAB"     #'company-complete-selection
+         [tab]     #'company-complete-selection))))
