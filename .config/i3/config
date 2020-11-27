@@ -102,7 +102,7 @@ client.placeholder      #000000	#0c0c0c	#ffffff	#000000		#0c0c0c
 client.background       #ffffff
 
 # Gaps
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 1
 smart_gaps on
 hide_edge_borders smart
 
@@ -252,5 +252,4 @@ exec --no-startup-id systemd-run --user --scope -p MemoryLimit=250M nextcloud # 
 exec --no-startup-id xautolock -time 30 -locker "i3lock --ignore-empty-password --show-failed-attempts" -killtime 30 -killer "systemctl suspend" -detectsleep
 exec --no-startup-id xcape -e 'Caps_Lock=Escape'
 
-# TODO: Better way of starting these when desktop is ready
-exec sleep 3 && $HOME/.config/bitday-wallpaper/changebg
+exec --no-startup-id xsetroot -solid \#006060
