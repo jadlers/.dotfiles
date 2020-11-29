@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# NOTE: Make sure the directory $HOME/.local/toggle-dpms
+# exists.
+
+if [ -f $HOME/.local/toggle-dpms/disabled ]; then
+  xset +dpms;
+  rm $HOME/.local/toggle-dpms/disabled;
+  notify-send -u low "DPMS" "Enabled" \
+    -h string:x-canonical-private-synchronous:Toggle-dpms;
+else
+  xset -dpms;
+  touch $HOME/.local/toggle-dpms/disabled;
+  notify-send -u low "DPMS" "Disabled" \
+    -h string:x-canonical-private-synchronous:Toggle-dpms;
+fi
+

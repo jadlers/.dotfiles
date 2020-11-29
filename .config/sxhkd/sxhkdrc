@@ -18,8 +18,8 @@ XF86Audio{Play,Next,Prev}
 super + XF86Audio{Play,Stop}
   playerctl --all-players {play,pause}
 
-Pause
-  alacritty --command tpause
+{_, shift +, super +} Pause
+  {xset dpms force suspend,alacritty --command tpause,toggle-dpms}
 
 # terminal emulator
 super + {_,ctrl +,shift +} Return
