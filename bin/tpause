@@ -1,0 +1,16 @@
+#!/bin/sh
+# Taken from here: https://www.davidbegin.com/how-i-use-tmux/
+
+SESSIONS=`tmux list-sessions | cut -d':' -f1 | rg Pause`
+
+if [ -z $SESSIONS ]; then
+  tmux new-session -s Pause -n fst -d
+  tmux clock-mode -t Pause:fst
+
+  tmux select-window -t Pause:fst
+  tmux split-window -v -l 90% asciiquarium
+
+  tmux -u attach -t Pause
+else
+  tmux attach -t Pause
+fi
