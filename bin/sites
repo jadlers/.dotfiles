@@ -29,8 +29,14 @@ case "$SELECTED" in
     exit 0;;
   mpv)
     URL=$(xclip -o)
-    notify-send "Stream with mpv" "$URL";
-    i3-msg "exec mpv -x11-name=mpvfloat $URL"
+    case $URL in
+      https://www.twitch.tv* | https://www.svtplay.se/video/*)
+        notify-send "Stream with mpv (streamlink)" "$URL";
+        i3-msg "exec streamlink --title '{title}' "$URL" best";;
+      *)
+        notify-send "Stream with mpv" "$URL";
+        i3-msg "exec mpv -x11-name=mpvfloat $URL";;
+    esac
     exit 0;;
   *)
     exit 1;;
