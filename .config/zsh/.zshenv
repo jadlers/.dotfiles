@@ -4,6 +4,9 @@ export EDITOR=vim
 export BROWSER=firefox
 [ $(uname -s) = "Linux" ] && export TERMINAL=alacritty
 
+## IRC
+export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat
+
 ## My own scripts
 export PATH=$PATH:$HOME/bin
 
