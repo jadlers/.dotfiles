@@ -5,6 +5,7 @@ Calendar
 Laundry Booking
 Poll Kung DotA
 mpv view (link from clipboard)
+Twitch
 PiCamera"
 
 LINES=$(echo "$ENTRIES" | wc -l)
@@ -30,13 +31,24 @@ case "$SELECTED" in
   mpv)
     URL=$(xclip -o)
     case $URL in
-      https://www.twitch.tv* | https://www.svtplay.se/video/*)
+      https://www.twitch.tv* \
+        | https://www.youtube.com* \
+        | https://www.svtplay.se/video/*)
         notify-send "Stream with mpv (streamlink)" "$URL";
-        i3-msg "exec streamlink --title '{title}' "$URL" best";;
+        i3-msg "exec streamlink --title '{title}' $URL best";;
       *)
         notify-send "Stream with mpv" "$URL";
         i3-msg "exec mpv -x11-name=mpvfloat $URL";;
     esac
+    exit 0;;
+  twitch)
+    stream=$(rofi -dmenu -l 1)
+    if [ -z "$stream" ]; then
+      exit 1
+    fi
+    URL="https://www.twitch.tv/$stream"
+    notify-send "Watch twitch" "Streamer: $stream"
+    i3-msg "exec streamlink --title '{title}' $URL best"
     exit 0;;
   *)
     exit 1;;
