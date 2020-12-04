@@ -142,6 +142,10 @@ exec --no-startup-id xrandr --output HDMI-A-0       --right-of DisplayPort-2 --r
 # Switch between workspaces
 bindsym $mod+ctrl+h workspace prev
 bindsym $mod+ctrl+l workspace next
+# Move workspace between outputs
+bindsym $mod+ctrl+j move workspace to output left
+bindsym $mod+ctrl+k move workspace to output right
+
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
