@@ -101,5 +101,5 @@ fi
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source /usr/local/opt/fzf/shell/key-bindings.zsh
 
-# Load spaceship prompt
-source $ZDOTDIR/spaceship.zsh
+# Load starship prompt
+eval "$(starship init zsh)"
