@@ -459,7 +459,7 @@ schemes:
       cyan:    '#78DCE8'
       white:   '#FCFCFA'
     
-colors: *tomorrow_night
+# colors: *tomorrow_night
 
 #  # Indexed Colors
 #  #
