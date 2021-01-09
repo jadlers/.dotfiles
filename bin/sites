@@ -24,7 +24,7 @@ case "$SELECTED" in
     exec electron7 "$HOME/code/laundry/index.js";
     exit 0;;
   poll)
-    URL=$(curl -s https://api.bollsvenskan.jacobadlers.com/dota-signup | jq -r ".currentPollUrl");;
+    URL=$(curl -s https://api.bollsvenskan.jacobadlers.com/dota/signup | jq -r ".currentPollUrl");;
   picamera)
     i3-msg "exec mpv --profile=low-latency --untimed av://v4l2:/dev/video0";
     exit 0;;
@@ -54,4 +54,4 @@ case "$SELECTED" in
     exit 1;;
 esac
 
-i3-msg "exec firefox --new-window -P Kiosk --class=KioskMode $URL"
+i3-msg focus output DisplayPort-2 && i3-msg -- exec surf "$URL"

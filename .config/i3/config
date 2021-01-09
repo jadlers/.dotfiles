@@ -88,6 +88,7 @@ bindsym $mod+u layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f sticky toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+a focus mode_toggle
@@ -211,6 +212,7 @@ for_window [class="Electron" title="Messages for web"] move scratchpad focus
 for_window [class="Whatsapp-for-linux"] move scratchpad focus
 
 # For programs launched with my specific WM_CLASS
+for_window [class="Surf"] move scratchpad focus 
 for_window [class="KioskMode"] fullscreen disable move scratchpad focus
 for_window [class="Electron" title="Aptus Portal"] floating enable resize set width 800px height 840px
 for_window [class="mpv" title="video0*"] floating enable sticky enable move up 35ppt
