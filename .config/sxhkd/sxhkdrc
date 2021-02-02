@@ -72,10 +72,14 @@ super + {_,shift +} grave
 # Temporarily disable clipmenud
 super + F5
   notify-send -u critical "clipmenud" "Diabling capture for 60s" \
-    --expire-time=68000; \
+    --expire-time=60000; \
   clipctl disable; sleep 60; clipctl enable; \
   notify-send -u critical "clipmenud" "Capture enabled again" \
     --expire-time=8000;
+
+super + shift + F5
+  notify-send -u critical "clipmenud" "Capture enabled"; \
+  clipctl enable;
 
 # Dunst notifications
 super + {d,shift + d}
