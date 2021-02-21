@@ -20,8 +20,6 @@ zstyle ':completion:*' menu select
 # Auto complete with case insenstivity
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit
-_comp_options+=(globdots)		# Include hidden files.
 
 # URL paste fix
 autoload -Uz url-quote-magic bracketed-paste-magic 
@@ -31,6 +29,9 @@ zle -N bracketed-paste bracketed-paste-magic
 # History traversal matching typed command
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
+
+# Load zsh-z plugin
+[ -f "$ZDOTDIR"/zsh-z/zsh-z.plugin.zsh ] && source "$ZDOTDIR"/zsh-z/zsh-z.plugin.zsh
 
 # vi mode
 bindkey -v
@@ -100,6 +101,10 @@ fi
 # Load fzf functions
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source /usr/local/opt/fzf/shell/key-bindings.zsh
+
+# Completion initiation
+compinit
+_comp_options+=(globdots)		# Include hidden files.
 
 # Load starship prompt
 eval "$(starship init zsh)"

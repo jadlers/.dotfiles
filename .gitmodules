@@ -28,3 +28,6 @@
 [submodule ".config/tmux/tmux-resurrect"]
 	path = .config/tmux/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule ".config/zsh/zsh-z"]
+	path = .config/zsh/zsh-z
+	url = https://github.com/agkozak/zsh-z
