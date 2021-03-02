@@ -9,6 +9,10 @@
     " Plug 'tpope/vim-dadbod' " Query DB in quickfix buffer
     Plug 'wincent/loupe'
 
+    " Language server protocol
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/completion-nvim'
+
     " Go
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -56,7 +60,16 @@
   " Open links with xdg-open
   nnoremap <silent> gx :!xdg-open <cWORD><cr>
 
+" LSP Config (TODO: Break out into own file)
+  " Take inspiration:
+  " https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
+  set completeopt=menuone,noinsert,noselect " Don't automatically insert
+  let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
+  " JavaScript/TypeScript
+  lua require('lspconfig').tsserver.setup{ on_attach=require('completion').on_attach }
 
+  " Python
+  lua require('lspconfig').pyright.setup{ on_attach=require('completion').on_attach }
 
 

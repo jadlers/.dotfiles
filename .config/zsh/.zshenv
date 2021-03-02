@@ -33,5 +33,7 @@ fi
 export LANG=en_GB.UTF-8
 export LC_CTYPE=sv_SE.UTF-8
 
+# Add node packages to path
+export PATH=$PATH:$HOME/.yarn/bin
 ## WARNING Always make this the last alteration, can compromise security
 export PATH=$PATH:./node_modules/.bin
