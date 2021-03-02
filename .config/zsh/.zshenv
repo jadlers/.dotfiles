@@ -1,5 +1,5 @@
 ## Defaults
-export TERM=xterm-256color
+export TERM=tmux-256color
 export EDITOR=vim
 export BROWSER=firefox
 [ $(uname -s) = "Linux" ] && export TERMINAL=alacritty
