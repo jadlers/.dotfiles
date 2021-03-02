@@ -30,9 +30,10 @@ case "$SELECTED" in
   mpv)
     URL=$(xclip -o)
     case $URL in
-      https://www.twitch.tv* \
-        | https://www.youtube.com* \
-        | https://www.svtplay.se/video/*)
+      # Don't really like how you're not able to scrub through the entire video
+      # using streamlabs. Fine for streaming but not optimal for YouTube,
+      # svtplay, etc. Also seems like the svtplay addon is broken atm.
+      https://www.twitch.tv*)
         notify-send "Stream with mpv (streamlink)" "$URL";
         i3-msg "exec streamlink --title '{title}' $URL best";;
       *)
