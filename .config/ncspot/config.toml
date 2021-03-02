@@ -1,3 +1,5 @@
+notify = true
+
 [theme]
 primary = "light white"
 secondary = "light black"

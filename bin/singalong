@@ -8,8 +8,8 @@ while getopts 'g' flag; do
   esac
 done
 
-ARTIST=`playerctl --player=spotify metadata artist`
-TITLE=`playerctl --player=spotify metadata title`
+ARTIST=`playerctl --player=spotify,spotifyd metadata artist`
+TITLE=`playerctl --player=spotify,spotifyd metadata title`
 
 if [ "$USE_GENIUS" == true ]; then
   zzng genius "$ARTIST $TITLE"
