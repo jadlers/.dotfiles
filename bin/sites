@@ -21,8 +21,7 @@ case "$SELECTED" in
   calendar)
     URL=https://calendar.google.com;;
   laundry)
-    exec electron7 "$HOME/code/laundry/index.js";
-    exit 0;;
+    URL="https://sssb.aptustotal.se/AptusPortal/Account/Login";;
   poll)
     URL=$(curl -s https://api.bollsvenskan.jacobadlers.com/dota/signup | jq -r ".currentPollUrl");;
   picamera)
