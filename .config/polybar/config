@@ -479,12 +479,18 @@ menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
-[module/spotify]
+[module/spotify-scroll]
 type = custom/script
 tail = true
 format-prefix = " "
 format = <label>
-exec = ~/.config/polybar/scripts/playerctl_scroll_status.sh spotify
+exec = ~/.config/polybar/scripts/playerctl_scroll_status.sh spotify,spotifyd,ncspot
+
+[module/spotify]
+type = custom/script
+; format-prefix = " "
+format = <label>
+exec = $XDG_CONFIG_HOME/polybar/scripts/playerctl_get_status.sh spotify,spotifyd
 
 [module/vpn-nordvpn-status]
 type = custom/script

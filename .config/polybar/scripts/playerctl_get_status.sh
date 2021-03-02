@@ -2,11 +2,20 @@
 
 FORMAT="{{ title }} - {{ artist }}"
 PLAYER="${1-playerctld}"
+# Merge stdout & stderr
+PLAYER_STATUS="$(playerctl --player="$PLAYER" status 2>&1)"
 
-if [ "$(playerctl --player="$PLAYER" status)" = "Playing"  ]; then
-    playerctl --player="$PLAYER" metadata --format "$FORMAT"
-elif [ "$(playerctl --player="$PLAYER" status)" = "Paused"  ]; then
-    playerctl --player="$PLAYER" metadata --format "$FORMAT"
-else # Can be configured to output differently when player is paused
-    echo "No music is playing"
-fi
+case "$PLAYER_STATUS" in
+  Playing|Paused)
+  # Playing)
+    # NOTE: Old version, ratelimited by spotifyd
+    # playerctl --player="$PLAYER" metadata --format "$FORMAT"
+
+    # Works with spotifyd without exhausting requests
+    spt playback --status 
+    ;;
+  Paused)
+    echo "Paused" ;;
+  *)
+    echo "" ;;
+esac
