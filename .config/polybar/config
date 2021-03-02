@@ -30,7 +30,7 @@ alert = #bd2c40
 ; Base config for all bars
 [bar/base]
 width = 100%
-height = 32
+height = 26
 override-redirect = false
 wm-restack = i3
 
@@ -44,7 +44,7 @@ line-size = 2
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-font-0 = FuraCodeNerdFont:pixelsize=12
+font-0 = SauceCodePro Nerd Font:pixelsize=12;2
 font-1 = Symbola:scale=10;1
 font-2 = mono:pixelsize=9;1
 font-3 = unifont:fontformat=truetype:size=9:antialias=false;0
