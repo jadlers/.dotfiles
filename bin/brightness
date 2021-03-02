@@ -2,9 +2,9 @@
 
 if [ -z $1 ]; then
   if  [ -S "$SWAYSOCK" ]; then
-    VALUE=$(seq 0 10 100 | wofi -d --lines 10 --prompt 'Set brightness to: ')
+    VALUE=$(seq 0 10 100 | wofi -d --lines 11 --prompt 'Set brightness to: ')
   elif [ -n "$DISPLAY" ]; then
-    VALUE=$(seq 0 10 100 | rofi -dmenu -l 10 -p 'Set brightness to: ')
+    VALUE=$(seq 0 10 100 | rofi -dmenu -l 11 -p 'Set brightness to: ')
   fi
 
   # Don't run any command if no value has been set
