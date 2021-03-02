@@ -1,55 +1,62 @@
-" General settings
-  set mouse=a         " Give vim access to mouse input
+" Plugins with vim-plug
+  " The default path for 'data' is: $XDG_DATA_HOME/nvim
+  call plug#begin(stdpath('data') . '/plugged')
 
-  set nocompatible    " vim won't try to be vi
-  set smartindent     " Make the indentation smarter (auto indent alternative)
-  set ruler           " Display info on location inside open file
-  set colorcolumn=81  " Display a column marking past where text should go
+    " Generic
+    Plug 'junegunn/fzf'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    " Plug 'tpope/vim-dadbod' " Query DB in quickfix buffer
+    Plug 'wincent/loupe'
+
+    " Go
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+    " Markdown
+    Plug 'tpope/vim-markdown'
+
+    " Colors
+    Plug 'crispgm/nord-vim'
+    Plug 'ayu-theme/ayu-vim' " You need to set ayucolor
+
+  call plug#end()
+
+" General config
+  set termguicolors
+  set mouse=a
+
+  " Set colorscheme
+  "   Current favourites in order are:
+  "   nord, auy, evening, desert
+  let ayucolor = "mirage" " light, mirage, or dark
+  colorscheme nord
 
   set shiftwidth=2    " Number of spaces for each indent
   set tabstop=2       " Number of spaces a <Tab> stands for
   set expandtab       " Always insert spaces instead of tabs
+  set splitbelow      " Vertical splits open below
+  set splitright      " Horizontal splits open to the right
+  set scrolloff=3     " Always show 5 lines below/under cursor
 
-  set splitbelow      " Open new split panes to
-  set splitright      " the right and bottom
+  set listchars=tab:>-,trail:·,eol:¬ " Show trailing spaces and tabs
+  set list                           " Show by default
 
-  set number          " Use normal numbers together with
-  set relativenumber  " relative numbers as default
 
-  set nowrap          " Don't wrap by default
-  set nospell         " Spell checking turned off
+" Keybindings
 
-  set noesckeys       " Remove delay pressing <Shift><o> immediately after <Esc>
-                      " It also disables cursor keys while in insert mode
+  " Toggle showing listchars
+  nmap <F7> :setlocal list!<cr>
 
-  filetype indent plugin on " Automatic, language-dependent indentation,
-  syntax on                 " syntax coloring and other functionality.
+  " Easily search through project
+  nmap <C-t> :FZF<cr>
 
-  " Reload files, helps when modifying files externally (e.g. git)
-  au FocusGained,BufEnter * :silent! !
+  " Markdown specific (move to ftplugin dir)
+  nmap <localleader>f mmvipgq`m
 
-  let mapleader="\<Space>"
-  let maplocalleader="\\"
+  " Open links with xdg-open
+  nnoremap <silent> gx :!xdg-open <cWORD><cr>
 
-" Dynamic line numbers: relative for current in normal otherwise normal
-  augroup numbertoggle
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-  augroup END
 
-" Remapping keys
-  nnoremap <C-H> <C-w>h;
-  nnoremap <C-J> <C-w>j;
-  nnoremap <C-K> <C-w>k;
-  nnoremap <C-L> <C-w>l;
 
-  " Adds newline over/under current line
-  nnoremap <Leader>ij mmo<Esc>`m
-  nnoremap <Leader>ik mmO<Esc>`m
 
-  " Closes all other splits
-  nnoremap <LocalLeader>o :only<CR>
 
-  " Spell toggle
-  map <F8> :setlocal spell!<CR>
