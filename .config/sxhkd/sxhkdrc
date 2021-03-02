@@ -13,7 +13,7 @@ XF86Audio{Lower,Raise}Volume
 
 # TODO: Make possible to select which player to target
 XF86Audio{Play,Next,Prev}
-  playerctl {play-pause,next,previous}
+  playerctl --player=spotify,spotifyd,ncspot,%any {play-pause,next,previous}
 
 super + XF86Audio{Play,Stop}
   playerctl --all-players {play,pause}
@@ -29,8 +29,8 @@ super + w
   firefox -P default-release
 
 # SSH to local clients
-super + {_, shift +} F3
-  alacritty --command ssh {bea -t tmux a,yio-remote}
+super + {_, ctrl +, shift +} F3
+  alacritty --command ssh {bea -t tmux a -t 0,bea -t tmux a -t IRC,yio-remote}
 
 # program launcher
 super + space
@@ -46,8 +46,11 @@ super + Escape
   power.sh
 
 # Screenshot
-{_,shift +,ctrl +}Print
-  maim { ,-s,-i $(xdotool getactivewindow)} --hidecursor ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
+{shift +,ctrl +}Print
+  maim {-s,-i $(xdotool getactivewindow)} --hidecursor ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
+
+Print
+  flameshot gui
 
 # make sxhkd reload its configuration files:
 super + shift + Escape
