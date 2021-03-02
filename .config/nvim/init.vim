@@ -50,6 +50,7 @@
 
   " Toggle showing listchars
   nmap <F7> :setlocal list!<cr>
+  nmap <F8> :setlocal spell!<cr>
 
   " Easily search through project
   nmap <C-t> :FZF<cr>
