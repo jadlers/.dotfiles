@@ -3,7 +3,7 @@
 SESSIONS=$(tmux list-sessions)
 
 SEL=$(echo "$SESSIONS" \
-  | rofi -dmenu -i -width 800 \
+  | dmenu -i -l 10 -p "Connect to tmux session:" \
   | cut -d':' -f1)
 
 # Only open if a value is selected

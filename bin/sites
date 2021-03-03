@@ -11,7 +11,7 @@ PiCamera"
 LINES=$(echo "$ENTRIES" | wc -l)
 
 SELECTED=$(echo "$ENTRIES" \
-  | rofi -dmenu -i -l "$LINES" -p "What to launch?" \
+  | dmenu -i -l "$LINES" -p "What to launch?" \
   | cut -d' ' -f1 \
   | awk '{print tolower($1)}')
 
@@ -42,7 +42,7 @@ case "$SELECTED" in
     esac
     exit 0;;
   twitch)
-    stream=$(rofi -dmenu -l 1)
+    stream=$(echo "" | dmenu -p "Who do you want to watch?")
     if [ -z "$stream" ]; then
       exit 1
     fi
