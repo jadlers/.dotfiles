@@ -225,6 +225,9 @@ for_window [class="zoom" title="Schedule Meeting"] floating enable
 for_window [class="anki"] floating enable
 # for_window [class="anki" title="Preview"] floating enable
 
+# journal-wiki
+for_window [class="Alacritty" title="journal-wiki"] floating enable, resize set 951 699, move scratchpad, focus
+
 # Steam
   # https://github.com/ValveSoftware/steam-for-linux/issues/1040
   for_window [class="^Steam$" title="^Friends List$"] floating enable

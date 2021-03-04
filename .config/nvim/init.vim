@@ -73,4 +73,13 @@
   " Python
   lua require('lspconfig').pyright.setup{ on_attach=require('completion').on_attach }
 
+"""
+""" Autocommands
+"""
+
+  " journal-wiki specific
+  augroup journal-wiki
+    autocmd!
+    au BufNewFile,BufRead $HOME/Nextcloud/journal/**.md setlocal colorcolumn=81
+  augroup END
 
