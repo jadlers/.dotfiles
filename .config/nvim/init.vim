@@ -48,6 +48,12 @@
 
 " Keybindings
 
+	" Navigate quickfix list
+	nnoremap ]q :cnext<CR>
+	nnoremap [q :cprev<CR>
+	nnoremap <C-j> :cnext<CR>
+	nnoremap <C-k> :cprev<CR>
+
   " Toggle showing listchars
   nmap <F7> :setlocal list!<cr>
   nmap <F8> :setlocal spell!<cr>
@@ -61,17 +67,9 @@
   " Open links with xdg-open
   nnoremap <silent> gx :!xdg-open <cWORD><cr>
 
-" LSP Config (TODO: Break out into own file)
-  " Take inspiration:
-  " https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
+" Completion
   set completeopt=menuone,noinsert,noselect " Don't automatically insert
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-
-  " JavaScript/TypeScript
-  lua require('lspconfig').tsserver.setup{ on_attach=require('completion').on_attach }
-
-  " Python
-  lua require('lspconfig').pyright.setup{ on_attach=require('completion').on_attach }
 
 """
 """ Autocommands
