@@ -16,6 +16,9 @@
     " Go
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+    " JavaScript/TypeScript
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
     " Markdown
     Plug 'tpope/vim-markdown'
 
@@ -45,6 +48,12 @@
   set listchars=tab:>-,trail:·,eol:¬ " Show trailing spaces and tabs
   set list                           " Show by default
 
+" Plugin setup
+
+  " Prettier
+
+  let g:prettier#autoformat = 1
+  let g:prettier#autoformat_require_pragma = 0
 
 " Keybindings
 
