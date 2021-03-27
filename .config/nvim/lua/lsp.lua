@@ -1,4 +1,3 @@
-lua << EOF
 -- From nvim-lspconfig https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
 local nvim_lsp = require('lspconfig')
 local completion = require('completion')
@@ -25,7 +24,7 @@ local keybinding_on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>l', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
 	-- Own additions
 	buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
@@ -43,10 +42,13 @@ local autogroup_on_attach = function(client, bufnr)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
     -- You may tweak these to your liking
+      -- hi LspReferenceRead cterm=reverse gui=reverse
+      -- hi LspReferenceText cterm=reverse gui=reverse
+      -- hi LspReferenceWrite cterm=reverse gui=reverse
     vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=reverse gui=reverse
-      hi LspReferenceText cterm=reverse gui=reverse
-      hi LspReferenceWrite cterm=reverse gui=reverse
+      hi LspReferenceRead  ctermbg=13 guibg=#343F4C
+      hi LspReferenceText  ctermbg=13 guibg=#343F4C
+      hi LspReferenceWrite ctermbg=13 guibg=#343F4C
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -66,10 +68,7 @@ end
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
-local servers = { "pyright", "tsserver" }
+local servers = { "gopls", "pyright", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = custom_on_attach }
 end
-EOF
-
-" vim: filetype=lua

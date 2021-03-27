@@ -3,10 +3,13 @@
   call plug#begin(stdpath('data') . '/plugged')
 
     " Generic
+    Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim' " Adds :Rg :Files etc.
     Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-surround'
     " Plug 'tpope/vim-dadbod' " Query DB in quickfix buffer
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
     Plug 'wincent/loupe'
 
     " Language server protocol
@@ -22,9 +25,14 @@
     " Markdown
     Plug 'tpope/vim-markdown'
 
-    " Colors
-    Plug 'crispgm/nord-vim'
-    Plug 'ayu-theme/ayu-vim' " You need to set ayucolor
+    " Syntax
+      " Treesitter (supposed to improve sytax highlighting)
+      Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+      Plug 'nvim-treesitter/playground'
+
+      " Colorschemes
+      Plug 'crispgm/nord-vim'
+      Plug 'ayu-theme/ayu-vim' " You need to set ayucolor
 
   call plug#end()
 
@@ -36,7 +44,7 @@
   "   Current favourites in order are:
   "   nord, auy, evening, desert
   let ayucolor = "mirage" " light, mirage, or dark
-  colorscheme nord
+  colorscheme ayu
 
   set shiftwidth=2    " Number of spaces for each indent
   set tabstop=2       " Number of spaces a <Tab> stands for
@@ -44,16 +52,41 @@
   set splitbelow      " Vertical splits open below
   set splitright      " Horizontal splits open to the right
   set scrolloff=3     " Always show 5 lines below/under cursor
+  set number          " Show the absolute line number for current line
+  set relativenumber  " Show relative numbers for all other lines
+  set nowrap          " Don't wrap lines by default
+  set nohlsearch      " Don't keep search highlighting after search completed
+  set ignorecase      " Ignore casing for searches by default
+  set smartcase       " If search includes upper case letter, it's case sensitive
+  set noswapfile      " Don't create swapfiles, I don't want them
+  set incsearch       " Highlight as you search, works with regex as well!
+  set hidden          " Allow leaving unsaved buffers in the background
+  set signcolumn=yes  " Always show column on the leftmost part for linting etc.
+  set updatetime=400  " Shorter update times for CursorHold & CursorHoldI
 
-  set listchars=tab:>-,trail:·,eol:¬ " Show trailing spaces and tabs
-  set list                           " Show by default
+  " Horizontal scrolling
+  set breakindent                 " Don't indent less than leftmost char on line
+  set breakindentopt=sbr,shift:4  " shift is number of spaces
+  set showbreak=↪                 " Show unicode char to indicate wrapped line
+  set sidescroll=1                " Scroll horizontally when close to the edge
+
+  set listchars=tab:»—,trail:·,eol:¬  " Show trailing spaces and tabs
+  set listchars+=extends:>,precedes:< " Hint long lines
+  set list                            " Show by default
+
+" Source lua configuration files
+  lua require('lsp')
+  lua require('treesitter_conf')
 
 " Plugin setup
 
   " Prettier
+    let g:prettier#autoformat = 1
+    let g:prettier#autoformat_require_pragma = 0
 
-  let g:prettier#autoformat = 1
-  let g:prettier#autoformat_require_pragma = 0
+  " vim-go
+    " I'm using LSP for this
+    let g:go_def_mapping_enabled = 0
 
 " Keybindings
 
@@ -63,15 +96,16 @@
 	nnoremap <C-j> :cnext<CR>
 	nnoremap <C-k> :cprev<CR>
 
+  " Navigate local list
+	nnoremap <A-j> :lnext<CR>
+	nnoremap <A-k> :lprev<CR>
+
   " Toggle showing listchars
   nmap <F7> :setlocal list!<cr>
   nmap <F8> :setlocal spell!<cr>
 
   " Easily search through project
-  nmap <C-t> :FZF<cr>
-
-  " Markdown specific (move to ftplugin dir)
-  nmap <localleader>f mmvipgq`m
+  nmap <C-t> :Files<cr>
 
   " Open links with xdg-open
   nnoremap <silent> gx :!xdg-open <cWORD><cr>
