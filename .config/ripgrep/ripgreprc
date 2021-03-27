@@ -1,5 +1,10 @@
 # RIPGREP_CONFIG_PATH must point to this file for the config to be applied
 
-# Don't search in node_modules
+# Searches case insensitively if the pattern is all lowercase. Search case sensitively otherwise.
+--smart-case
+
+# Don't search in node_modules or .git/
 --glob
 !**/node_modules/*
+--glob
+!.git
