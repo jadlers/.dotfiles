@@ -9,6 +9,7 @@ setlocal textwidth=80
 setlocal spell
 setlocal nonumber norelativenumber
 setlocal nolist
+setlocal conceallevel=2
 
 " Format paragraph by making text hard-wrap on textwidth
 nmap <localleader>f mmvipgq`m

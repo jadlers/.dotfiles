@@ -23,10 +23,10 @@
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
     " Markdown
-    Plug 'tpope/vim-markdown'
+    Plug 'SidOfc/mkdx' " Swiss knife of markdown
 
     " Syntax
-      " Treesitter (supposed to improve sytax highlighting)
+      " Treesitter (improves sytax highlighting for many languages)
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
       Plug 'nvim-treesitter/playground'
 
