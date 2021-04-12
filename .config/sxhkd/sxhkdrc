@@ -21,6 +21,12 @@ super + XF86Audio{Play,Stop}
 {_, shift +, super +} Pause
   {xset dpms force suspend,alacritty --command tpause,toggle-dpms}
 
+# Lock and blank screen
+Scroll_Lock
+  notify-send "TEST" "works"; \
+  i3lock --ignore-empty-password --show-failed-attempts --color=a6dcef; \
+  xset dpms force suspend
+
 # terminal emulator
 super + {_,ctrl +,shift +} Return
 	{$TERMINAL -e tmux new-session -A -s Default,tmuxselect,kitty}
@@ -34,7 +40,8 @@ super + {_, ctrl +, shift +} F3
 
 # program launcher
 super + space
-  rofi -modi "drun,run" -show drun -show-icons
+  dmenu_run -p "Run:"
+  # rofi -modi "drun,run" -show drun -show-icons
 
 super + ctrl + shift + space
   SUDO_ASKPASS=~/bin/askpass-rofi rofi -show drun -run-command "sudo -A {cmd}"
