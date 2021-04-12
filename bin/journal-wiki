@@ -2,12 +2,8 @@
 
 JOURNAL_DIR="$HOME/Nextcloud/journal"
 
+# Default to today
 DATE=${1-$(date +%Y-%m-%d)}
 echo "Opening journal for: $DATE"
 
-# The nvim command must be in quotes to use the variables from this file and
-# not in the new shell spawned.
-i3-msg -- \
-  exec alacritty --title="journal-wiki" --command \
-  "nvim --cmd ':cd $JOURNAL_DIR' $JOURNAL_DIR/$DATE.md" \
-  > /dev/null # Don't show [{"success":true}]
+nvim --cmd ":cd $JOURNAL_DIR" "$JOURNAL_DIR/$DATE.md"

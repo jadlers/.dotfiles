@@ -2,9 +2,9 @@
 
 ENTRIES="HomeAssistant
 Calendar
-Laundry Booking
 Poll Kung DotA
 mpv view (link from clipboard)
+Journal
 Twitch
 PiCamera"
 
@@ -20,8 +20,9 @@ case "$SELECTED" in
     URL=http://192.168.1.10:8123;;
   calendar)
     URL=https://calendar.google.com;;
-  laundry)
-    URL="https://sssb.aptustotal.se/AptusPortal/Account/Login";;
+  journal)
+    i3-msg -- exec alacritty --title="journal-wiki" --command journal-wiki
+    exit 0;;
   poll)
     URL=$(curl -s https://api.bollsvenskan.jacobadlers.com/dota/signup | jq -r ".currentPollUrl");;
   picamera)
