@@ -2,8 +2,18 @@
 
 JOURNAL_DIR="$HOME/Nextcloud/journal"
 
-# Default to today
-DATE=${1-$(date +%Y-%m-%d)}
-echo "Opening journal for: $DATE"
+while getopts 'y' c
+do
+  case $c in
+    y) DATE="$(date +'%Y-%m-%d' -d 'yesterday')" ;;
+    *) exit 1 ;;
+  esac
+done
 
+# Default to today
+if [ -z "$DATE" ]; then
+  DATE=${1-$(date +%Y-%m-%d)}
+fi
+
+echo "Opening journal for: $DATE"
 nvim --cmd ":cd $JOURNAL_DIR" "$JOURNAL_DIR/$DATE.md"
