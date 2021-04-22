@@ -138,7 +138,7 @@ workspace $ws10 output HDMI-A-0
 # output 'Dell Inc. DELL U2414H 9TG46449146L' res 1920x1080 transform 90 position 2560 -25
 
 exec --no-startup-id xrandr --output DisplayPort-2  --primary --pos 0x264
-exec --no-startup-id xrandr --output HDMI-A-0       --right-of DisplayPort-2 --rotate right --pos 2560x0
+exec --no-startup-id xrandr --output HDMI-A-0       --left-of DisplayPort-2 --rotate left --pos 2560x0
 
 # Switch between workspaces
 bindsym $mod+ctrl+h workspace prev
@@ -260,6 +260,5 @@ exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/unclutter
 exec --no-startup-id systemd-run --user --scope -p MemoryLimit=250M nextcloud # Limit memory leak
 exec --no-startup-id xautolock -time 30 -locker "i3lock --ignore-empty-password --show-failed-attempts" -killtime 30 -killer "systemctl suspend" -detectsleep
-exec --no-startup-id xcape -e 'Caps_Lock=Escape'
 
 exec --no-startup-id xsetroot -solid \#006060
