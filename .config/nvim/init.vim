@@ -6,6 +6,7 @@
     Plug 'airblade/vim-gitgutter'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim' " Adds :Rg :Files etc.
+    Plug 'junegunn/goyo.vim'
     Plug 'tpope/vim-commentary'
     " Plug 'tpope/vim-dadbod' " Query DB in quickfix buffer
     Plug 'tpope/vim-fugitive'
@@ -21,6 +22,7 @@
 
     " JavaScript/TypeScript
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+    Plug 'jxnblk/vim-mdx-js'
 
     " Markdown
     Plug 'SidOfc/mkdx' " Swiss knife of markdown
