@@ -55,7 +55,7 @@ x11 () {
       exec systemctl poweroff;;
     suspend)
       playerctl --all-players pause;
-      exec systemctl suspend;;
+      systemctl suspend;;
     reboot)
       playerctl --all-players pause;
       exec systemctl reboot;;

@@ -17,7 +17,7 @@ SELECTED=$(echo "$ENTRIES" \
 
 case "$SELECTED" in
   homeassistant)
-    URL=http://192.168.1.10:8123;;
+    URL=http://bea:8123;;
   calendar)
     URL=https://calendar.google.com;;
   journal)
