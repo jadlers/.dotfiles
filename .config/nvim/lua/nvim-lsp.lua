@@ -1,6 +1,6 @@
 -- From nvim-lspconfig https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
 local nvim_lsp = require('lspconfig')
-local completion = require('completion')
+-- local completion = require('completion')
 
 local keybinding_on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
