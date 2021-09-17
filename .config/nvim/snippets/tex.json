@@ -1,0 +1,44 @@
+{
+  "NewEnvironment": {
+    "prefix": "beg",
+    "description": "Create a new environment",
+    "body": [
+      "\\begin{$1}",
+      "\t$0",
+      "\\end{$1}"
+    ]
+  },
+  "Enumerate": {
+    "prefix": "enumerate",
+    "description": "Add a enumerate",
+    "body": [
+      "\\begin{enumerate}",
+      "\t\\item $0",
+      "\\end{enumerate}"
+    ]
+  },
+  "Itemize": {
+    "prefix": "itemize",
+    "description": "Itemize",
+    "body": [
+      "\\begin{itemize}",
+      "\t\\item $0",
+      "\\end{itemize}"
+    ]
+  },
+  "Section": {
+    "prefix": "sec",
+    "description": "Section",
+    "body": [
+      "\\section{${1:section name}} % (fold)",
+      "\\label{sec:${2:${1/(\\w+)(\\W+$)?|\\W+/${1:?${1:/asciify/downcase}:_}/g}}}",
+      "${0:$TM_SELECTED_TEXT}",
+      "% section $2 (end)"
+    ]
+  },
+  "bold-text": {
+    "prefix": "bf",
+    "description": "Bold text",
+    "body": "\\textbf{$1}$0"
+  }
+}

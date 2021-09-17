@@ -21,7 +21,7 @@ compe.setup {
     -- calc = true;
     nvim_lsp = true,
     emoji = true,
-    -- vsnip = true;
+    vsnip = true;
     -- ultisnips = true;
   };
 }

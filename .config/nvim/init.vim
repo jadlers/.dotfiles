@@ -4,6 +4,7 @@
 
     " Generic
     Plug 'airblade/vim-gitgutter'
+    Plug 'hrsh7th/vim-vsnip'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim' " Adds :Rg :Files etc.
     Plug 'junegunn/goyo.vim'
@@ -123,6 +124,16 @@
   inoremap <silent><expr> <C-e>     compe#close('<C-e>')
   inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
   inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" Snippets
+  " Set up location of snippets
+  let g:vsnip_snippet_dir = expand('$XDG_CONFIG_HOME') .'/nvim/snippets'
+
+  " Jump forward or backward
+  imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+  smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+  imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+  smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 
 """
 """ Autocommands
