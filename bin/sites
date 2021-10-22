@@ -4,6 +4,7 @@ ENTRIES="HomeAssistant
 Calendar
 Poll Kung DotA
 mpv view (link from clipboard)
+Mute TV
 Journal
 Twitch
 PiCamera"
@@ -50,6 +51,9 @@ case "$SELECTED" in
     URL="https://www.twitch.tv/$stream"
     notify-send "Watch twitch" "Streamer: $stream"
     i3-msg "exec streamlink --title '{title}' $URL best"
+    exit 0;;
+  mute)
+    curl -X POST http://bea:8123/api/webhook/mute_tv;
     exit 0;;
   *)
     exit 1;;

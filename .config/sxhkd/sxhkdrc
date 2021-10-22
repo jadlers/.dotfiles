@@ -18,6 +18,9 @@ XF86Audio{Play,Next,Prev}
 super + XF86Audio{Play,Stop}
   playerctl --all-players {play,pause}
 
+ctrl + XF86AudioStop
+  curl -X POST http://bea:8123/api/webhook/mute_tv
+
 {_, shift +, super +} Pause
   {xset dpms force suspend,alacritty --command tpause,toggle-dpms}
 
