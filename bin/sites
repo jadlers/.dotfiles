@@ -44,7 +44,11 @@ case "$SELECTED" in
     esac
     exit 0;;
   twitch)
-    stream=$(echo "" | dmenu -p "Who do you want to watch?")
+    if [ -f $XDG_CACHE_HOME/twitch ]; then
+      stream=$(dmenu -p "Who do you want to watch?" < $XDG_CACHE_HOME/twitch)
+    else
+      stream=$(echo "" | dmenu -p "Who do you want to watch?")
+    fi
     if [ -z "$stream" ]; then
       exit 1
     fi
