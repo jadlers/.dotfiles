@@ -15,6 +15,10 @@
     Plug 'tpope/vim-surround'
     Plug 'wincent/loupe'
 
+      " File explorer
+      Plug 'kyazdani42/nvim-web-devicons' " for file icons
+      Plug 'kyazdani42/nvim-tree.lua'
+
     " Language server protocol
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-cmp'
@@ -88,6 +92,7 @@
   lua require('nvim-lsp')
   lua require('treesitter_conf')
   lua require('colorizer').setup()
+  lua require('nvim-tree-config')
 
 " Plugin setup
 
@@ -120,6 +125,9 @@
 
   " Open links with xdg-open
   nnoremap <silent> gx :!xdg-open <cWORD><cr>
+
+  " nvim-tree
+  nmap <leader>t :NvimTreeToggle<CR>
 
 " Completion
   set completeopt=menuone,noinsert,noselect " Don't automatically insert
