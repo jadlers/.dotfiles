@@ -8,6 +8,7 @@
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim' " Adds :Rg :Files etc.
     Plug 'junegunn/goyo.vim'
+    Plug 'norcalli/nvim-colorizer.lua'
     Plug 'tpope/vim-commentary'
     " Plug 'tpope/vim-dadbod' " Query DB in quickfix buffer
     Plug 'tpope/vim-fugitive'
@@ -86,6 +87,7 @@
   lua require('nvim-cmp')
   lua require('nvim-lsp')
   lua require('treesitter_conf')
+  lua require('colorizer').setup()
 
 " Plugin setup
 
