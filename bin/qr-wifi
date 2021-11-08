@@ -4,12 +4,16 @@
 
 FILE=/tmp/qr-wifi.svg
 
-if [ -z "$SSID" ]; then
+if [ "$1" ]; then
+  SSID="$1"
+elif [ -z "$SSID" ]; then
   read -p "Specify the SSID of the wi-fi network: " SSID
 fi
 
-if [ -z "$PASS" ]; then
-  read -p "Specify the password of the wi-fi network: " PASS
+if [ "$2" ]; then
+  PASS="$2"
+elif [ -z "$PASS" ]; then
+  read -sp "Specify the password of the wi-fi network: " PASS
 fi
 
 # WPA="WIFI:T:WPA;S:${SSID};P:${PASS};;"
