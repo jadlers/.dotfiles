@@ -104,6 +104,9 @@
     " I'm using LSP for this
     let g:go_def_mapping_enabled = 0
 
+  " Goyo
+    let g:goyo_width = 81
+
 " Keybindings
 
 	" Navigate quickfix list
@@ -151,5 +154,26 @@
   augroup journal-wiki
     autocmd!
     au BufNewFile,BufRead $HOME/Nextcloud/journal/**.md setlocal colorcolumn=81
+
+    " Quit Vim if this is the only remaining buffer
+    function! s:goyo_enter()
+      let b:quitting = 0
+      let b:quitting_bang = 0
+      autocmd QuitPre <buffer> let b:quitting = 1
+      cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+    endfunction
+
+    function! s:goyo_leave()
+      if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+        if b:quitting_bang
+          qa!
+        else
+          qa
+        endif
+      endif
+    endfunction
+
+    autocmd! User GoyoEnter call <SID>goyo_enter()
+    autocmd! User GoyoLeave call <SID>goyo_leave()
   augroup END
 
