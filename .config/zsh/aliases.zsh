@@ -1,4 +1,5 @@
 alias dfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias configure='$EDITOR "$HOME/$(dfa ls-files --full-name $HOME | fzf)"'
 alias zr='source $ZDOTDIR/.zshrc'
 
 # Ask if it might overwrite anything
@@ -20,3 +21,6 @@ alias gd='git diff'
 alias gst='git status'
 alias gupa='git pull --rebase --autostash'
 alias cb='git branch --sort=-committerdate | fzf --header Checkout | xargs git checkout'
+
+# You know why...
+alias :q=exit
