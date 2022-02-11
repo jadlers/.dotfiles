@@ -35,6 +35,9 @@
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
     Plug 'jxnblk/vim-mdx-js'
 
+    " LaTeX
+    Plug 'lervag/vimtex'
+
     " Markdown
     Plug 'SidOfc/mkdx' " Swiss knife of markdown
 
@@ -132,6 +135,16 @@
   " nvim-tree
   nmap <leader>t :NvimTreeToggle<CR>
 
+  " Yank to clipboard
+  nmap <leader>y "+y
+  vmap <leader>y "+y
+
+  " Goyo
+  nmap <leader>g :Goyo<CR>
+
+  " Quick-select first spelling correction
+  noremap <leader>s 1z=
+
 " Completion
   set completeopt=menuone,noinsert,noselect " Don't automatically insert
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -153,7 +166,7 @@
   " journal-wiki specific
   augroup journal-wiki
     autocmd!
-    au BufNewFile,BufRead $HOME/Nextcloud/journal/**.md setlocal colorcolumn=81
+    au BufNewFile,BufRead $HOME/Nextcloud/journal/**.md setlocal colorcolumn=81 spelllang=sv,en
 
     " Quit Vim if this is the only remaining buffer
     function! s:goyo_enter()
@@ -177,3 +190,9 @@
     autocmd! User GoyoLeave call <SID>goyo_leave()
   augroup END
 
+  " Restore cursor position when returning to a file
+  " https://vi.stackexchange.com/questions/28774/can-vim-remember-cursor-position-as-well-as-lines-displayed
+  autocmd BufReadPost *
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    \ |   exe "normal! g`\""
+    \ | endif
