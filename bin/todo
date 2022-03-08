@@ -9,8 +9,8 @@ TODO_FILE="${SIMPLE_TODO_FILE:-$XDG_DATA_HOME/jadlers/todo}"
 usage()
 {
   echo "$(basename "$0") usage:
-  add     DESCRIPTION
-  remove  NUMBER_OF_TODO (\"complete\" is an alias)"
+  add   DESCRIPTION
+  done  NUMBER_OF_TODO (\"remove\" is an alias)"
 }
 
 with_line_numbers()
@@ -34,13 +34,13 @@ case "$1" in
   add)
     shift 1
     echo "$@" >> "$TODO_FILE" ;;
-  complete|remove)
+  done|remove)
     shift
     DATA=$(with_line_numbers "$TODO_FILE")
     NUM_GREP="^[[:space:]]*$1:"
     REMOVING=$(echo "$DATA" | grep "$NUM_GREP" | remove_line_numbers)
     if [ -z "$REMOVING" ]; then
-      echo "$1 is not a valid number to remove."
+      echo "$1 is not a valid to remove."
       exit 1
     else
       echo "Removing: $REMOVING"
