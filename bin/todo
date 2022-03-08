@@ -15,12 +15,12 @@ usage()
 
 with_line_numbers()
 {
-  nl --number-format=rn -s': ' "$1"
+  nl -n rn -s': ' "$1"
 }
 
 remove_line_numbers()
 {
-  cut -d':' -f1 --complement | sed -e 's/^[[:space:]]*//'
+  cut -d':' -f2- | sed -e 's/^[[:space:]]*//'
 }
 
 # With no argument display all todos
