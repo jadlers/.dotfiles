@@ -1,0 +1,47 @@
+#!/bin/sh
+# Simple To-Do list where each To-Do is described on a single line.
+
+# Make sure the TODO_FILE exists
+TODO_FILE="$XDG_DATA_HOME/jadlers/todo"
+[ -f "$TODO_FILE" ] || touch "$TODO_FILE"
+
+if [ "$#" -lt 1 ]; then
+  nl --number-format=rn -s': ' "$TODO_FILE"
+  exit 0
+fi
+
+usage()
+{
+  echo "$(basename "$0") usage:
+  add     DESCRIPTION
+  remove  NUMBER_OF_TODO"
+}
+
+remove_line_number()
+{
+  cut -d':' -f1 --complement | sed -e 's/^[[:space:]]*//'
+}
+
+case "$1" in
+  add)
+    shift 1
+    echo "$@" >> "$TODO_FILE" ;;
+  complete|remove)
+    shift
+    DATA=$(nl --number-format=rn -s': ' "$TODO_FILE")
+    NUM_GREP="^[[:space:]]*$1:"
+    REMOVING=$(echo "$DATA" | grep "$NUM_GREP" | remove_line_number)
+    if [ -z "$REMOVING" ]; then
+      echo "$1 is not a valid number to remove."
+      exit 1
+    else
+      echo "Removing: $REMOVING"
+    fi
+    echo "$DATA" | grep -v "$NUM_GREP" | remove_line_number > "$TODO_FILE"
+    ;;
+  help)
+    usage ;;
+  *)
+    usage
+    exit 1 ;;
+esac
