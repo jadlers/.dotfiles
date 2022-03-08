@@ -1,26 +1,34 @@
 #!/bin/sh
 # Simple To-Do list where each To-Do is described on a single line.
 
+# Use user defined $SIMPLE_TODO_FILE or use fallback
+TODO_FILE="${SIMPLE_TODO_FILE:-$XDG_DATA_HOME/jadlers/todo}"
 # Make sure the TODO_FILE exists
-TODO_FILE="$XDG_DATA_HOME/jadlers/todo"
 [ -f "$TODO_FILE" ] || touch "$TODO_FILE"
-
-if [ "$#" -lt 1 ]; then
-  nl --number-format=rn -s': ' "$TODO_FILE"
-  exit 0
-fi
 
 usage()
 {
   echo "$(basename "$0") usage:
   add     DESCRIPTION
-  remove  NUMBER_OF_TODO"
+  remove  NUMBER_OF_TODO (\"complete\" is an alias)"
 }
 
-remove_line_number()
+with_line_numbers()
+{
+  nl --number-format=rn -s': ' "$1"
+}
+
+remove_line_numbers()
 {
   cut -d':' -f1 --complement | sed -e 's/^[[:space:]]*//'
 }
+
+# With no argument display all todos
+if [ "$#" -lt 1 ]; then
+  # nl --number-format=rn -s': ' "$TODO_FILE"
+  with_line_numbers "$TODO_FILE"
+  exit 0
+fi
 
 case "$1" in
   add)
@@ -28,16 +36,16 @@ case "$1" in
     echo "$@" >> "$TODO_FILE" ;;
   complete|remove)
     shift
-    DATA=$(nl --number-format=rn -s': ' "$TODO_FILE")
+    DATA=$(with_line_numbers "$TODO_FILE")
     NUM_GREP="^[[:space:]]*$1:"
-    REMOVING=$(echo "$DATA" | grep "$NUM_GREP" | remove_line_number)
+    REMOVING=$(echo "$DATA" | grep "$NUM_GREP" | remove_line_numbers)
     if [ -z "$REMOVING" ]; then
       echo "$1 is not a valid number to remove."
       exit 1
     else
       echo "Removing: $REMOVING"
     fi
-    echo "$DATA" | grep -v "$NUM_GREP" | remove_line_number > "$TODO_FILE"
+    echo "$DATA" | grep -v "$NUM_GREP" | remove_line_numbers > "$TODO_FILE"
     ;;
   help)
     usage ;;
