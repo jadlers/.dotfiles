@@ -18,8 +18,22 @@ XF86Audio{Play,Next,Prev}
 super + XF86Audio{Play,Stop}
   playerctl --all-players {play,pause}
 
-ctrl + XF86AudioStop
-  curl -X POST http://bea:8123/api/webhook/mute_tv
+# F20, keycode 198, keysym 0x1008ffb2, XF86AudioMicMute
+XF86AudioMicMute
+  notify-send "LG TV" "Muting TV"; \
+  http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-mute"
+  # Curl alternative:
+  # curl -X POST -d '{ "action": "volume-mute" }' -H "Content-Type: application/json" http://bea:8123/api/webhook/tv_control; \
+
+# TODO: Make it work with XF86TouchpadToggle instead of shift mod
+# F21, keycode 199, keysym 0x1008ffa9, XF86TouchpadToggle
+# F22, keycode 200, keysym 0x1008ffb0, XF86TouchpadOn
+XF86TouchpadOn
+  notify-send "LG TV" "Volume down"; \
+  http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-down"
+shift + XF86TouchpadOn
+  notify-send "LG TV" "Volume up"; \
+  http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-up"
 
 {_, shift +, super +} Pause
   {xset dpms force suspend,alacritty --command tpause,toggle-dpms}
