@@ -53,9 +53,9 @@ font-4 = FontAwesome:pixelsize=11;2
 [bar/i3]
 inherit = bar/base
 monitor = DisplayPort-2
-modules-left = i3 
+modules-left = i3
 modules-center = long-date
-modules-right = pulseaudio xkeyboard
+modules-right = pomo pulseaudio xkeyboard
 tray-position = right
 
 [bar/i3-2]
@@ -63,7 +63,8 @@ inherit = bar/base
 monitor = HDMI-A-0
 
 modules-left = i3 spotify
-modules-right = memory cpu vpn-nordvpn-status eth date
+modules-center = pomo
+modules-right = memory cpu eth date
 
 
 [bar/bspwm]
@@ -496,6 +497,12 @@ exec = $XDG_CONFIG_HOME/polybar/scripts/playerctl_get_status.sh spotify,spotifyd
 type = custom/script
 exec = ~/.config/polybar/scripts/vpn-nordvpn-status.sh
 interval = 5
+
+[module/pomo]
+type = custom/script
+exec = pomo
+exec-if = [ ! -z $(pomo up) ]
+interval = 1
 
 [settings]
 screenchange-reload = true
