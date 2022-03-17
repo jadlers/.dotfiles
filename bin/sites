@@ -5,6 +5,7 @@ Calendar
 Poll Kung DotA
 mpv view (link from clipboard)
 Mute TV
+Turn off TV
 Journal
 Twitch
 PiCamera"
@@ -59,6 +60,9 @@ case "$SELECTED" in
   mute)
     curl -X POST http://bea:8123/api/webhook/mute_tv;
     exit 0;;
+  turn)
+    http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="turn-off"
+    exit 0 ;;
   *)
     exit 1;;
 esac
