@@ -1,0 +1,41 @@
+#!/bin/sh
+# Wrapper around rwxrob/cmdbox-pomo command. **Always** pass the arguments to
+# `pomo`.
+
+notify_ha()
+{
+  [ -z "$HA_EXTERNAL" ] && echo "missing env HA_EXTERNAL" && return 1
+  [ -z "$HA_WEBHOOK_POMO" ] && echo "missing env HA_WEBHOOK_POMO" && return 1
+  https --quiet POST "$HA_EXTERNAL/api/webhook/$HA_WEBHOOK_POMO" action="$1"
+}
+
+file_store()
+{
+  [ -z "$POMO_HISTORY" ] && echo "missing env POMO_HISTORY" && return 1
+  echo "$(date +'%Y-%m-%d %H:%M:%S') $1" >> "$POMO_HISTORY"
+}
+
+case "$1" in 
+  # If arguments starts a new timer also notify HA
+  # `start`, `d`, `dur`, `duration`
+  d|dur|duration|start)
+    pomo "$@"
+    dur=$(rg duration "$(pomo file)" | cut -d= -f2)
+    if [ "$?" -eq 0 ]; then
+      notify_ha start
+      file_store "start $dur"
+    fi ;;
+
+  # Likewise for stopping
+  # `stop`
+  stop)
+    pomo "$@"
+    if [ "$?" -eq 0 ]; then
+      notify_ha stop
+      file_store stop
+    fi ;;
+
+  # Pass all other commands through directly
+  *)
+    pomo "$@" ;;
+esac
