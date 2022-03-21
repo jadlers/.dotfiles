@@ -500,7 +500,7 @@ interval = 5
 
 [module/pomo]
 type = custom/script
-exec = pomo
+exec = p show
 exec-if = [ ! -z $(pomo up) ]
 interval = 1
 

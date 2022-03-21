@@ -28,7 +28,6 @@ case "$1" in
     if [ "$?" -eq 0 ]; then
       file_store "start $dur $TRACKER"
       notify_ha start
-      notify-send "Pomodoro" "Started session for $TRACKER ($dur)"
       dunstctl set-paused true
     fi ;;
 
@@ -40,9 +39,12 @@ case "$1" in
       file_store stop
       notify_ha stop
       dunstctl set-paused false
-      echo "$TRACKER"
       notify-send "Pomodoro" "Stopped session for $TRACKER"
     fi ;;
+
+  # Show remaining time and the current tracker
+  show)
+    echo "$(pomo) ($TRACKER)" ;;
 
   tracker)
     if [ "$#" -gt 1 ]; then
