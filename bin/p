@@ -23,9 +23,8 @@ case "$1" in
   # If arguments starts a new timer also notify HA
   # `start`, `d`, `dur`, `duration`
   d|dur|duration|start)
-    pomo "$@"
-    dur=$(rg duration "$(pomo file)" | cut -d= -f2)
-    if [ "$?" -eq 0 ]; then
+    if pomo "$@"; then
+      dur=$(rg duration "$(pomo file)" | cut -d= -f2)
       file_store "start $dur $TRACKER"
       notify_ha start
       dunstctl set-paused true
@@ -34,8 +33,7 @@ case "$1" in
   # Likewise for stopping
   # `stop`
   stop)
-    pomo "$@"
-    if [ "$?" -eq 0 ]; then
+    if pomo "$@"; then
       file_store stop
       notify_ha stop
       dunstctl set-paused false
