@@ -46,8 +46,8 @@ case "$1" in
 
   tracker)
     if [ "$#" -gt 1 ]; then
+      [ "$2" != "school" ] && [ "$2" != "personal" ] && echo "$2 not valid tracker" && exit 1
       echo "$2" > "$TRACKER_FILE"
-      echo "tracker set to: $2"
     else
       echo "$TRACKER"
     fi ;;
