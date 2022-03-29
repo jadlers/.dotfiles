@@ -42,7 +42,14 @@ case "$1" in
 
   # Show remaining time and the current tracker
   show)
-    echo "$(pomo) ($TRACKER)" ;;
+    case "$(uname -s)" in
+      "Linux")
+        # Assuming dunst is running on all linux machines
+        echo "$(pomo) ($TRACKER) ($(dunstctl count waiting))" ;;
+      *) # Darwin for macOS specific
+        echo "$(pomo) ($TRACKER)" ;;
+    esac
+    ;;
 
   tracker)
     if [ "$#" -gt 1 ]; then
