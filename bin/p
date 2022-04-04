@@ -27,7 +27,7 @@ case "$1" in
       dur=$(rg duration "$(pomo file)" | cut -d= -f2)
       file_store "start $dur $TRACKER"
       notify_ha start
-      dunstctl set-paused true
+      command -v dunstctl && dunstctl set-paused true
     fi ;;
 
   # Likewise for stopping
@@ -36,7 +36,7 @@ case "$1" in
     if pomo "$@"; then
       file_store stop
       notify_ha stop
-      dunstctl set-paused false
+      command -v dunstctl && dunstctl set-paused false
       notify-send "Pomodoro" "Stopped session for $TRACKER"
     fi ;;
 
