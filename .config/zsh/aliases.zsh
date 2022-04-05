@@ -1,5 +1,4 @@
 alias dfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-alias configure='$EDITOR "$HOME/$(dfa ls-files --full-name $HOME | fzf)"'
 alias zr='source $ZDOTDIR/.zshrc'
 
 # Ask if it might overwrite anything

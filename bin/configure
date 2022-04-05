@@ -1,0 +1,11 @@
+#!/bin/sh
+# Search and find configuration file which is under VCS in the .dotfiles
+# repositody. All arguments provided are passed on to fzf for filtering.
+
+files=$(dfa ls-files --full-name "$HOME")
+
+# Prefill the search to select file
+selected=$(echo "$files" | fzf --no-multi --select-1 --query="$@")
+[ -z "$selected" ] && exit 0 # No file chosen, exit
+
+$EDITOR "$HOME/$selected"
