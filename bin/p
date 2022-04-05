@@ -19,15 +19,26 @@ file_store()
   echo "$(date +'%Y-%m-%d %H:%M:%S') $1" >> "$POMO_HISTORY"
 }
 
+start_pomo()
+{
+  dur=$(rg duration "$(pomo file)" | cut -d= -f2)
+  file_store "start $dur $TRACKER"
+  notify_ha start
+  dunstctl set-paused true 2>/dev/null
+}
+
 case "$1" in 
   # If arguments starts a new timer also notify HA
   # `start`, `d`, `dur`, `duration`
-  d|dur|duration|start)
+  d|dur|duration)
+    if [ "$#" -lt 2 ]; then
+      pomo duration
+    else
+      pomo "$@" && start_pomo
+    fi ;;
+  start)
     if pomo "$@"; then
-      dur=$(rg duration "$(pomo file)" | cut -d= -f2)
-      file_store "start $dur $TRACKER"
-      notify_ha start
-      command -v dunstctl && dunstctl set-paused true
+      start_pomo
     fi ;;
 
   # Likewise for stopping
@@ -36,7 +47,7 @@ case "$1" in
     if pomo "$@"; then
       file_store stop
       notify_ha stop
-      command -v dunstctl && dunstctl set-paused false
+      dunstctl set-paused false 2>/dev/null
       notify-send "Pomodoro" "Stopped session for $TRACKER"
     fi ;;
 

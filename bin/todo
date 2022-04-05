@@ -9,8 +9,9 @@ TODO_FILE="${SIMPLE_TODO_FILE:-$XDG_DATA_HOME/jadlers/todo}"
 usage()
 {
   echo "$(basename "$0") usage:
-  add   DESCRIPTION
-  done  NUMBER_OF_TODO (\"remove\" is an alias)"
+  add   description...  Add new
+  done  todo_number     Remove from list (alias: \"remove\")
+  list                  Show all. Default command."
 }
 
 with_line_numbers()
@@ -47,6 +48,8 @@ case "$1" in
     fi
     echo "$DATA" | grep -v "$NUM_GREP" | remove_line_numbers > "$TODO_FILE"
     ;;
+  list)
+    with_line_numbers "$TODO_FILE" ;;
   help)
     usage ;;
   *)
