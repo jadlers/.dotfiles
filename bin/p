@@ -56,7 +56,9 @@ case "$1" in
     case "$(uname -s)" in
       "Linux")
         # Assuming dunst is running on all linux machines
-        echo "$(pomo) ($TRACKER) ($(dunstctl count waiting))" ;;
+        if [ ! -z "$(pomo)" ]; then
+          echo "$(pomo) ($TRACKER) ($(dunstctl count waiting))"
+        fi ;;
       *) # Darwin for macOS specific
         echo "$(pomo) ($TRACKER)" ;;
     esac
