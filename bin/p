@@ -25,6 +25,16 @@ start_pomo()
   file_store "start $dur $TRACKER"
   notify_ha start
   dunstctl set-paused true 2>/dev/null
+  [ "$(uname --nodename)" = "coraline" ] && xautolock -disable
+}
+
+stop_pomo()
+{
+  file_store stop
+  notify_ha stop
+  dunstctl set-paused false 2>/dev/null
+  notify-send "Pomodoro" "Stopped session for $TRACKER"
+  [ "$(uname --nodename)" = "coraline" ] && xautolock -enable
 }
 
 case "$1" in 
@@ -45,21 +55,19 @@ case "$1" in
   # `stop`
   stop)
     if pomo "$@"; then
-      file_store stop
-      notify_ha stop
-      dunstctl set-paused false 2>/dev/null
-      notify-send "Pomodoro" "Stopped session for $TRACKER"
+      stop_pomo
     fi ;;
 
   # Show remaining time and the current tracker
   show)
-    case "$(uname -s)" in
-      "Linux")
-        # Assuming dunst is running on all linux machines
-        if [ ! -z "$(pomo)" ]; then
+    case "$(uname --nodename)" in
+      "coraline")
+        if [ -z "$(pomo)" ]; then
+          echo ""
+        else
           echo "$(pomo) ($TRACKER) ($(dunstctl count waiting))"
         fi ;;
-      *) # Darwin for macOS specific
+      *)
         echo "$(pomo) ($TRACKER)" ;;
     esac
     ;;
