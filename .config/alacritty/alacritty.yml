@@ -112,12 +112,14 @@ font:
     #   - (Windows) Consolas
     # family: mononoki Nerd Font
     # family: Fura Code Nerd Font
-    # family: TerminessTTF Nerd Font Mono
+    # family: TerminessTTF Nerd Font
+    # family: Terminus
     # family: JetBrains Mono
-    family: SauceCodePro Nerd Font Mono
+    # family: SauceCodePro Nerd Font Mono
+    family: Cascadia Code
 
     # The `style` can be specified to pick a specific face.
-    style: Regular
+    style: Light
 
   # Bold font face
   bold:
@@ -127,10 +129,12 @@ font:
     # value specified for the normal font.
     #family: monospace
     # family: JetBrains Mono Medium
-    family: SauceCodePro Nerd Font Mono
+    # family: SauceCodePro Nerd Font Mono
+    # family: Terminus
+    family: Cascadia Code
 
     # The `style` can be specified to pick a specific face.
-    style: Bold
+    style: LightBold
 
   # Italic font face
   italic:
@@ -139,10 +143,12 @@ font:
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: monospace
-    family: SauceCodePro Nerd Font Mono
+    # family: SauceCodePro Nerd Font Mono
+    # family: Terminus
+    family: Cascadia Code
 
     # The `style` can be specified to pick a specific face.
-    style: Italic
+    style: LightItalic
 
   # Point size
   size: 12
