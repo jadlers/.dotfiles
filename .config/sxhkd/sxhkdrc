@@ -29,20 +29,33 @@ XF86AudioMicMute
 # F21, keycode 199, keysym 0x1008ffa9, XF86TouchpadToggle
 # F22, keycode 200, keysym 0x1008ffb0, XF86TouchpadOn
 XF86TouchpadOn
-  notify-send "LG TV" "Volume down"; \
-  http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-down"
-shift + XF86TouchpadOn
   notify-send "LG TV" "Volume up"; \
   http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-up"
+
+# [_, hold, press, _] on micro pad
+{_,shift+} XF86TouchpadToggle
+  export SXHKD_DIR="{down,up}"; notify-send "LG TV" "Volume $SXHKD_DIR"; \
+  http -v POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-$SXHKD_DIR"
+  # curl -XPOST -H'Content-Type: application/json' -d'{"action": "volume-$SXHKD_DIR"}' "http://bea:8123/api/webhook/$HA_WEBHOOK_TV"
+
+# XF86TouchpadOn
+#   notify-send "LG TV" "Volume down"; \
+#   http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-down"
+
+# shift + XF86TouchpadOn
+#   notify-send "LG TV" "Volume up"; \
+#   http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-up"
+
+XF86Launch5
+  p stop
 
 {_, shift +, super +} Pause
   {xset dpms force suspend,alacritty --command tpause,toggle-dpms}
 
 # Lock and blank screen
 Scroll_Lock
-  notify-send "TEST" "works"; \
   i3lock --ignore-empty-password --show-failed-attempts --color=a6dcef; \
-  xset dpms force suspend
+  sleep 0.5; xset dpms force off
 
 # terminal emulator
 super + {_,ctrl +,shift +} Return
@@ -53,7 +66,7 @@ super + w
 
 # SSH to local clients
 super + {_, ctrl +, shift +} F3
-  alacritty --command ssh {bea -t tmux a -t 0,bea -t tmux a -t IRC,yio-remote}
+  alacritty --command ssh {bea -t tmux a -t 0,mac,yio-remote}
 
 # program launcher
 super + space
