@@ -581,7 +581,7 @@ hints:
         enabled: true
         mods: None
       binding:
-        key: U
+        key: L
         mods: Control|Shift
 
 # Mouse bindings
