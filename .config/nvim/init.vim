@@ -159,8 +159,7 @@
   noremap <leader>s 1z=
 
 " Completion
-  set completeopt=menuone,noinsert,noselect " Don't automatically insert
-  let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+  set completeopt=menu,menuone,noselect " Don't automatically insert
 
 " Snippets
   " Set up location of snippets
