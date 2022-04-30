@@ -30,15 +30,38 @@
     "prefix": "sec",
     "description": "Section",
     "body": [
-      "\\section{${1:section name}} % (fold)",
-      "\\label{sec:${2:${1/(\\w+)(\\W+$)?|\\W+/${1:?${1:/asciify/downcase}:_}/g}}}",
-      "${0:$TM_SELECTED_TEXT}",
-      "% section $2 (end)"
+      "\\section{${1:section name}}",
+      "\\label{sec:$1}",
+      "${0:$TM_SELECTED_TEXT}"
     ]
   },
   "bold-text": {
     "prefix": "bf",
     "description": "Bold text",
     "body": "\\textbf{$1}$0"
+  },
+  "sats": {
+    "prefix": "thm",
+    "description": "Define new theorem",
+    "body": [
+      "\\begin{sats}[${1:theorem name}]",
+      "\t$0",
+      "\\end{sats}"
+    ]
+  },
+  "acronym": {
+    "prefix": "gls",
+    "description": "Insert an acronym",
+    "body": ["\\gls{$1}$0"]
+  },
+  "text-italicised": {
+    "prefix": "t_",
+    "description": "Insert italicised text",
+    "body": ["\\textit{$1}$0"]
+  },
+  "inline-quote": {
+    "prefix": "quot",
+    "description": "Add a quoted sentence inline",
+    "body": ["``$1''$0"]
   }
 }

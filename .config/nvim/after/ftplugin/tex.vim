@@ -1,5 +1,6 @@
 setlocal wrap
 setlocal textwidth=80
+setlocal colorcolumn=81
 setlocal conceallevel=2
 " Got warnings that 'ctermfg=color' is not a valid color
 hi! Conceal guifg=color " ctermfg=color
