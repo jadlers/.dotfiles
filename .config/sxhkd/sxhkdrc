@@ -19,13 +19,14 @@ super + XF86Audio{Play,Stop}
   playerctl --all-players {play,pause}
 
 # F20, keycode 198, keysym 0x1008ffb2, XF86AudioMicMute
+# [press, hold, _, _] on micro pad
 XF86AudioMicMute
   notify-send "LG TV" "Muting TV"; \
-  http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-mute"
+  http -v POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-mute"
   # Curl alternative:
   # curl -X POST -d '{ "action": "volume-mute" }' -H "Content-Type: application/json" http://bea:8123/api/webhook/tv_control; \
 
-# TODO: Make it work with XF86TouchpadToggle instead of shift mod
+# TODO: Make it work with XF86TouchpadToggle instead of shift mod below
 # F21, keycode 199, keysym 0x1008ffa9, XF86TouchpadToggle
 # F22, keycode 200, keysym 0x1008ffb0, XF86TouchpadOn
 XF86TouchpadOn
@@ -36,17 +37,14 @@ XF86TouchpadOn
 {_,shift+} XF86TouchpadToggle
   export SXHKD_DIR="{down,up}"; notify-send "LG TV" "Volume $SXHKD_DIR"; \
   http -v POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-$SXHKD_DIR"
-  # curl -XPOST -H'Content-Type: application/json' -d'{"action": "volume-$SXHKD_DIR"}' "http://bea:8123/api/webhook/$HA_WEBHOOK_TV"
 
-# XF86TouchpadOn
-#   notify-send "LG TV" "Volume down"; \
-#   http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-down"
-
-# shift + XF86TouchpadOn
-#   notify-send "LG TV" "Volume up"; \
-#   http POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="volume-up"
-
+# [_, press, _, _] on micro pad
 XF86Launch5
+  notify-send "LG TV" "Toggle TV on/off"; \
+  http -v POST "bea:8123/api/webhook/$HA_WEBHOOK_TV" action="toggle"
+
+# [_, _, _, press] on micro pad
+XF86Launch7
   p stop
 
 {_, shift +, super +} Pause
