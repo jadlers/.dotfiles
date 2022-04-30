@@ -34,6 +34,10 @@
     " JavaScript/TypeScript
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
     Plug 'jxnblk/vim-mdx-js'
+      " JSX & TSX
+      Plug 'yuezk/vim-js'
+      Plug 'HerringtonDarkholme/yats.vim'
+      Plug 'maxmellon/vim-jsx-pretty'
 
     " LaTeX
     Plug 'lervag/vimtex'
@@ -45,6 +49,7 @@
       " Treesitter (improves sytax highlighting for many languages)
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
       Plug 'nvim-treesitter/playground'
+      Plug 'baskerville/vim-sxhkdrc'
 
       " Colorschemes
       Plug 'crispgm/nord-vim'
