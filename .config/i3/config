@@ -104,13 +104,12 @@ client.placeholder      #000000	#0c0c0c	#ffffff	#000000		#0c0c0c
 client.background       #ffffff
 
 # Gaps
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 3
 smart_gaps on
 hide_edge_borders smart
 
 gaps inner 0 # Default to no gaps
 gaps outer 0
-hide_edge_borders smart
 
 # Control inner gaps with s and outer with z
 bindsym $mod+z          gaps outer current plus 5
@@ -218,6 +217,7 @@ for_window [class="KioskMode"] fullscreen disable move scratchpad focus
 for_window [class="Electron" title="Aptus Portal"] floating enable resize set width 800px height 840px
 for_window [class="mpv" title="video0*"] floating enable sticky enable move up 35ppt
 for_window [class="mpvfloat"] floating enable
+for_window [class="nm-connection-editor"] floating enable
 
 for_window [class="zoom" title="Zoom - Licensed Account"] floating enable resize set 860 600
 for_window [class="zoom" title="Settings"] floating enable
@@ -259,7 +259,10 @@ exec --no-startup-id dunst
 exec --no-startup-id sxhkd
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/unclutter
-exec --no-startup-id systemd-run --user --scope -p MemoryLimit=250M nextcloud # Limit memory leak
+exec --no-startup-id /usr/bin/barrier
+# exec --no-startup-id systemd-run --user --scope -p MemoryLimit=250M nextcloud # Limit memory leak
+exec --no-startup-id nextcloud
 exec --no-startup-id xautolock -time 30 -locker "i3lock --ignore-empty-password --show-failed-attempts" -killtime 30 -killer "systemctl suspend" -detectsleep
 
+exec --no-startup-id xrandr --dpi 96 # https://bugs.archlinux.org/task/72661?project=1&string=xorg-server
 exec --no-startup-id xsetroot -solid \#006060
