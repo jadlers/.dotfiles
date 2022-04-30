@@ -95,6 +95,13 @@
   set listchars+=extends:>,precedes:< " Hint long lines
   set list                            " Show by default
 
+  " Store undo information
+  set undodir=$XDG_DATA_HOME/nvim/undo  " Default location explicitly set
+  set undofile                          " Store undo information
+
+  " Don't store undo history for temporary files
+  au BufWritePre /tmp/* setlocal noundofile
+
 " Source lua configuration files
   lua require('nvim-cmp')
   lua require('nvim-lsp')
