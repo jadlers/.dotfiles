@@ -31,7 +31,7 @@ url="$1"
 player="mpv --geometry=50%:50% --autofit-larger=90%x90%"
 
 dir="$HOME/Videos/watch-later"
-videoname=$(youtube-dl --get-title "$url" \
+videoname=$(yt-dlp --get-title "$url" \
   | sed 's/\ /_/g' \
   | sed "s/['\"]//g" \
   | sed 's+[/\]+|+g' \
@@ -51,13 +51,14 @@ if [ "$QUIET" = true ]; then
   player="$player --really-quiet"
 fi
 
+# TODO: Check for .part file and resume download
 existing_file=$(find "$dir" -name "*${videoname}.*")
 if [ -z "$existing_file" ]; then
   if [ "$QUIET" = true ]; then
-    youtube-dl $DL_FLAGS --quiet --output="$output" "$url"
+    yt-dlp $DL_FLAGS --quiet --output="$output" "$url"
   else
     echo "Downloading video..."
-    youtube-dl $DL_FLAGS --output="$output" "$url"
+    yt-dlp $DL_FLAGS --output="$output" "$url"
   fi;
 
   # Clean up eventual .part files

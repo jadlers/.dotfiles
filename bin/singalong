@@ -2,6 +2,9 @@
 # Find lyrics for the currently playing song on Spotify. Uses my zzng project
 # found here: https://github.com/jadlers/zzng
 
+# apiseeds seems to be down atm, using genius by default for now
+USE_GENIUS=true
+
 while getopts 'g' flag; do
   case $flag in
     g) USE_GENIUS=true;;
