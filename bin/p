@@ -1,6 +1,10 @@
 #!/bin/sh
 # Wrapper around rwxrob/cmdbox-pomo command. **Always** pass the arguments to
 # `pomo`.
+#
+# Should the tracking of focused time be handled by another script which this
+# calles instead? Would make it easier to just start a focused session without
+# a timer. `focus start <personal|school>`, `focus stop`.
 
 TRACKER_FILE="${NC:-$HOME/Nextcloud}/pomo_tracker.txt"
 TRACKER=$(cat "$TRACKER_FILE")
@@ -24,17 +28,21 @@ start_pomo()
   dur=$(rg duration "$(pomo file)" | cut -d= -f2)
   file_store "start $dur $TRACKER"
   notify_ha start
-  dunstctl set-paused true 2>/dev/null
-  [ "$(uname --nodename)" = "coraline" ] && xautolock -disable
+  if [ "$(uname -n)" = "coraline" ]; then
+    dunstctl set-paused true 2>/dev/null
+    xautolock -disable
+  fi
 }
 
 stop_pomo()
 {
   file_store stop
   notify_ha stop
-  dunstctl set-paused false 2>/dev/null
-  notify-send "Pomodoro" "Stopped session for $TRACKER"
-  [ "$(uname --nodename)" = "coraline" ] && xautolock -enable
+  if [ "$(uname -n)" = "coraline" ]; then
+    dunstctl set-paused false 2>/dev/null
+    notify-send "Pomodoro" "Stopped session for $TRACKER"
+    xautolock -enable
+  fi
 }
 
 case "$1" in 
