@@ -64,7 +64,7 @@ monitor = HDMI-A-0
 
 modules-left = i3 spotify
 modules-center = pomo
-modules-right = memory cpu eth date
+modules-right = focused-time memory cpu eth date
 
 
 [bar/bspwm]
@@ -502,6 +502,13 @@ interval = 5
 type = custom/script
 exec = p show
 interval = 1
+
+[module/focused-time]
+type = custom/script
+exec = ~/.config/polybar/scripts/focused-time.sh
+interval = 10
+format-prefix = "FOC "
+format-prefix-foreground = ${colors.foreground-alt}
 
 [settings]
 screenchange-reload = true
