@@ -21,5 +21,8 @@ alias gst='git status'
 alias gupa='git pull --rebase --autostash'
 alias cb='git branch --sort=-committerdate | fzf --header Checkout | xargs git checkout'
 
+# When
+alias when='when --calendar="$NC/Documents/when-calendar"'
+
 # You know why...
 alias :q=exit

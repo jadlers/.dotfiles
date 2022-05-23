@@ -1,0 +1,4 @@
+future = 90
+editor = nvim
+filter_accents_on_output = 0
+monday_first = true
