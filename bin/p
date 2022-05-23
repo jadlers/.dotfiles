@@ -28,7 +28,7 @@ start_pomo()
   dur=$(rg duration "$(pomo file)" | cut -d= -f2)
   file_store "start $dur $TRACKER"
   notify_ha start
-  if [ "$(uname -n)" = "coraline" ]; then
+  if [ "$(uname --nodename)" = "coraline" ]; then
     dunstctl set-paused true 2>/dev/null
     xautolock -disable
   fi
@@ -38,10 +38,10 @@ stop_pomo()
 {
   file_store stop
   notify_ha stop
-  if [ "$(uname -n)" = "coraline" ]; then
+  if [ "$(uname --nodename)" = "coraline" ]; then
     dunstctl set-paused false 2>/dev/null
-    notify-send "Pomodoro" "Stopped session for $TRACKER"
     xautolock -enable
+    notify-send "Pomodoro" "Stopped session for $TRACKER"
   fi
 }
 
