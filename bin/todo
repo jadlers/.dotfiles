@@ -10,6 +10,7 @@ usage()
 {
   echo "$(basename "$0") usage:
   add   description...  Add new
+  edit                  Open todo file in \$EDITOR
   done  todo_number     Remove from list (alias: \"remove\")
   list                  Show all. Default command."
 }
@@ -35,6 +36,9 @@ case "$1" in
   add)
     shift 1
     echo "$@" >> "$TODO_FILE" ;;
+  edit)
+    shift 1
+    $EDITOR "$TODO_FILE" || vi "$TODO_FILE" ;;
   done|remove)
     shift
     DATA=$(with_line_numbers "$TODO_FILE")
