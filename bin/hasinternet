@@ -1,0 +1,9 @@
+#!/bin/sh
+# Does a DNS query for the site and then pings to see if you can reach the
+# target.
+
+site=archlinux.org # Default site
+[ ! -z "$1" ] && site="$1"
+
+dig +short +timeout=3 "$site"
+ping -c 5 "$site"
