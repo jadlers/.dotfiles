@@ -10,6 +10,7 @@ setlocal makeprg=just
 
 " Save (if needed) and build main
 nmap <localleader>m :up<CR>:make<CR>
+nmap <localleader>t :VimtexTocToggle<CR>
 " Format current paragraph to fit within `textwidth`
 nnoremap <localleader>f gwip
 vnoremap <localleader>f gw

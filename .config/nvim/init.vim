@@ -44,6 +44,7 @@
 
     " Markdown
     Plug 'SidOfc/mkdx' " Swiss knife of markdown
+    Plug 'godlygeek/tabular'
 
     " Syntax
       " Treesitter (improves sytax highlighting for many languages)
