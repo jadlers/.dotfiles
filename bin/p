@@ -27,8 +27,9 @@ start_pomo()
 {
   dur=$(rg duration "$(pomo file)" | cut -d= -f2)
   file_store "start $dur $TRACKER"
+  # TODO: If HA fails ask if it should start file store or cancel?
   notify_ha start
-  if [ "$(uname --nodename)" = "coraline" ]; then
+  if [ "$(uname -n)" = "coraline" ]; then
     dunstctl set-paused true 2>/dev/null
     xautolock -disable
   fi
