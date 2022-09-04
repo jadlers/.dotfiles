@@ -40,7 +40,7 @@ end
 -- LSP specific autogroups
 local autogroup_on_attach = function(client, bufnr)
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then -- New for nvim 0.8
     -- You may tweak these to your liking
       -- hi LspReferenceRead cterm=reverse gui=reverse
       -- hi LspReferenceText cterm=reverse gui=reverse
