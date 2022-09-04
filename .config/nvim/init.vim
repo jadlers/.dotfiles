@@ -114,7 +114,8 @@
   " Prettier
     let g:prettier#autoformat_config_present = 1 " Require config to auto-format
     let g:prettier#autoformat_require_pragma = 0
-    let g:prettier#autoformat_config_files = ['package.json', '.prettierrc', '.prettierrc.yaml']
+    " It's not certain that a `package.json` include prettier configuration
+    let g:prettier#autoformat_config_files = ['.prettierrc', '.prettierrc.yaml']
 
   " vim-go
     " I'm using LSP for this
