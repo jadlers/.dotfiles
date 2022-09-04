@@ -64,7 +64,7 @@ super + w
 
 # SSH to local clients
 super + {_, ctrl +, shift +} F3
-  alacritty --command ssh {bea -t tmux a -t 0,mac,yio-remote}
+  alacritty --command ssh {bea -t tmux new-session -A -s 0,mac,freja -t tmux new-session -A -s main}
 
 # program launcher
 super + space
@@ -103,6 +103,9 @@ super + F4
 # Open a website in floating electron window
 super + m
   chat.sh
+
+super + c
+  clipmenu
 
 super + {_,shift +} grave
   emojiselect {_,insert directly}
