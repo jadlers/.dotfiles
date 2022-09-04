@@ -120,6 +120,7 @@ font:
 
     # The `style` can be specified to pick a specific face.
     style: Light
+    # style: Regular
 
   # Bold font face
   bold:
@@ -128,13 +129,14 @@ font:
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: monospace
-    # family: JetBrains Mono Medium
+    # family: JetBrains Mono
     # family: SauceCodePro Nerd Font Mono
     # family: Terminus
     family: Cascadia Code
 
     # The `style` can be specified to pick a specific face.
-    style: LightBold
+    style: Light Bold
+    # style: Bold
 
   # Italic font face
   italic:
@@ -146,9 +148,11 @@ font:
     # family: SauceCodePro Nerd Font Mono
     # family: Terminus
     family: Cascadia Code
+    # family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
-    style: LightItalic
+    style: Light Italic
+    # style: Italic
 
   # Point size
   size: 12
