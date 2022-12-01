@@ -55,6 +55,7 @@
       " Colorschemes
       Plug 'crispgm/nord-vim'
       Plug 'ayu-theme/ayu-vim' " You need to set ayucolor
+      Plug 'folke/tokyonight.nvim'
 
   call plug#end()
 
@@ -65,8 +66,10 @@
   " Set colorscheme
   "   Current favourites in order are:
   "   nord, auy, evening, desert
-  let ayucolor = "mirage" " light, mirage, or dark
-  colorscheme ayu
+  " let ayucolor = "mirage" " light, mirage, or dark
+  " colorscheme ayu
+  " day, storm, moon, night
+  colorscheme tokyonight-night
 
   set shiftwidth=2    " Number of spaces for each indent
   set tabstop=2       " Number of spaces a <Tab> stands for
