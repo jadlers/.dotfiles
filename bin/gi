@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Create useful gitignore files
 # Usage: gi [param]
@@ -12,7 +12,7 @@ function __gi() {
 if  [ "$#" -eq 0 ]; then
   IFS+=","
   for item in $(__gi list); do
-    echo $item
+    echo "$item"
   done | fzf --multi --ansi | paste -s -d "," - |
   { read result && __gi "$result"; }
 else
