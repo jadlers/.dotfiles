@@ -64,7 +64,7 @@ monitor = HDMI-A-0
 
 modules-left = i3 spotify
 modules-center = pomo
-modules-right = focused-time memory cpu eth date
+modules-right = vpn-mullvad-status focused-time memory cpu eth date
 
 
 [bar/bspwm]
@@ -496,6 +496,11 @@ exec = $XDG_CONFIG_HOME/polybar/scripts/playerctl_get_status.sh spotify,spotifyd
 [module/vpn-nordvpn-status]
 type = custom/script
 exec = ~/.config/polybar/scripts/vpn-nordvpn-status.sh
+interval = 5
+
+[module/vpn-mullvad-status]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn-mullvad-status.sh
 interval = 5
 
 [module/pomo]
