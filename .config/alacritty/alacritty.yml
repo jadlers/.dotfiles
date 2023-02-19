@@ -184,7 +184,10 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: true
+  #
+  # 2023-02-19: `use_thin_strokes` has been removed, set the AppleFontSmoothing user
+  # default instead.
+  # use_thin_strokes: true
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
