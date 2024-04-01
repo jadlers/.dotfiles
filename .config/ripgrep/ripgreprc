@@ -5,6 +5,8 @@
 
 # Don't search in node_modules or .git/
 --glob
-!**/node_modules/*
+!node_modules
 --glob
 !.git
+--glob
+!yarn.lock
