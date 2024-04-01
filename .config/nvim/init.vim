@@ -53,10 +53,9 @@
       " Treesitter (improves sytax highlighting for many languages)
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
       Plug 'nvim-treesitter/playground'
-      Plug 'baskerville/vim-sxhkdrc'
+      Plug 'baskerville/vim-sxhkdrc'    " sxhkd
 
       " Colorschemes
-      Plug 'crispgm/nord-vim'
       Plug 'ayu-theme/ayu-vim' " You need to set ayucolor
       Plug 'folke/tokyonight.nvim'
 
@@ -79,7 +78,7 @@
   set expandtab       " Always insert spaces instead of tabs
   set splitbelow      " Vertical splits open below
   set splitright      " Horizontal splits open to the right
-  set scrolloff=3     " Always show 5 lines below/under cursor
+  set scrolloff=3     " Always show 3 lines below/under cursor
   set number          " Show the absolute line number for current line
   set relativenumber  " Show relative numbers for all other lines
   set nowrap          " Don't wrap lines by default
@@ -122,7 +121,7 @@
     let g:prettier#autoformat_config_present = 1 " Require config to auto-format
     let g:prettier#autoformat_require_pragma = 0
     " It's not certain that a `package.json` include prettier configuration
-    let g:prettier#autoformat_config_files = ['.prettierrc', '.prettierrc.yaml']
+    let g:prettier#autoformat_config_files = ['.prettierrc', '.prettierrc.yaml', '.prettierrc.json']
 
   " vim-go
     " I'm using LSP for this
@@ -132,6 +131,14 @@
     let g:goyo_width = 81
 
 " Keybindings
+  " Close quickfix list
+  nnoremap <localleader>c :cclose<CR>
+
+  " Sort items
+  vmap <localleader>s :!sort<CR>
+
+  " Quick spell-correction
+  nnoremap <localleader>q 1z= 
 
 	" Navigate quickfix list
 	nnoremap ]q :cnext<CR>
@@ -149,6 +156,7 @@
 
   " Easily search through project
   nmap <C-t> :Files<cr>
+  nmap <C-l> :Rg<cr>
 
   " Open links with xdg-open
   nnoremap <silent> gx :!xdg-open <cWORD><cr>
