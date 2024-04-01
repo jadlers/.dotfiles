@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ENTRIES="HomeAssistant
+ENTRIES="Home Assistant
 Calendar
 Poll Kung DotA
 mpv view (link from clipboard)
@@ -13,11 +13,11 @@ LINES=$(echo "$ENTRIES" | wc -l)
 SELECTED=$(echo "$ENTRIES" \
   | dmenu -i -l "$LINES" -p "What to launch?" \
   | cut -d' ' -f1 \
-  | awk '{print tolower($1)}')
+  | awk '{print tolower($0)}')
 
 case "$SELECTED" in
-  homeassistant)
-    URL=http://bea:8123;;
+  home)
+    URL=https://ha.hemlabb.se;;
   calendar)
     URL=https://calendar.google.com;;
   journal)
