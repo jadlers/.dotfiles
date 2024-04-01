@@ -53,7 +53,7 @@ case "$SELECTED" in
     fi
     URL="https://www.twitch.tv/$stream"
     notify-send "Watch twitch" "Streamer: $stream"
-    i3-msg "exec streamlink --title '{title}' $URL best"
+    i3-msg "exec mpv $URL"
     exit 0;;
   *)
     exit 1;;
