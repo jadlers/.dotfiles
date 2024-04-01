@@ -7,7 +7,7 @@
     Plug 'hrsh7th/vim-vsnip'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim' " Adds :Rg :Files etc.
-    Plug 'junegunn/goyo.vim'
+    Plug 'folke/zen-mode.nvim'
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'tpope/vim-commentary'
     " Plug 'tpope/vim-dadbod' " Query DB in quickfix buffer
@@ -127,9 +127,6 @@
     " I'm using LSP for this
     let g:go_def_mapping_enabled = 0
 
-  " Goyo
-    let g:goyo_width = 81
-
 " Keybindings
   " Close quickfix list
   nnoremap <localleader>c :cclose<CR>
@@ -168,8 +165,8 @@
   nmap <leader>y "+y
   vmap <leader>y "+y
 
-  " Goyo
-  nmap <leader>g :Goyo<CR>
+  " ZenMode
+  nmap <leader>g :ZenMode<CR>
 
   " Quick-select first spelling correction
   noremap <leader>s 1z=
@@ -195,27 +192,6 @@
   augroup journal-wiki
     autocmd!
     au BufNewFile,BufRead $HOME/Nextcloud/journal/**.md setlocal colorcolumn=81 spelllang=sv,en
-
-    " Quit Vim if this is the only remaining buffer
-    function! s:goyo_enter()
-      let b:quitting = 0
-      let b:quitting_bang = 0
-      autocmd QuitPre <buffer> let b:quitting = 1
-      cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-    endfunction
-
-    function! s:goyo_leave()
-      if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-        if b:quitting_bang
-          qa!
-        else
-          qa
-        endif
-      endif
-    endfunction
-
-    autocmd! User GoyoEnter call <SID>goyo_enter()
-    autocmd! User GoyoLeave call <SID>goyo_leave()
   augroup END
 
   " Restore cursor position when returning to a file
