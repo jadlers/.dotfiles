@@ -4,10 +4,18 @@
   rebase = true
 [core]
   editor = nvim
-  pager = delta
 [fetch]
   prune = true
 [init]
   defaultBranch = main
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
+
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+
+[delta]
+  tabs = 2
