@@ -67,4 +67,4 @@ case "$SELECTED" in
     exit 1;;
 esac
 
-i3-msg focus output DisplayPort-2 && i3-msg -- exec surf "$URL"
+i3-msg focus output HDMI-A-0 && i3-msg -- exec surf "$URL"

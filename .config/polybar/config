@@ -52,7 +52,7 @@ font-4 = FontAwesome:pixelsize=11;2
 
 [bar/i3]
 inherit = bar/base
-monitor = DisplayPort-2
+monitor = HDMI-A-0
 modules-left = i3
 modules-center = long-date
 modules-right = pomo pulseaudio xkeyboard
@@ -60,7 +60,7 @@ tray-position = right
 
 [bar/i3-2]
 inherit = bar/base
-monitor = HDMI-A-0
+monitor = DisplayPort-3
 
 modules-left = i3 spotify
 modules-center = pomo
