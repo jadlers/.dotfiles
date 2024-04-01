@@ -256,10 +256,10 @@ exec --no-startup-id dunst
 exec --no-startup-id sxhkd
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id /usr/bin/unclutter
-exec --no-startup-id /usr/bin/barrier
 # exec --no-startup-id systemd-run --user --scope -p MemoryLimit=250M nextcloud # Limit memory leak
 exec --no-startup-id nextcloud
-exec --no-startup-id xautolock -time 30 -locker "i3lock --ignore-empty-password --show-failed-attempts" -killtime 30 -killer "systemctl suspend" -detectsleep
+exec --no-startup-id flameshot
+exec --no-startup-id xautolock -time 40 -locker "i3lock --ignore-empty-password --show-failed-attempts" -killtime 45 -killer "systemctl suspend" -detectsleep
 
 exec --no-startup-id xrandr --dpi 96 # https://bugs.archlinux.org/task/72661?project=1&string=xorg-server
 exec --no-startup-id xsetroot -solid \#006060
