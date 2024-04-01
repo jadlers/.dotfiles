@@ -31,3 +31,6 @@
 [submodule ".config/zsh/zsh-z"]
 	path = .config/zsh/zsh-z
 	url = https://github.com/agkozak/zsh-z
+[submodule ".config/alacritty/alacritty-theme"]
+	path = .config/alacritty/alacritty-theme
+	url = https://github.com/alacritty/alacritty-theme
