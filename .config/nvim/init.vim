@@ -31,6 +31,9 @@
     " Go
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+    " Zig
+    Plug 'ziglang/zig.vim'
+
     " JavaScript/TypeScript
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
     Plug 'jxnblk/vim-mdx-js'
