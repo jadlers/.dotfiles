@@ -10,7 +10,10 @@
     Plug 'folke/zen-mode.nvim'
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'tpope/vim-commentary'
-    " Plug 'tpope/vim-dadbod' " Query DB in quickfix buffer
+    Plug 'tpope/vim-dadbod'
+      " Improved dadbod ui
+      Plug 'kristijanhusak/vim-dadbod-ui'
+      Plug 'kristijanhusak/vim-dadbod-completion'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'wincent/loupe'
@@ -116,6 +119,9 @@
   lua require('nvim-tree-config')
 
 " Plugin setup
+
+  " dadbod
+    autocmd FileType dbout setlocal nofoldenable
 
   " Prettier
     let g:prettier#autoformat_config_present = 1 " Require config to auto-format
