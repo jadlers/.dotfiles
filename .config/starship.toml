@@ -19,3 +19,6 @@ disabled = true
 
 [cmd_duration]
 show_notifications = true
+
+[env_var.AWS_ENV_CUSTOM]
+format = '[☁️  $env_value](bold yellow) '
