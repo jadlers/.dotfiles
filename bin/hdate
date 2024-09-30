@@ -1,4 +1,4 @@
 #!/bin/sh
 # create a second level markdown header with todays date
 
-echo "## $(date +'%Y-%m-%d')"
+echo "## $(date +'%Y-%m-%d')\n\n- "
