@@ -5,7 +5,7 @@
     " Generic
     Plug 'airblade/vim-gitgutter'
     Plug 'hrsh7th/vim-vsnip'
-    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim' " Adds :Rg :Files etc.
     Plug 'folke/zen-mode.nvim'
     Plug 'norcalli/nvim-colorizer.lua'
