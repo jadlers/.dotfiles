@@ -1,3 +1,5 @@
+[general]
+
 # Set color scheme, some alternatives in rotation. Themes included as a
 # submodule repository: https://github.com/alacritty/alacritty-theme
 import = [
