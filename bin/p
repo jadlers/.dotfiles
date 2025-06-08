@@ -12,9 +12,9 @@ TRACKER=$(cat "$TRACKER_FILE")
 notify_ha()
 {
   [ -z "$TRACKER" ] && echo "no tracker set" && return 1
-  [ -z "$HA_EXTERNAL" ] && echo "missing env HA_EXTERNAL" && return 1
+  [ -z "$HA_INTERNAL" ] && echo "missing env HA_INTERNAL" && return 1
   [ -z "$HA_WEBHOOK_POMO" ] && echo "missing env HA_WEBHOOK_POMO" && return 1
-  https --quiet POST "$HA_EXTERNAL/api/webhook/$HA_WEBHOOK_POMO" action="$1" tracker="$TRACKER"
+  https --quiet POST "$HA_INTERNAL/api/webhook/$HA_WEBHOOK_POMO" action="$1" tracker="$TRACKER"
 }
 
 file_store()
@@ -31,7 +31,7 @@ start_pomo()
   notify_ha start
   if [ "$(uname -n)" = "coraline" ]; then
     dunstctl set-paused true 2>/dev/null
-    xautolock -disable
+    pgrep xautolock && xautolock -disable
   fi
 }
 
@@ -41,7 +41,7 @@ stop_pomo()
   notify_ha stop
   if [ "$(uname --nodename)" = "coraline" ]; then
     dunstctl set-paused false 2>/dev/null
-    xautolock -enable
+    pgrep xautolock && xautolock -enable
     notify-send "Pomodoro" "Stopped session for $TRACKER"
   fi
 }
