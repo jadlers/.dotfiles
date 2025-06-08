@@ -48,19 +48,14 @@ x11 () {
     lock)
       exec i3lock --ignore-empty-password --show-failed-attempts --color=a6dcef;;
     logout)
-      playerctl --all-players pause;
       exec i3-msg exit;;
     shutdown)
-      playerctl --all-players pause;
       exec systemctl poweroff;;
     suspend)
-      playerctl --all-players pause;
       systemctl suspend;;
     reboot)
-      playerctl --all-players pause;
       exec systemctl reboot;;
     windows)
-      playerctl --all-players pause;
       exec systemctl reboot --boot-loader-entry=auto-windows;;
     *)
       exit 1;;
