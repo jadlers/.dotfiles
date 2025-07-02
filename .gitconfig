@@ -1,5 +1,7 @@
 [user]
   name = Jacob Adlers
+[push]
+  followTags = true
 [pull]
   rebase = true
 [core]
@@ -19,3 +21,5 @@
 
 [delta]
   tabs = 2
+[rerere]
+	enabled = true
