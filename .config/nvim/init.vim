@@ -69,12 +69,14 @@
   set mouse=a
 
   " Set colorscheme
-  "   Current favourites in order are:
-  "   nord, auy, evening, desert
-  " let ayucolor = "mirage" " light, mirage, or dark
-  " colorscheme ayu
-  " day, storm, moon, night
-  colorscheme tokyonight-night
+
+    " let ayucolor = "light" " light, mirage, or dark
+    " colorscheme ayu
+    " set background=light
+
+    colorscheme tokyonight-night " day, storm, moon, night
+    " colorscheme quiet
+    " set background=light
 
   set shiftwidth=2    " Number of spaces for each indent
   set tabstop=2       " Number of spaces a <Tab> stands for
@@ -111,11 +113,10 @@
   " Don't store undo history for temporary files
   au BufWritePre /tmp/* setlocal noundofile
 
-" Source lua configuration files
+" Source lua configuration files. Some plugins have config in the lua directory
   lua require('nvim-cmp')
   lua require('nvim-lsp')
   lua require('treesitter_conf')
-  lua require('colorizer').setup()
   lua require('nvim-tree-config')
 
 " Plugin setup
