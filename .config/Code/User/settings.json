@@ -1,66 +1,55 @@
 {
-  // spell-checker: disable
-  // Place your settings in this file to overwrite the default settings
-  "window.zoomLevel": 0,
-  "workbench.sideBar.location": "right",
-  "workbench.editor.tabCloseButton": "left",
   "workbench.startupEditor": "none",
-  "workbench.iconTheme": "material-icon-theme",
-  "material-icon-theme.hidesExplorerArrows": true,
-  "editor.lineNumbers": "on", // "relative" for VIM
-  "editor.fontFamily": "'mononoki Nerd Font', 'Fira Code', 'source code pro', 'Hack', 'monospace'",
+  "workbench.iconTheme": "vs-seti",
+  "editor.lineNumbers": "relative", // "relative" for VIM
+  "editor.fontFamily": "'Cascadia Code', 'mononoki Nerd Font', 'Fira Code', 'source code pro', 'Hack', 'monospace'",
   "editor.fontLigatures": true, // Fira code uses ligatures
-  "editor.fontSize": 13,
+  "editor.fontSize": 12,
   "editor.cursorStyle": "underline",
   "editor.cursorBlinking": "phase",
-  "editor.renderIndentGuides": true,
   "editor.fontWeight": "400",
   "editor.formatOnPaste": true,
   "editor.wordWrapColumn": 80,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
-  "editor.formatOnSave": true,
-  "editor.rulers": [
-    80
-  ],
+  "editor.rulers": [80, 100],
   "editor.minimap.enabled": false,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "terminal.integrated.cursorStyle": "underline",
   "terminal.integrated.cursorBlinking": true,
-  "zenMode.hideTabs": false,
-  "rewrap.wrappingColumn": 80,
-  "rewrap.reformat": true,
-  "markdown.preview.scrollEditorWithPreview": false,
-  "bookmarks.treeview.visible": false,
-  "projectManager.treeview.visible": false,
-  "projectManager.showProjectNameInStatusBar": false,
-  "prettier.eslintIntegration": true,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "es5",
-  "prettier.disableLanguages": [
-    "markdown"
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"]
+    }
   ],
+  "markdown.preview.scrollEditorWithPreview": false,
+  "prettier.singleQuote": false,
+  "prettier.trailingComma": "all",
   "cSpell.showStatus": false,
-  "cSpell.language": "en-GB, sv",
+  "cSpell.language": "en-GB,lorem",
   "cSpell.userWords": [
     "Adlers",
     "Admin",
     "Arial",
     "ctrl",
     "ecmascript",
+    "ecsjets",
     "jadlers",
+    "metabytes",
     "movie",
     "movies",
     "multiline",
     "placeholders",
     "startup"
   ],
-  "cSpell.ignoreRegExpList": [
-    "\\\\\\w*(\\[.*?\\])?(\\{.*?\\})?",
-    "\\$.+?\\$"
-  ],
+  "cSpell.ignoreRegExpList": ["\\\\\\w*(\\[.*?\\])?(\\{.*?\\})?", "\\$.+?\\$"],
   "cSpell.enabledLanguageIds": [
     "c",
     "cpp",
@@ -89,26 +78,65 @@
     "*.dll",
     "**/*.dll"
   ],
-  "C_Cpp.clang_format_sortIncludes": true,
-  "C_Cpp.clang_format_style": "{BasedOnStyle: google, AllowShortFunctionsOnASingleLine: Empty}",
-  "python.pythonPath": "/usr/local/bin/python3",
-  "python.formatting.provider": "yapf",
-  "files.associations": {
-    "*.sc": "scala"
-  },
+  "files.associations": { "*.sc": "scala" },
   "editor.renderControlCharacters": true,
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "files.exclude": {
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true
   },
-  "liveshare.featureSet": "insiders",
-  "google-java-format.executable": "/usr/local/bin/google-java-format",
-  "java.format.settings.url": "",
-  "java.format.settings.profile": "",
-  "java.format.enabled": false,
   "diffEditor.ignoreTrimWhitespace": false,
+  "telemetry.telemetryLevel": "crash",
+  "redhat.telemetry.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "editor.guides.indentation": true,
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "svelte.enable-ts-plugin": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.suggestSmartCommit": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "i18n-ally.displayLanguage": "sv",
+  "cSpell.enableFiletypes": ["tailwindcss", "terraform", "vue"],
+  "window.zoomLevel": 1,
+  "workbench.editor.tabActionLocation": "left",
+  "todohighlight.isEnable": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "playwright.reuseBrowser": false,
+  "playwright.showTrace": true,
+  "git.confirmSync": false,
+  "explorer.sortOrder": "filesFirst",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "go.formatTool": "goimports",
+  "dart.flutterSdkPath": "/home/jacob/flutter",
+  "workbench.colorTheme": "Default Dark+"
 }
