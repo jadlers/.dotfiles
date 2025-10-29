@@ -18,11 +18,15 @@ alias gc='git commit'
 alias gco='git checkout'
 alias gd='git diff'
 alias gst='git status'
+alias gl='git log --oneline -n10'
 alias gupa='git pull --rebase --autostash'
-alias cb='git branch --sort=-committerdate | fzf --header Checkout | xargs git checkout'
+alias cb='git branch --sort=-committerdate | fzf --header Checkout | sed "s/^..//" | xargs git checkout'
 
 # When
 alias when='when --calendar="$NC/Documents/when-calendar"'
 
 # You know why...
 alias :q=exit
+
+# JavaScript projects
+alias jscripts='jq .scripts < package.json'
