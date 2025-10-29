@@ -18,7 +18,11 @@ disabled = true
 disabled = true
 
 [cmd_duration]
-show_notifications = true
+# Would like to specify commadns to ignore
+show_notifications = false
 
 [env_var.AWS_ENV_CUSTOM]
 format = '[☁️  $env_value](bold yellow) '
+
+[env_var.ENV]
+format = '(env: $env_value) '
