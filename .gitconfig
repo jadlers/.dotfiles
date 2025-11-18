@@ -12,7 +12,8 @@
   defaultBranch = main
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
-
+[commit]
+  verbose = true
 [pager]
   diff = delta
   log = delta
