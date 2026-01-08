@@ -1,5 +1,4 @@
 -- From nvim-lspconfig https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-local nvim_lsp = require('lspconfig')
 
 local keybinding_on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -66,10 +65,27 @@ local custom_on_attach = function(client, bufnr)
   autogroup_on_attach(client, bufnr);
 end
 
+-- General config defaults
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      }
+    }
+  },
+  root_markers = { '.git' },
+})
+
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
 local servers = { "gopls", "pyright", "ts_ls", "phpactor", "zls" }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = custom_on_attach, capabilities = capabilities }
+  vim.lsp.config(lsp, {
+    on_attach = custom_on_attach,
+    capabilities = capabilities,
+  })
+  vim.lsp.enable(lsp)
 end
