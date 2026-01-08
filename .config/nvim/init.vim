@@ -55,8 +55,7 @@
     " Syntax
       " Treesitter (improves sytax highlighting for many languages)
       Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-      Plug 'nvim-treesitter/playground'
-      Plug 'baskerville/vim-sxhkdrc'    " sxhkd
+      Plug 'baskerville/vim-sxhkdrc' " sxhkd
 
       " Colorschemes
       Plug 'ayu-theme/ayu-vim' " You need to set ayucolor
